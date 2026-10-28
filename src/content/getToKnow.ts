@@ -64,7 +64,7 @@ export const surabaya = {
   dayTrips: [
     { place: "Malang", side: "left", lat: -7.98, lng: 112.63, time: { en: "1.5–2 h by road", id: "1,5–2 jam darat" } },
     { place: "Bromo", side: "right", lat: -7.94, lng: 112.95, time: { en: "3–4 h by road", id: "3–4 jam darat" } },
-    { place: "Madura", side: "right", lat: -7.03, lng: 112.95, time: { en: "Suramadu Bridge", id: "Jembatan Suramadu" } },
+    { place: "Madura", side: "right", lat: -7.05, lng: 112.85, time: { en: "Suramadu Bridge", id: "Jembatan Suramadu" } },
     { place: "Bali", side: "bottom", lat: -8.65, lng: 115.22, time: { en: "≈1¼ h flight", id: "≈1¼ jam terbang" } },
   ] satisfies { place: string; side: "top" | "bottom" | "left" | "right"; lat: number; lng: number; time: L }[],
   /** Landmarks — surabayaLandmarks, surabayaCultureTrip sources. Photos to be added once image hosts are reachable. */

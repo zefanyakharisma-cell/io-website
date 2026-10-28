@@ -12,6 +12,9 @@ import { SectionHeading } from "@/components/brand/SectionHeading";
 import { Reveal } from "@/components/brand/Reveal";
 import { Photo } from "@/components/brand/Photo";
 import { NumberTicker } from "@/components/ui/number-ticker";
+import { ArrowUpRight } from "lucide-react";
+import { links } from "@/content/links";
+import { ExternalLink } from "@/components/sections/links";
 
 export const generateStaticParams = localeParams;
 
@@ -71,14 +74,43 @@ export default async function FacultiesPage({ params }: PageProps) {
               <Reveal delay={0.1}>
                 <p className="font-display text-7xl leading-none text-midnight">{f.code}</p>
                 <h2 id={`${f.code}-title`} className="mt-2 text-3xl text-midnight">{tr(f.name, locale)}</h2>
+                <ExternalLink href={links.faculty[f.code]} label={en ? `${f.code} faculty website` : `Situs fakultas ${f.code}`} locale={locale} variant="midnight" className={links.faculty[f.code] ? "mt-4" : "mt-4 text-midnight"} />
                 <ul className="mt-6 divide-y divide-midnight/10 rounded-lg border border-midnight/10 bg-white">
-                  {f.programmes.map((p) => (
-                    <li key={p.name} className="px-5 py-3.5">
-                      <p className="font-semibold text-midnight">{p.name}</p>
-                      {p.tracks && <p className="mt-0.5 text-sm text-ink-secondary">{p.tracks}</p>}
-                    </li>
-                  ))}
+                  {f.programmes.map((p) => {
+                    const site = links.programmes[p.name];
+                    return (
+                      <li key={p.name} className="flex items-start justify-between gap-4 px-5 py-3.5">
+                        <div>
+                          <p className="font-semibold text-midnight">{p.name}</p>
+                          {p.tracks && <p className="mt-0.5 text-sm text-ink-secondary">{p.tracks}</p>}
+                        </div>
+                        {site ? (
+                          <a href={site} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center gap-1 rounded-full border border-midnight/20 px-3 py-1 text-xs font-semibold text-midnight hover:bg-midnight hover:text-white">
+                            {en ? "Website" : "Situs"} <ArrowUpRight className="size-3.5" aria-hidden />
+                            <span className="sr-only">{`${p.name}, ${en ? "opens in a new tab" : "membuka tab baru"}`}</span>
+                          </a>
+                        ) : (
+                          <span className="shrink-0 text-xs font-semibold text-ink-secondary">{en ? "Link coming soon" : "Tautan segera hadir"}</span>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
+                {links.programmeSites.some((s) => s.faculty === f.code) && (
+                  <div className="mt-4">
+                    <p className="eyebrow text-emerald">{en ? "Tracks & programme sites" : "Situs peminatan & program"}</p>
+                    <ul className="mt-2 flex flex-wrap gap-2">
+                      {links.programmeSites.filter((s) => s.faculty === f.code).map((s) => (
+                        <li key={s.url}>
+                          <a href={s.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-midnight shadow-card hover:bg-midnight hover:text-white">
+                            {s.label} <ArrowUpRight className="size-3.5" aria-hidden />
+                            <span className="sr-only">{en ? "(opens in a new tab)" : "(membuka tab baru)"}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 {f.postgraduate && (
                   <p className="mt-4 text-sm text-ink-secondary">
                     <span className="eyebrow mr-2 text-emerald">{en ? "Postgraduate & more" : "Pascasarjana & lainnya"}</span>
