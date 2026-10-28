@@ -29,7 +29,7 @@ export function MovingLogoGrid({
   const [paused, setPaused] = useState(false);
   const [focused, setFocused] = useState(false);
   return (
-    <div className={cn("space-y-5", className)} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}>
+    <div className={cn("space-y-5", className)}>
       <div className="flex justify-end">
         <button
           type="button"
@@ -41,16 +41,19 @@ export function MovingLogoGrid({
           {paused ? labels.play : labels.pause}
         </button>
       </div>
-      {rows.map((row, i) => (
-        <div key={row.label ?? i}>
-          {row.label && <p className={cn("eyebrow mb-2", tone === "light" ? "text-emerald" : "text-amber")}>{row.label}</p>}
-          <InfiniteSlider gap={12} duration={Math.max(30, row.items.length * 5)} durationOnHover={row.items.length * 20} reverse={i % 2 === 1} paused={paused || focused} className="py-2">
-            {row.items.map((it) => (
-              <LogoTile key={it.name} item={it} newTab={newTab} className="h-52 w-44 shrink-0" />
-            ))}
-          </InfiniteSlider>
-        </div>
-      ))}
+      {/* Focus pauses only while it is on a tile, so the Play button above resumes straight away. */}
+      <div className="space-y-5" onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}>
+        {rows.map((row, i) => (
+          <div key={row.label ?? i}>
+            {row.label && <p className={cn("eyebrow mb-2", tone === "light" ? "text-emerald" : "text-amber")}>{row.label}</p>}
+            <InfiniteSlider gap={12} duration={Math.max(30, row.items.length * 5)} durationOnHover={row.items.length * 20} reverse={i % 2 === 1} paused={paused || focused} className="py-2">
+              {row.items.map((it) => (
+                <LogoTile key={it.name} item={it} newTab={newTab} className="h-52 w-44 shrink-0" />
+              ))}
+            </InfiniteSlider>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

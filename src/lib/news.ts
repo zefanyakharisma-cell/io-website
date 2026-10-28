@@ -76,5 +76,5 @@ export function getNews(slug: string) {
 }
 
 export function formatDate(date: string, locale: Locale) {
-  return new Intl.DateTimeFormat(locale === "id" ? "id-ID" : "en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(date));
+  return new Intl.DateTimeFormat(locale === "id" ? "id-ID" : "en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(date));
 }
