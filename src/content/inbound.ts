@@ -72,12 +72,21 @@ export const visa = {
       note: { en: "Eligibility depends on your nationality and the activity. Check with KUI before you book.", id: "Kelayakan bergantung pada kewarganegaraan dan kegiatan. Konsultasikan dengan KUI sebelum memesan tiket." },
     },
   ] satisfies { name: L; who: L; note: L }[],
+  /** Process from Indonesian university and government guides — see visaYarsi, visaBinus sources. */
   steps: [
-    { en: "Receive your letter of acceptance from Petra", id: "Terima surat penerimaan dari Petra" },
-    { en: "Send KUI the documents for your visa application", id: "Kirim dokumen pengajuan visa ke KUI" },
-    { en: "Petra applies for your visa as sponsor; you receive the e-visa by email", id: "Petra mengajukan visa sebagai sponsor; Anda menerima e-visa melalui email" },
-    { en: "Arrive in Indonesia and report to KUI in your first week", id: "Tiba di Indonesia dan lapor ke KUI di minggu pertama" },
-    { en: "KUI helps you complete your stay permit and local registration", id: "KUI membantu menyelesaikan izin tinggal dan pelaporan setempat" },
+    { title: { en: "Letter of acceptance", id: "Surat penerimaan" }, body: { en: "Petra accepts you into your programme.", id: "Petra menerima Anda di program pilihan." } },
+    { title: { en: "Study permit", id: "Izin belajar" }, body: { en: "Petra, as your sponsor, requests a study permit from the Ministry.", id: "Petra, sebagai sponsor, mengajukan izin belajar ke Kementerian." } },
+    { title: { en: "Visa approval", id: "Persetujuan visa" }, body: { en: "Petra applies for your visa; you receive the approval or e-visa.", id: "Petra mengajukan visa Anda; Anda menerima persetujuan atau e-visa." } },
+    { title: { en: "Arrive in Indonesia", id: "Tiba di Indonesia" }, body: { en: "Enter Indonesia with your visa and passport.", id: "Masuk ke Indonesia dengan visa dan paspor." } },
+    { title: { en: "Biometrics & ITAS", id: "Biometrik & ITAS" }, body: { en: "Register biometrics at immigration and receive your stay permit (ITAS/KITAS).", id: "Rekam biometrik di imigrasi dan terima izin tinggal (ITAS/KITAS)." } },
+    { title: { en: "Report to KUI", id: "Lapor ke KUI" }, body: { en: "KUI completes your local registration in your first week.", id: "KUI menyelesaikan pelaporan setempat di minggu pertama." } },
+  ] satisfies { title: L; body: L }[],
+  documents: [
+    { en: "Letter of acceptance", id: "Surat penerimaan" },
+    { en: "Passport — at least 18 months valid for a one-year stay (longer for two years)", id: "Paspor — berlaku minimal 18 bulan untuk tinggal satu tahun (lebih lama untuk dua tahun)" },
+    { en: "Passport-size photos", id: "Pas foto" },
+    { en: "Proof of funds", id: "Bukti dana" },
+    { en: "Health certificate", id: "Surat keterangan sehat" },
   ] satisfies L[],
   cost: { en: "Visa and stay-permit fees follow current Indonesian immigration rates. KUI will confirm the amount for your programme.", id: "Biaya visa dan izin tinggal mengikuti tarif imigrasi Indonesia yang berlaku. KUI akan mengonfirmasi jumlahnya untuk program Anda." } satisfies L,
 };
@@ -127,13 +136,22 @@ export const tailorMade = {
 
 /** Darmasiswa. Public facts about the Indonesian government programme — TO CONFIRM by KUI. */
 export const darmasiswa = {
+  /** 2026/27 cycle, from the official application guidelines (darmasiswaGuidelines source). */
+  timeline: [
+    { when: { en: "15 May – 15 Jun 2026", id: "15 Mei – 15 Jun 2026" }, title: { en: "Online registration", id: "Pendaftaran online" }, body: { en: "On the official Darmasiswa portal", id: "Melalui portal resmi Darmasiswa" } },
+    { when: { en: "16 – 23 Jun 2026", id: "16 – 23 Jun 2026" }, title: { en: "Embassy interviews", id: "Wawancara kedutaan" }, body: { en: "Interviews and administration at the Indonesian embassy", id: "Wawancara dan administrasi di Kedutaan Besar Indonesia" } },
+    { when: { en: "14 Jul 2026", id: "14 Jul 2026" }, title: { en: "Final announcement", id: "Pengumuman akhir" }, body: { en: "Awardees and host universities announced", id: "Penerima dan universitas tujuan diumumkan" } },
+    { when: { en: "Late Aug 2026", id: "Akhir Agu 2026" }, title: { en: "Orientation in Jakarta", id: "Orientasi di Jakarta" } },
+    { when: { en: "Early Sep 2026", id: "Awal Sep 2026" }, title: { en: "Classes begin", id: "Perkuliahan dimulai" }, body: { en: "At your host university, such as Petra", id: "Di universitas tujuan, misalnya Petra" } },
+  ] satisfies { when: L; title: L; body?: L }[],
   intro: {
     en: "Darmasiswa is a scholarship from the Government of Indonesia for international students to study Indonesian language, arts and culture at Indonesian universities for up to one academic year.",
     id: "Darmasiswa adalah beasiswa dari Pemerintah Indonesia bagi mahasiswa internasional untuk mempelajari bahasa, seni dan budaya Indonesia di universitas di Indonesia hingga satu tahun akademik.",
   } satisfies L,
   points: [
-    { en: "Apply through the official Darmasiswa website or the Indonesian embassy in your country", id: "Daftar melalui situs resmi Darmasiswa atau Kedutaan Besar Indonesia di negara Anda" },
+    { en: "Register online on the official Darmasiswa portal, then complete the interview at the Indonesian embassy in your country", id: "Daftar online di portal resmi Darmasiswa, lalu ikuti wawancara di Kedutaan Besar Indonesia di negara Anda" },
     { en: "Choose Petra Christian University as your host university, if it is listed for the current intake", id: "Pilih Universitas Kristen Petra sebagai universitas tujuan, bila tercantum pada periode pendaftaran" },
+    { en: "Check the age limit and other eligibility rules in the current official guidelines — published summaries differ", id: "Periksa batas usia dan syarat lain di panduan resmi terbaru — ringkasan yang beredar berbeda-beda" },
     { en: "KUI supports Darmasiswa students at Petra from arrival to completion", id: "KUI mendampingi mahasiswa Darmasiswa di Petra dari kedatangan hingga selesai" },
   ] satisfies L[],
 };

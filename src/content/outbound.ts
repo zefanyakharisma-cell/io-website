@@ -17,6 +17,16 @@ export const iisma = {
     { en: "Petra's internal selection: documents and interview", id: "Seleksi internal Petra: berkas dan wawancara" },
   ] satisfies L[],
   images: [media.mobility.nsysu, media.mobility["korea-university"], media.mobility["exchange-group"]] satisfies Img[],
+  facts: [
+    { en: "Managed by the Directorate General of Higher Education, Research and Technology", id: "Dikelola Direktorat Jenderal Pendidikan Tinggi, Riset, dan Teknologi" },
+    { en: "Open to undergraduates; a vocational track has run since 2022", id: "Terbuka untuk mahasiswa S1; jalur vokasi berjalan sejak 2022" },
+  ] satisfies L[],
+  /** Applicants per year (iismaKatadata source); selected only reported for 2024. */
+  applicants: [
+    { year: "2021", value: 2551 },
+    { year: "2024", value: 15211 },
+  ],
+  selected2024: 3330,
 };
 
 export const globalOutbound: { title: L; definition: L; download: string; image: Img }[] = [
@@ -56,11 +66,17 @@ export const outboundRequirements: L[] = [
 
 export const ice = {
   intro: {
-    en: "ICE Institute is an Indonesian online learning platform where students take credit-bearing courses from other universities. Petra students can join selected courses and transfer the credits.",
-    id: "ICE Institute adalah platform pembelajaran daring di Indonesia tempat mahasiswa mengambil mata kuliah berkredit dari universitas lain. Mahasiswa Petra dapat mengikuti mata kuliah tertentu dan mentransfer kreditnya.",
+    en: "ICE Institute (Indonesia Cyber Education Institute) is a consortium platform for online courses that count toward university credit. It is run by Universitas Terbuka, with members such as UGM, Universitas Indonesia, ITS, BINUS and UPH.",
+    id: "ICE Institute (Indonesia Cyber Education Institute) adalah platform konsorsium mata kuliah daring yang dapat diakui sebagai kredit. Platform ini dikelola Universitas Terbuka, dengan anggota seperti UGM, Universitas Indonesia, ITS, BINUS dan UPH.",
   } satisfies L,
+  /** As of ICE Institute's fifth anniversary (iceFiveYears source). */
+  stats: [
+    { value: 49, label: { en: "Partner institutions", id: "Institusi mitra" } },
+    { value: 885, label: { en: "National online courses", id: "Mata kuliah daring nasional" } },
+    { value: 50000, suffix: "+", label: { en: "Learners", id: "Pembelajar" } },
+  ] satisfies { value: number; suffix?: string; label: L }[],
   selection: [
-    { en: "Course approved by your study programme for credit transfer", id: "Mata kuliah disetujui program studi untuk transfer kredit" },
+    { en: "Course approved by your study programme for credit transfer; your programme sets how many credits can come from online courses", id: "Mata kuliah disetujui program studi untuk transfer kredit; program studi menentukan berapa banyak kredit dari mata kuliah daring" },
     { en: "Registration through KUI within the enrolment window", id: "Pendaftaran melalui KUI dalam periode pendaftaran" },
   ] satisfies L[],
 };

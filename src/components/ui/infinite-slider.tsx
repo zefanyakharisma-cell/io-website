@@ -2,10 +2,11 @@
 
 // Adapted from 21st.dev "Infinite Slider" (ibelick). Pauses under reduced
 // motion, where it becomes a wrapping row.
-import { animate, motion, useMotionValue, useReducedMotion } from "framer-motion";
+import { animate, motion, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
 import useMeasure from "react-use-measure";
 import { cn } from "@/lib/utils";
+import { useReducedMotionSafe } from "@/lib/use-reduced-motion";
 
 export function InfiniteSlider({
   children,
@@ -22,7 +23,7 @@ export function InfiniteSlider({
   reverse?: boolean;
   className?: string;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [current, setCurrent] = useState(duration);
   const [ref, { width }] = useMeasure();
   const x = useMotionValue(0);

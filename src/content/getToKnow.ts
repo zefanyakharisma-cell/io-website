@@ -31,6 +31,18 @@ export const petramate = {
   ] satisfies L[],
   images: [media.mobility["international-day"], media.mobility["cultural-night"], media.mobility.henna],
   contact: "head-mobility@petra.ac.id",
+  /** From Petra's 2024/25 open-recruitment notice (petramate2425 source). Confirm for the current year. */
+  recruitmentFacts: [
+    { value: "SKKK", label: { en: "Credit points for completing a Petramate term", id: "Poin SKKK setelah menyelesaikan satu periode Petramate" } },
+    { value: "Scholarship", label: { en: "Members can qualify for a scholarship when joining PCU's International Programs", id: "Anggota dapat memperoleh beasiswa saat bergabung di Program Internasional PCU" } },
+  ] satisfies { value: string; label: L }[],
+};
+
+/** International Office location and mobility line (pcuFactSheet source). */
+export const office = {
+  room: { en: "Main Campus, D Building, Room 104", id: "Kampus Utama, Gedung D, Ruang 104" } satisfies L,
+  mobilityPhone: { display: "+62 31 298 3188", tel: "+62312983188" },
+  mobilityEmail: "staff-mobility@petra.ac.id",
 };
 
 /**
@@ -39,15 +51,29 @@ export const petramate = {
  */
 export const surabaya = {
   intro: {
-    en: "Surabaya is Indonesia's second-largest city and the gateway to East Java — about an hour's flight from Bali and a two-hour drive from the cool highlands of Malang and Mount Bromo.",
-    id: "Surabaya adalah kota terbesar kedua di Indonesia dan gerbang Jawa Timur — sekitar satu jam penerbangan dari Bali dan dua jam perjalanan dari dataran tinggi Malang dan Gunung Bromo.",
+    en: "Surabaya is Indonesia's second-largest city and the gateway to East Java — about an hour's flight from Bali, two hours from the cool highlands of Malang and a few hours from Mount Bromo.",
+    id: "Surabaya adalah kota terbesar kedua di Indonesia dan gerbang Jawa Timur — sekitar satu jam penerbangan dari Bali, dua jam dari dataran tinggi Malang, dan beberapa jam dari Gunung Bromo.",
   } satisfies L,
   nearby: [
-    { place: "Bali", detail: { en: "≈1 hour by air", id: "≈1 jam penerbangan" } },
-    { place: "Malang", detail: { en: "≈2 hours by road", id: "≈2 jam perjalanan darat" } },
-    { place: "Mount Bromo", detail: { en: "Sunrise trips from Surabaya", id: "Perjalanan matahari terbit dari Surabaya" } },
-    { place: "Madura", detail: { en: "Across the Suramadu Bridge", id: "Melalui Jembatan Suramadu" } },
+    { place: "Malang", detail: { en: "1.5–2 hours by toll road · ≈2 hours by train", id: "1,5–2 jam via tol · ≈2 jam dengan kereta" } },
+    { place: "Mount Bromo", detail: { en: "3–4 hours by road", id: "3–4 jam perjalanan darat" } },
+    { place: "Madura", detail: { en: "Across the 5.4 km Suramadu Bridge", id: "Melalui Jembatan Suramadu 5,4 km" } },
+    { place: "Bali", detail: { en: "≈1¼ hours by air", id: "≈1¼ jam penerbangan" } },
   ] satisfies { place: string; detail: L }[],
+  /** Day-trip map points (lat, lng) with travel times — malangToll, bromoTransfer sources; Bali from airline schedules. */
+  dayTrips: [
+    { place: "Malang", side: "left", lat: -7.98, lng: 112.63, time: { en: "1.5–2 h by road", id: "1,5–2 jam darat" } },
+    { place: "Bromo", side: "right", lat: -7.94, lng: 112.95, time: { en: "3–4 h by road", id: "3–4 jam darat" } },
+    { place: "Madura", side: "right", lat: -7.03, lng: 112.95, time: { en: "Suramadu Bridge", id: "Jembatan Suramadu" } },
+    { place: "Bali", side: "bottom", lat: -8.65, lng: 115.22, time: { en: "≈1¼ h flight", id: "≈1¼ jam terbang" } },
+  ] satisfies { place: string; side: "top" | "bottom" | "left" | "right"; lat: number; lng: number; time: L }[],
+  /** Landmarks — surabayaLandmarks, surabayaCultureTrip sources. Photos to be added once image hosts are reachable. */
+  landmarks: [
+    { name: "Suramadu Bridge", stat: "5.4 km", body: { en: "Opened in June 2009, it links Java and Madura and is Indonesia's longest bridge. Best at sunset.", id: "Diresmikan Juni 2009, menghubungkan Jawa dan Madura, dan merupakan jembatan terpanjang di Indonesia. Paling indah saat senja." } },
+    { name: "Tugu Pahlawan", stat: "41 m", body: { en: "The Heroes Monument honours the Battle of Surabaya on 10 November 1945; the 10 November Museum sits beside it.", id: "Monumen yang mengenang Pertempuran Surabaya 10 November 1945; Museum 10 November berada di sampingnya." } },
+    { name: "House of Sampoerna", stat: "1932", body: { en: "A heritage complex and museum on the history of kretek, with guided tours of the hand-rolling floor.", id: "Kompleks cagar budaya dan museum sejarah kretek, dengan tur ke ruang pelintingan tangan." } },
+    { name: "Monumen Kapal Selam", stat: "Monkasel", body: { en: "A retired Soviet-built Whiskey-class submarine, now a museum on the bank of the Kalimas River.", id: "Kapal selam kelas Whiskey buatan Soviet yang kini menjadi museum di tepi Kalimas." } },
+  ] satisfies { name: string; stat: string; body: L }[],
   photos: [
     { image: media.mobility.bromo, caption: { en: "Sunrise at Mount Bromo", id: "Matahari terbit di Gunung Bromo" }, credit: "Petra International Office" },
     { image: media.mobility["psp-bus"], caption: { en: "City tour, Surabaya", id: "Tur kota, Surabaya" }, credit: "Petra International Office" },

@@ -3,11 +3,19 @@
 // Adapted from 21st.dev "World Map" (aceternity / manuarora700): animated arcs
 // from one origin over a dotted map. Points are projected on the server
 // (src/lib/map-projection.ts) so this component ships no map data.
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useReducedMotionSafe } from "@/lib/use-reduced-motion";
 
-export type MapPoint = { x: number; y: number; label: string; detail?: string; color?: string };
+export type MapPoint = { x: number; y: number; label: string; detail?: string; color?: string; side?: "top" | "bottom" | "left" | "right" };
+
+const labelSide = {
+  bottom: "-translate-x-1/2 translate-y-2",
+  top: "-translate-x-1/2 -translate-y-[calc(100%+0.5rem)]",
+  left: "-translate-x-[calc(100%+0.6rem)] -translate-y-1/2 text-right",
+  right: "translate-x-[0.6rem] -translate-y-1/2",
+};
 
 export function WorldMap({
   origin,
@@ -16,6 +24,9 @@ export function WorldMap({
   className,
   originLabel = "Surabaya",
   dashed = false,
+  mapSrc = "/brand/world-dots.svg",
+  dotOpacity = "opacity-25",
+  showLabels = false,
 }: {
   origin: { x: number; y: number };
   points: MapPoint[];
@@ -23,8 +34,13 @@ export function WorldMap({
   className?: string;
   originLabel?: string;
   dashed?: boolean;
+  /** Dotted base map; must match the projection used for the points. */
+  mapSrc?: string;
+  dotOpacity?: string;
+  /** Always show each point's label and detail (for maps with few points). */
+  showLabels?: boolean;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [active, setActive] = useState<number | null>(null);
   const curve = (p: MapPoint) => {
     const midX = (origin.x + p.x) / 2;
@@ -36,10 +52,10 @@ export function WorldMap({
     <div className={cn("relative w-full", className)} style={{ aspectRatio: `${size.width} / ${size.height}` }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/brand/world-dots.svg"
+        src={mapSrc}
         alt=""
         aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full select-none opacity-25 [mask-image:linear-gradient(to_bottom,transparent,black_8%,black_92%,transparent)]"
+        className={`pointer-events-none absolute inset-0 h-full w-full select-none ${dotOpacity} [mask-image:linear-gradient(to_bottom,transparent,black_8%,black_92%,transparent)]`}
         draggable={false}
       />
       <svg viewBox={`0 0 ${size.width} ${size.height}`} className="absolute inset-0 h-full w-full" role="group" aria-label={points.map((p) => p.label).join(", ")}>
@@ -94,7 +110,18 @@ export function WorldMap({
       >
         {originLabel}
       </div>
-      {active !== null && (
+      {showLabels &&
+        points.map((p) => (
+          <div
+            key={`lbl-${p.label}`}
+            className={cn("glass-strong pointer-events-none absolute z-10 whitespace-nowrap rounded-md px-2 py-1 text-[11px] leading-tight text-white sm:text-xs", labelSide[p.side ?? "bottom"])}
+            style={{ left: `${(p.x / size.width) * 100}%`, top: `${(p.y / size.height) * 100}%` }}
+          >
+            <strong className="font-semibold">{p.label}</strong>
+            {p.detail && <span className="block text-amber">{p.detail}</span>}
+          </div>
+        ))}
+      {!showLabels && active !== null && (
         <div
           className="glass-strong pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-[130%] whitespace-nowrap rounded-md px-3 py-1.5 text-xs text-white"
           style={{ left: `${(points[active].x / size.width) * 100}%`, top: `${(points[active].y / size.height) * 100}%` }}

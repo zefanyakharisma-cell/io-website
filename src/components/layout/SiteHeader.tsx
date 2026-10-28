@@ -6,17 +6,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Globe, Menu, X, ArrowRight } from "lucide-react";
 import { directNav, navigation } from "@/content/navigation";
 import { ui } from "@/lib/dictionary";
 import { href, tr, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/brand/Logo";
+import { useReducedMotionSafe } from "@/lib/use-reduced-motion";
 
 export function SiteHeader({ locale }: { locale: Locale }) {
   const pathname = usePathname() ?? "/";
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [open, setOpen] = useState<number | null>(null);
   const [mobile, setMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);

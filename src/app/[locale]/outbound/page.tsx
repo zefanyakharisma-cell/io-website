@@ -19,6 +19,8 @@ import { Reveal } from "@/components/brand/Reveal";
 import { Photo } from "@/components/brand/Photo";
 import { Ring } from "@/components/brand/Ring";
 import { WorldMap } from "@/components/ui/world-map";
+import { StatGrid } from "@/components/sections/StatGrid";
+import { SourceNote } from "@/components/sections/SourceNote";
 
 export const generateStaticParams = localeParams;
 
@@ -55,6 +57,9 @@ export default async function OutboundPage({ params }: PageProps) {
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHeading id="iisma-title" tone="light" eyebrow="IISMA" title="Indonesian International Student Mobility Awards" lead={tr(iisma.intro, locale)} />
+            <ul className="mt-6 space-y-2">
+              {iisma.facts.map((f) => <li key={f.en} className="flex gap-3 text-midnight"><Check className="mt-0.5 size-5 shrink-0 text-emerald" aria-hidden />{tr(f, locale)}</li>)}
+            </ul>
             <h3 className="mt-8 text-lg text-midnight">{en ? "Petra's internal selection" : "Seleksi internal Petra"}</h3>
             <ul className="mt-3 space-y-2">
               {iisma.selection.map((r) => <li key={r.en} className="flex gap-3 text-midnight"><Check className="mt-0.5 size-5 shrink-0 text-emerald" aria-hidden />{tr(r, locale)}</li>)}
@@ -68,6 +73,19 @@ export default async function OutboundPage({ params }: PageProps) {
                 <Photo image={img} sizes="(min-width: 1024px) 25vw, 50vw" />
               </div>
             ))}
+            <figure className="glass-light col-span-2 rounded-lg p-5">
+              <figcaption className="font-bold text-midnight">{en ? "Applicants nationwide" : "Pendaftar nasional"}</figcaption>
+              <ul className="mt-4 space-y-3">
+                {[...iisma.applicants.map((a) => ({ label: a.year, sub: en ? "applicants" : "pendaftar", value: a.value, color: "#19304b" })), { label: "2024", sub: en ? "selected" : "terpilih", value: iisma.selected2024, color: "#135d50" }].map((b) => (
+                  <li key={b.label + b.sub} className="grid grid-cols-[5.5rem_1fr_4rem] items-center gap-3 text-sm">
+                    <span className="text-midnight"><span className="font-semibold">{b.label}</span> <span className="text-ink-secondary">{b.sub}</span></span>
+                    <span className="h-3 overflow-hidden rounded-full bg-midnight/10"><span className="block h-full rounded-full" style={{ width: `${(b.value / iisma.applicants[1].value) * 100}%`, background: b.color }} /></span>
+                    <span className="text-right font-semibold tabular-nums text-midnight">{b.value.toLocaleString(en ? "en-US" : "id-ID")}</span>
+                  </li>
+                ))}
+              </ul>
+              <SourceNote ids={["iismaKatadata", "iismaUmy"]} locale={locale} />
+            </figure>
           </div>
         </div>
       </Section>
@@ -180,6 +198,8 @@ export default async function OutboundPage({ params }: PageProps) {
               <ExternalLink href={links.iceInstitute} label={en ? "ICE Institute website" : "Situs ICE Institute"} locale={locale} />
               <ExternalLink href={links.outboundRegistration} label={en ? "Register" : "Daftar"} locale={locale} variant="glass" />
             </div>
+            <StatGrid stats={ice.stats} locale={locale} className="mt-8 sm:grid-cols-3 md:grid-cols-3" />
+            <SourceNote ids={["icePartners", "iceFiveYears"]} locale={locale} tone="dark" />
           </div>
           <div id="local" className="scroll-mt-24">
             <h2 className="text-3xl">{en ? "Local outbound" : "Outbound lokal"}</h2>

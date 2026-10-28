@@ -10,6 +10,9 @@ import { ToConfirm } from "@/components/sections/bits";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { Reveal } from "@/components/brand/Reveal";
 import { Photo } from "@/components/brand/Photo";
+import { WorldMap } from "@/components/ui/world-map";
+import { SourceNote } from "@/components/sections/SourceNote";
+import { EAST_JAVA_SIZE, projectEastJava } from "@/lib/map-projection";
 
 export const generateStaticParams = localeParams;
 
@@ -20,6 +23,8 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function SurabayaPage({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const en = locale === "en";
+  const origin = projectEastJava(-7.2575, 112.7521);
+  const trips = surabaya.dayTrips.map((t) => ({ ...projectEastJava(t.lat, t.lng), label: t.place, side: t.side, detail: tr(t.time, locale) }));
 
   return (
     <>
@@ -41,6 +46,28 @@ export default async function SurabayaPage({ params }: PageProps) {
             </li>
           ))}
         </ul>
+        <div className="glass mt-6 rounded-lg p-4 md:p-6">
+          <h3 className="text-lg">{en ? "Day trips from Surabaya" : "Perjalanan sehari dari Surabaya"}</h3>
+          <WorldMap className="mx-auto mt-4 max-w-3xl" origin={origin} points={trips} size={EAST_JAVA_SIZE} mapSrc="/brand/eastjava-dots.svg" dotOpacity="opacity-40" showLabels />
+        </div>
+        <SourceNote ids={["malangToll", "bromoTransfer"]} locale={locale} tone="dark" />
+      </Section>
+      <Section tone="deep" labelledBy="landmarks">
+        <SectionHeading id="landmarks" eyebrow={en ? "City of Heroes" : "Kota Pahlawan"} title={en ? "Landmarks to see" : "Ikon kota yang wajib dikunjungi"} />
+        <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {surabaya.landmarks.map((l, i) => (
+            <li key={l.name}>
+              <Reveal delay={i * 0.05} className="h-full">
+                <article className="glass h-full rounded-lg p-5">
+                  <p className="font-display text-4xl leading-none text-amber">{l.stat}</p>
+                  <h3 className="mt-3 text-lg">{l.name}</h3>
+                  <p className="mt-1 text-sm text-smoke/90">{tr(l.body, locale)}</p>
+                </article>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+        <SourceNote ids={["surabayaLandmarks", "surabayaCultureTrip", "suramaduWiki"]} locale={locale} tone="dark" className="mt-6" />
       </Section>
       <Section tone="light" labelledBy="photos">
         <SectionHeading id="photos" tone="light" eyebrow={en ? "In pictures" : "Dalam gambar"} title={en ? "Sights around Surabaya" : "Pesona sekitar Surabaya"} lead={en ? "Photos from the Surabaya City Government will be added here, each credited to its account." : "Foto dari Pemerintah Kota Surabaya akan ditambahkan di sini, lengkap dengan kredit akun pemiliknya."} />

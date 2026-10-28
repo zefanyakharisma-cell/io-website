@@ -11,6 +11,8 @@ import { ToConfirm } from "@/components/sections/bits";
 import { ExternalLink } from "@/components/sections/links";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { Photo } from "@/components/brand/Photo";
+import { Timeline } from "@/components/sections/Timeline";
+import { SourceNote } from "@/components/sections/SourceNote";
 
 export const generateStaticParams = localeParams;
 
@@ -31,7 +33,10 @@ export default async function DarmasiswaPage({ params }: PageProps) {
         lead={tr(darmasiswa.intro, locale)}
         crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(inboundNav.label, locale), href: href(locale, "/inbound") }, { label: "Darmasiswa" }]}
       >
-        <div className="mt-6"><ExternalLink href={links.darmasiswa} label={en ? "Darmasiswa website" : "Situs Darmasiswa"} locale={locale} /></div>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <ExternalLink href={links.darmasiswaApply} label={en ? "Apply on the official portal" : "Daftar di portal resmi"} locale={locale} />
+          <ExternalLink href={links.darmasiswa} label={en ? "Darmasiswa website" : "Situs Darmasiswa"} locale={locale} variant="glass" />
+        </div>
       </PageHero>
       <Section tone="light" labelledBy="how">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
@@ -43,6 +48,7 @@ export default async function DarmasiswaPage({ params }: PageProps) {
               ))}
             </ul>
             <ToConfirm locale={locale} className="mt-5 text-emerald" />
+            <SourceNote ids={["darmasiswaGuidelines", "darmasiswaAtmaJaya"]} locale={locale} />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="relative col-span-2 aspect-[16/9] overflow-hidden rounded-lg"><Photo image={media.mobility["spectra-cooking"]} /></div>
@@ -50,6 +56,11 @@ export default async function DarmasiswaPage({ params }: PageProps) {
             <div className="relative aspect-square overflow-hidden rounded-lg"><Photo image={media.mobility.henna} sizes="25vw" /></div>
           </div>
         </div>
+      </Section>
+      <Section tone="dark" orbs labelledBy="timeline">
+        <SectionHeading id="timeline" eyebrow={en ? "2026/27 cycle" : "Periode 2026/27"} title={en ? "Key dates" : "Tanggal penting"} lead={en ? "From the official 2026/27 guidelines. Dates change each year — always check the portal." : "Dari panduan resmi 2026/27. Tanggal berubah setiap tahun — selalu cek portal."} />
+        <Timeline className="mt-10" items={darmasiswa.timeline.map((t) => ({ when: tr(t.when, locale), title: tr(t.title, locale), body: t.body ? tr(t.body, locale) : undefined }))} />
+        <SourceNote ids={["darmasiswaGuidelines"]} locale={locale} tone="dark" className="mt-6" />
       </Section>
       <CtaBand locale={locale} image={media.mobility.bromo} title={en ? "Choosing Petra for Darmasiswa?" : "Memilih Petra untuk Darmasiswa?"} body={en ? "Contact our mobility team before you apply." : "Hubungi tim mobilitas kami sebelum mendaftar."} />
     </>

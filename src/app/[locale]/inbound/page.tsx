@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Check, Mail } from "lucide-react";
+import { ArrowRight, Check, ClipboardCheck, FileCheck, Fingerprint, Landmark, Mail, Plane, Stamp } from "lucide-react";
 import { media } from "@/content/media.generated";
 import { videos } from "@/content/media";
 import { inboundNav } from "@/content/navigation";
@@ -18,6 +18,11 @@ import { SectionHeading } from "@/components/brand/SectionHeading";
 import { Reveal } from "@/components/brand/Reveal";
 import { Photo } from "@/components/brand/Photo";
 import { WorldMap } from "@/components/ui/world-map";
+import { ProcessFlow } from "@/components/sections/ProcessFlow";
+import { SourceNote } from "@/components/sections/SourceNote";
+import { MapEmbed } from "@/components/sections/MapEmbed";
+
+const visaIcons = [FileCheck, Landmark, Stamp, Plane, Fingerprint, ClipboardCheck];
 
 export const generateStaticParams = localeParams;
 
@@ -100,15 +105,31 @@ export default async function InboundPage({ params }: PageProps) {
                 </li>
               ))}
             </ul>
-            <h3 className="mt-6 text-lg text-midnight">{en ? "How to get your visa and stay permit" : "Cara mengurus visa dan izin tinggal"}</h3>
-            <ol className="mt-3 space-y-2">
-              {visa.steps.map((s, i) => (
-                <li key={s.en} className="flex gap-3 text-midnight"><span className="grid size-6 shrink-0 place-items-center rounded-full bg-midnight text-xs font-bold text-white">{i + 1}</span>{tr(s, locale)}</li>
+            <h3 className="mt-6 text-lg text-midnight">{en ? "Documents to prepare" : "Dokumen yang perlu disiapkan"}</h3>
+            <ul className="mt-3 space-y-2">
+              {visa.documents.map((d) => (
+                <li key={d.en} className="flex gap-3 text-midnight"><Check className="mt-0.5 size-5 shrink-0 text-emerald" aria-hidden />{tr(d, locale)}</li>
               ))}
-            </ol>
+            </ul>
             <p className="mt-4 text-sm text-ink-secondary"><strong className="text-midnight">{en ? "Cost: " : "Biaya: "}</strong>{tr(visa.cost, locale)}</p>
             <ToConfirm locale={locale} className="mt-4 text-emerald" />
           </div>
+        </div>
+      </Section>
+
+      <Section tone="dark" labelledBy="visa-steps">
+        <SectionHeading id="visa-steps" eyebrow={en ? "Visa & stay permit" : "Visa & izin tinggal"} title={en ? "From acceptance letter to ITAS" : "Dari surat penerimaan hingga ITAS"} lead={en ? "The usual sequence for a student stay in Indonesia. KUI guides you through each step." : "Urutan umum untuk tinggal sebagai mahasiswa di Indonesia. KUI mendampingi setiap langkah."} />
+        <div className="mt-10">
+          <ProcessFlow steps={visa.steps.map((s, i) => ({ icon: visaIcons[i], title: tr(s.title, locale), body: tr(s.body, locale) }))} />
+        </div>
+        <ToConfirm locale={locale} className="mt-6 text-amber" />
+        <SourceNote ids={["visaYarsi", "visaBinus"]} locale={locale} tone="dark" className="mt-3" />
+      </Section>
+
+      <Section tone="light" labelledBy="find-us">
+        <SectionHeading id="find-us" tone="light" eyebrow={en ? "Find us" : "Lokasi"} title={en ? "Petra's main campus, Siwalankerto" : "Kampus utama Petra, Siwalankerto"} lead="Siwalankerto 121–131, Surabaya 60236" />
+        <div className="mt-8">
+          <MapEmbed query="Petra Christian University, Siwalankerto, Surabaya" title={en ? "Map of Petra Christian University" : "Peta Universitas Kristen Petra"} labels={en ? { load: "Show map", note: "Loads Google Maps, which may set cookies.", open: "Open in Google Maps" } : { load: "Tampilkan peta", note: "Memuat Google Maps, yang dapat menyimpan cookie.", open: "Buka di Google Maps" }} />
         </div>
       </Section>
 
