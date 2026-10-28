@@ -40,7 +40,7 @@ export function VideoSlot({
   const toggle = () => {
     const v = ref.current;
     if (!v) return;
-    if (v.paused) v.play().then(() => setPlaying(true));
+    if (v.paused) v.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
     else {
       v.pause();
       setPlaying(false);

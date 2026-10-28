@@ -67,6 +67,13 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   const leave = () => {
     closeTimer.current = setTimeout(() => setOpen(null), 140);
   };
+  // A link to a #section of the current page doesn't change the pathname, so close on any link click too.
+  const closeOnLink = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest("a")) {
+      setOpen(null);
+      setMobile(false);
+    }
+  };
 
   return (
     <>
@@ -161,6 +168,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               className="mx-auto mt-2 hidden max-w-7xl xl:block"
               onMouseEnter={() => enter(open)}
               onMouseLeave={leave}
+              onClick={closeOnLink}
             >
               <MegaPanel locale={locale} index={open} />
             </motion.div>
@@ -177,6 +185,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             animate={{ opacity: 1 }}
             exit={reduce ? undefined : { opacity: 0 }}
             className="glass-strong fixed inset-0 z-40 overflow-y-auto px-5 pb-10 pt-24 xl:hidden"
+            onClick={closeOnLink}
           >
             <nav aria-label="Mobile">
               <ul className="space-y-6">
