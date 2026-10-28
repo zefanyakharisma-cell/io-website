@@ -127,6 +127,10 @@ export default async function InboundPage({ params }: PageProps) {
                     </li>
                   ))}
                 </ul>
+                <a href={p.website} target="_blank" rel="noreferrer" className="btn btn-amber mt-8">
+                  {en ? `Visit the ${p.code} website` : `Kunjungi situs ${p.code}`} <ArrowUpRight className="size-4" aria-hidden />
+                  <span className="sr-only">{en ? "(opens in a new tab)" : "(membuka tab baru)"}</span>
+                </a>
               </Reveal>
             </div>
           </section>

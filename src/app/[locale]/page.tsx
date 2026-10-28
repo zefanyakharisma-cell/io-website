@@ -163,12 +163,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           {signatureProgrammes.map((p, i) => (
             <li key={p.code} className="w-[80%] shrink-0 snap-start sm:w-auto">
               <Reveal delay={i * 0.08} className="h-full">
-                <Link href={href(locale, `/mobility/inbound#${p.code.toLowerCase()}`)} className="group relative flex h-[26rem] flex-col justify-end overflow-hidden rounded-lg">
+                <article className="group relative flex h-[26rem] flex-col justify-end overflow-hidden rounded-lg">
                   <Photo image={p.images[0]} className="absolute inset-0 transition-transform duration-[1.2s] group-hover:scale-105" sizes="(min-width: 1024px) 25vw, 80vw" />
                   <span className="absolute inset-0 bg-gradient-to-t from-midnight-deep via-midnight-deep/40 to-transparent" />
-                  <span className="relative p-5">
-                    <span className="font-display text-5xl leading-none text-amber">{p.code}</span>
-                    <span className="mt-1 block font-semibold">{p.name}</span>
+                  <div className="relative p-5">
+                    <span className="block font-display text-5xl leading-none text-amber">{p.code}</span>
+                    <h3 className="mt-1 text-base font-semibold tracking-normal">
+                      <Link href={href(locale, `/mobility/inbound#${p.code.toLowerCase()}`)} className="after:absolute after:inset-0 after:content-['']">
+                        {p.name}
+                      </Link>
+                    </h3>
                     <span className="mt-2 block text-sm text-smoke/85">{tr(p.kicker, locale)}</span>
                     <span className="mt-4 flex gap-4 border-t border-white/15 pt-3 text-sm">
                       {p.facts.slice(0, 2).map((f) => (
@@ -178,8 +182,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                         </span>
                       ))}
                     </span>
-                  </span>
-                </Link>
+                  </div>
+                  <a
+                    href={p.website}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn absolute right-3 top-3 z-10 border border-white/30 bg-midnight-deep/85 !px-3 !py-1.5 text-xs text-white backdrop-blur-md hover:bg-midnight"
+                    aria-label={en ? `${p.name} website (opens in a new tab)` : `Situs ${p.name} (membuka tab baru)`}
+                  >
+                    {en ? "Website" : "Situs"} <ArrowUpRight className="size-3.5" aria-hidden />
+                  </a>
+                </article>
               </Reveal>
             </li>
           ))}
