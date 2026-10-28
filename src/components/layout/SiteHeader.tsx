@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, Globe, Menu, X, ArrowRight } from "lucide-react";
-import { navigation, newsNav } from "@/content/navigation";
+import { directNav, navigation } from "@/content/navigation";
 import { ui } from "@/lib/dictionary";
 import { href, tr, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -57,7 +57,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     const section = path.split("/")[1];
     return rest.startsWith(`/${section}`);
   };
-  const activeIndex = [...navigation.map((g) => g.path), newsNav.path].findIndex(isActive);
+  const activeIndex = [...navigation.map((g) => g.path), ...directNav.map((d) => d.path)].findIndex(isActive);
 
   const enter = (i: number) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -84,7 +84,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             <Logo height={34} className="h-[34px] w-auto" />
           </Link>
 
-          <nav aria-label="Main" className="hidden lg:block">
+          <nav aria-label="Main" className="hidden xl:block">
             <ul className="flex items-center gap-1">
               {navigation.map((group, i) => (
                 <li key={group.path} onMouseEnter={() => enter(i)}>
@@ -94,7 +94,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                     aria-controls={`mega-${i}`}
                     onClick={() => setOpen(open === i ? null : i)}
                     className={cn(
-                      "relative flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-colors",
+                      "relative flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold transition-colors",
                       activeIndex === i || open === i ? "text-white" : "text-smoke/85 hover:text-white",
                     )}
                   >
@@ -104,18 +104,20 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                   </button>
                 </li>
               ))}
-              <li onMouseEnter={() => setOpen(null)}>
-                <Link
-                  href={href(locale, newsNav.path)}
-                  className={cn(
-                    "relative block rounded-full px-4 py-2 text-sm font-semibold transition-colors",
-                    activeIndex === navigation.length ? "text-white" : "text-smoke/85 hover:text-white",
-                  )}
-                >
-                  {tr(newsNav.label, locale)}
-                  {activeIndex === navigation.length && <Lamp reduce={!!reduce} />}
-                </Link>
-              </li>
+              {directNav.map((d, k) => (
+                <li key={d.path} onMouseEnter={() => setOpen(null)}>
+                  <Link
+                    href={href(locale, d.path)}
+                    className={cn(
+                      "relative block whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold transition-colors",
+                      activeIndex === navigation.length + k ? "text-white" : "text-smoke/85 hover:text-white",
+                    )}
+                  >
+                    {tr(d.label, locale)}
+                    {activeIndex === navigation.length + k && <Lamp reduce={!!reduce} />}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
 
@@ -129,12 +131,12 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               <Globe className="size-4" aria-hidden />
               {tr(ui.languageShort, locale)}
             </Link>
-            <Link href={href(locale, "/partnership/connect")} className="btn btn-amber hidden !px-4 !py-2 text-sm md:inline-flex">
+            <Link href={href(locale, "/contact")} className="btn btn-amber hidden !px-4 !py-2 text-sm md:inline-flex xl:hidden">
               {tr(ui.connect, locale)}
             </Link>
             <button
               type="button"
-              className="grid size-10 place-items-center rounded-full text-white hover:bg-white/10 lg:hidden"
+              className="grid size-10 place-items-center rounded-full text-white hover:bg-white/10 xl:hidden"
               aria-expanded={mobile}
               aria-controls="mobile-menu"
               aria-label={tr(mobile ? ui.close : ui.menu, locale)}
@@ -155,7 +157,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               animate={{ opacity: 1, y: 0 }}
               exit={reduce ? undefined : { opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              className="mx-auto mt-2 hidden max-w-7xl lg:block"
+              className="mx-auto mt-2 hidden max-w-7xl xl:block"
               onMouseEnter={() => enter(open)}
               onMouseLeave={leave}
             >
@@ -173,7 +175,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={reduce ? undefined : { opacity: 0 }}
-            className="glass-strong fixed inset-0 z-40 overflow-y-auto px-5 pb-10 pt-24 lg:hidden"
+            className="glass-strong fixed inset-0 z-40 overflow-y-auto px-5 pb-10 pt-24 xl:hidden"
           >
             <nav aria-label="Mobile">
               <ul className="space-y-6">
@@ -192,14 +194,16 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                     </ul>
                   </li>
                 ))}
-                <li>
-                  <Link href={href(locale, newsNav.path)} className="flex items-center justify-between rounded-md px-3 py-2.5 text-lg font-semibold text-white hover:bg-white/10">
-                    {tr(newsNav.label, locale)}
-                    <ArrowRight className="size-4 text-smoke/60" aria-hidden />
-                  </Link>
-                </li>
+                {directNav.map((d) => (
+                  <li key={d.path}>
+                    <Link href={href(locale, d.path)} className="flex items-center justify-between rounded-md px-3 py-2.5 text-lg font-semibold text-white hover:bg-white/10">
+                      {tr(d.label, locale)}
+                      <ArrowRight className="size-4 text-smoke/60" aria-hidden />
+                    </Link>
+                  </li>
+                ))}
               </ul>
-              <Link href={href(locale, "/partnership/connect")} className="btn btn-amber mt-8 w-full justify-center">
+              <Link href={href(locale, "/contact")} className="btn btn-amber mt-8 w-full justify-center">
                 {tr(ui.connect, locale)}
               </Link>
             </nav>

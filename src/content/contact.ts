@@ -17,18 +17,16 @@ export const contact = {
   mapUrl: "https://maps.google.com/?q=Petra+Christian+University+Siwalankerto+Surabaya",
 };
 
+/** Inquiry topics, each routed to the KUI address named in the spec (Sheet1 → Contact Us). */
 export const inquiryTopics = [
-  { value: "partnership", label: { en: "New partnership / MoU", id: "Kemitraan baru / MoU" } },
-  { value: "exchange", label: { en: "Student exchange", id: "Pertukaran mahasiswa" } },
-  { value: "degree", label: { en: "Joint or double degree", id: "Gelar bersama atau ganda" } },
-  { value: "summer", label: { en: "Summer or short programme", id: "Program musim panas atau singkat" } },
-  { value: "research", label: { en: "Research collaboration", id: "Kolaborasi riset" } },
-  { value: "visit", label: { en: "Delegation visit", id: "Kunjungan delegasi" } },
-  { value: "other", label: { en: "Something else", id: "Lainnya" } },
-] satisfies { value: string; label: L }[];
+  { value: "partnership", to: "head-partnership@petra.ac.id", label: { en: "New partnership / MoU", id: "Kemitraan baru / MoU" } },
+  { value: "degree", to: "head-partnership@petra.ac.id", label: { en: "Joint or dual degree", id: "Joint atau dual degree" } },
+  { value: "research", to: "head-partnership@petra.ac.id", label: { en: "Research collaboration", id: "Kolaborasi riset" } },
+  { value: "visit", to: "head-partnership@petra.ac.id", label: { en: "Delegation visit", id: "Kunjungan delegasi" } },
+  { value: "inbound", to: "head-mobility@petra.ac.id", label: { en: "Studying at Petra (international students)", id: "Belajar di Petra (mahasiswa internasional)" } },
+  { value: "outbound", to: "staff-mobility@petra.ac.id", label: { en: "Going abroad (Petra students)", id: "Ke luar negeri (mahasiswa Petra)" } },
+  { value: "intprogram", to: "intprogram@petra.ac.id", label: { en: "International Program (degree)", id: "Program Internasional (gelar)" } },
+  { value: "petramate", to: "head-mobility@petra.ac.id", label: { en: "Petramate", id: "Petramate" } },
+  { value: "other", to: "io@petra.ac.id", label: { en: "Something else", id: "Lainnya" } },
+] satisfies { value: string; to: string; label: L }[];
 
-export const partnershipProcess = [
-  { title: { en: "Say hello", id: "Sapa kami" }, body: { en: "Tell us who you are and what you have in mind.", id: "Ceritakan siapa Anda dan apa yang Anda rencanakan." } },
-  { title: { en: "Shape it together", id: "Rancang bersama" }, body: { en: "We match you with the right faculty and agree the scope, from one joint lecture to a full degree pathway.", id: "Kami menghubungkan Anda dengan fakultas yang tepat dan menyepakati cakupan, dari satu kuliah bersama hingga jalur gelar penuh." } },
-  { title: { en: "Sign and start", id: "Tanda tangan dan mulai" }, body: { en: "An MoU or agreement is signed, and the International Office supports every step that follows.", id: "MoU atau perjanjian ditandatangani, dan KUI mendampingi setiap langkah berikutnya." } },
-] satisfies { title: L; body: L }[];

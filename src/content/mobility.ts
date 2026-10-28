@@ -133,47 +133,6 @@ export const signatureProgrammes: SignatureProgramme[] = [
   },
 ];
 
-/** Outbound options. The deck covers only the destinations; detail is pending from KUI. */
-export const outboundRoutes = [
-  {
-    title: { en: "Semester exchange", id: "Pertukaran semester" },
-    body: {
-      en: "Spend one or two semesters at a partner university with full credit transfer. Exchange is open across all faculties.",
-      id: "Kuliah satu atau dua semester di universitas mitra dengan transfer kredit penuh. Terbuka untuk seluruh fakultas.",
-    },
-    image: media.mobility["korea-university"],
-    confirm: false,
-  },
-  {
-    title: { en: "Joint & double degree", id: "Gelar ganda & bersama" },
-    body: {
-      en: "Study at Petra, graduate twice: 10 partners and 23 programmes in 2+2, 3+1 and 1+1 formats.",
-      id: "Kuliah di Petra, lulus dengan dua gelar: 10 mitra dan 23 program dengan skema 2+2, 3+1 dan 1+1.",
-    },
-    image: media.mobility.saxion,
-    confirm: false,
-  },
-  {
-    title: { en: "IISMA & scholarships", id: "IISMA & beasiswa" },
-    body: {
-      en: "Government-funded mobility such as IISMA (Indonesian International Student Mobility Awards) and partner scholarships.",
-      id: "Mobilitas yang didanai pemerintah seperti IISMA (Indonesian International Student Mobility Awards) dan beasiswa mitra.",
-    },
-    image: media.mobility.nsysu,
-    confirm: true,
-  },
-  {
-    title: { en: "Summer & short programmes abroad", id: "Program musim panas & singkat di luar negeri" },
-    body: {
-      en: "Join the Asia Summer Program when a partner hosts it, or a partner's summer school, for 2–4 weeks with credits.",
-      id: "Ikuti Asia Summer Program saat mitra menjadi tuan rumah, atau summer school mitra, selama 2–4 minggu berkredit.",
-    },
-    image: media.mobility["asp-thailand"],
-    confirm: true,
-    link: { href: "https://asp.petra.ac.id/", label: { en: "Asia Summer Program website", id: "Situs Asia Summer Program" } },
-  },
-] satisfies { title: L; body: L; image: Img; confirm: boolean; link?: { href: string; label: L } }[];
-
 /** Slides 40–41: joint and double degree partners. */
 export type DegreeLevel = "B" | "M" | "D";
 export const jointDegrees: {

@@ -2,7 +2,7 @@ import { MapPin } from "lucide-react";
 import { media } from "@/content/media.generated";
 import { campus } from "@/content/profile";
 import { contact } from "@/content/contact";
-import { navigation } from "@/content/navigation";
+import { aboutNav } from "@/content/navigation";
 import { href, localeParams, pageMeta, resolveLocale, tr, type PageProps } from "@/lib/i18n";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/sections/Section";
@@ -32,7 +32,7 @@ export default async function CampusPage({ params }: PageProps) {
         eyebrow={en ? "Where we are" : "Lokasi kami"}
         title={en ? "Rooted in Surabaya since 1961" : "Berakar di Surabaya sejak 1961"}
         lead={tr(campus.intro, locale)}
-        crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(navigation[0].label, locale), href: href(locale, "/about") }, { label: en ? "Where We Are" : "Lokasi Kami" }]}
+        crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(aboutNav.label, locale), href: href(locale, "/about") }, { label: en ? "Where We Are" : "Lokasi Kami" }]}
       />
 
       <Section tone="dark" orbs labelledBy="zoom">

@@ -17,7 +17,7 @@ IPDM students train in the Digital Media Lab on 3D environments, character desig
 
 IPDM is one of eight bachelor's programmes taught fully in English, and offers a 2+2 pathway with Dongseo University in Korea.
 
-[Explore the Regular International Program →](/en/mobility/international-program/)
+[Explore the Regular International Program →](/en/inbound/international-programs/)
 ::id
 **Maximillian Serafino Suprapto**, mahasiswa International Program in Digital Media (IPDM) di Petra, tercatat sebagai animator bersama Ayena Studio di film animasi **JUMBO** produksi Visinema.
 
@@ -25,4 +25,4 @@ Mahasiswa IPDM berlatih di Digital Media Lab untuk lingkungan 3D, desain karakte
 
 IPDM adalah satu dari delapan program sarjana yang sepenuhnya berbahasa Inggris, dengan jalur 2+2 bersama Dongseo University di Korea.
 
-[Jelajahi Program Internasional Reguler →](/id/mobility/international-program/)
+[Jelajahi Program Internasional Reguler →](/id/inbound/international-programs/)

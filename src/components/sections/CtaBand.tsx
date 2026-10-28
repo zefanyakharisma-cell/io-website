@@ -22,7 +22,7 @@ export function CtaBand({ locale, image, title, body }: { locale: Locale; image:
           <h2 className="text-[clamp(1.75rem,1.3rem+2vw,2.75rem)] leading-tight">{title}</h2>
           <p className="mt-4 text-lg text-smoke/95">{body}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href={href(locale, "/partnership/connect")} className="btn btn-amber">
+            <Link href={href(locale, "/contact")} className="btn btn-amber">
               {en ? "Start a conversation" : "Mulai percakapan"} <ArrowRight className="size-4" aria-hidden />
             </Link>
             <a href={`mailto:${contact.email}`} className="btn btn-glass">

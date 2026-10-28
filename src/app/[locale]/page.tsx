@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Building2, GraduationCap, Plane } from "lucide-react";
 import { media } from "@/content/media.generated";
-import { videos } from "@/content/media";
+import { links } from "@/content/links";
+import { heroSlides } from "@/content/testimonials";
 import { badges, keyStats, rankingNote, rankings, tagline } from "@/content/profile";
 import { signatureProgrammes, gallery } from "@/content/mobility";
 import { byRegion, logoStrip, networkTotals } from "@/content/partners";
@@ -9,7 +10,7 @@ import { faculties } from "@/content/faculties";
 import { getAllNews } from "@/lib/news";
 import { href, isLocale, localeParams, tr, type Locale } from "@/lib/i18n";
 import { MAP_SIZE, partnerCountryPoints, surabaya } from "@/lib/map-points";
-import { VideoSlot } from "@/components/brand/VideoSlot";
+import { HeroSlides } from "@/components/sections/HeroSlides";
 import { Ring } from "@/components/brand/Ring";
 import { Reveal } from "@/components/brand/Reveal";
 import { Photo } from "@/components/brand/Photo";
@@ -40,33 +41,36 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       icon: Building2,
       title: en ? "Partner with us" : "Bermitra dengan kami",
       body: en ? "Exchange, joint degrees, research and more." : "Pertukaran, gelar bersama, riset dan lainnya.",
-      path: "/partnership/connect",
+      path: "/partners",
     },
     {
       icon: GraduationCap,
       title: en ? "Study at Petra" : "Belajar di Petra",
       body: en ? "Semester exchange and summer programmes." : "Pertukaran semester dan program musim panas.",
-      path: "/mobility/inbound",
+      path: "/inbound",
     },
     {
       icon: Plane,
       title: en ? "Go abroad" : "Ke luar negeri",
       body: en ? "Petranesians in 10 countries." : "Petranesian di 10 negara.",
-      path: "/mobility/outbound",
+      path: "/outbound",
     },
   ];
 
   const mobilityTiles = [
-    { path: "/mobility/inbound", image: media.mobility["cultural-night"], eyebrow: "Inbound", title: en ? "Spend a semester in Surabaya" : "Satu semester di Surabaya", body: en ? "Credits that count at home, Indonesian from zero, and a Petramate buddy." : "Kredit yang diakui di kampus asal, bahasa Indonesia dari nol, dan buddy Petramate." },
-    { path: "/mobility/outbound", image: media.mobility.nsysu, eyebrow: "Outbound", title: en ? "Petranesians around the world" : "Petranesian di seluruh dunia", body: en ? "Exchange, double degrees and summer schools in 10 countries." : "Pertukaran, gelar ganda dan summer school di 10 negara." },
-    { path: "/mobility/international-program", image: media.ai["study-table"], eyebrow: en ? "Regular International Program" : "Program Internasional Reguler", title: en ? "A full degree, in English" : "Gelar penuh, dalam bahasa Inggris", body: en ? "8 bachelor's programmes with a semester abroad built in." : "8 program sarjana dengan satu semester di luar negeri." },
+    { path: "/inbound", image: media.mobility["cultural-night"], eyebrow: "Inbound", title: en ? "Spend a semester in Surabaya" : "Satu semester di Surabaya", body: en ? "Credits that count at home, Indonesian from zero, and a Petramate buddy." : "Kredit yang diakui di kampus asal, bahasa Indonesia dari nol, dan buddy Petramate." },
+    { path: "/outbound", image: media.mobility.nsysu, eyebrow: "Outbound", title: en ? "Petranesians around the world" : "Petranesian di seluruh dunia", body: en ? "Exchange, double degrees and summer schools in 10 countries." : "Pertukaran, gelar ganda dan summer school di 10 negara." },
+    { path: "/inbound/international-programs", image: media.ai["study-table"], eyebrow: en ? "International Programs" : "Program Internasional", title: en ? "A full degree, in English" : "Gelar penuh, dalam bahasa Inggris", body: en ? "8 bachelor's programmes with a semester abroad built in." : "8 program sarjana dengan satu semester di luar negeri." },
   ];
 
   return (
     <>
       {/* 1 · Hero */}
       <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden pb-12 pt-32 text-white md:items-center md:pb-0">
-        <VideoSlot poster={media.campus.landmark} src={videos.homeHero} priority />
+        <HeroSlides
+          slides={heroSlides.map((h) => ({ image: h.image, caption: tr(h.caption, locale), quote: h.quote && tr(h.quote, locale), name: h.name, program: h.program }))}
+          labels={{ pause: en ? "Pause slideshow" : "Jeda tayangan", play: en ? "Play slideshow" : "Putar tayangan", slide: en ? "Show photo" : "Tampilkan foto" }}
+        />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-midnight-deep/95 via-midnight-deep/60 to-midnight-deep/20" />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-midnight-deep via-transparent to-midnight-deep/40" />
         <Ring shape="ring-u" className="-right-24 -top-10 w-[22rem] text-amber md:-right-32 md:w-[34rem]" />
@@ -128,6 +132,30 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <p className="mt-6 text-sm text-smoke/80">{tr(rankingNote, locale)}</p>
       </Section>
 
+      {/* 2b · Faculties — each links to the faculty website (src/content/links.ts) */}
+      <Section tone="light" labelledBy="fac-title">
+        <SectionHeading id="fac-title" tone="light" eyebrow={en ? "Academic structure" : "Struktur akademik"} title={en ? "Seven faculties, one campus" : "Tujuh fakultas, satu kampus"} />
+        <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+          {faculties.map((f) => (
+            <li key={f.code}>
+              <a
+                href={links.faculty[f.code] || href(locale, `/about/faculties#${f.code.toLowerCase()}`)}
+                {...(links.faculty[f.code] ? { target: "_blank", rel: "noreferrer" } : {})}
+                className="group relative block aspect-[3/4] overflow-hidden rounded-lg"
+              >
+                <Photo image={f.image} className="absolute inset-0 transition-transform duration-700 group-hover:scale-105" sizes="(min-width: 1024px) 14vw, 50vw" />
+                <span className="absolute inset-0 bg-gradient-to-t from-midnight-deep via-midnight-deep/30 to-transparent" />
+                <span className="absolute inset-x-0 bottom-0 p-3 text-white">
+                  <span className="font-display text-3xl leading-none text-amber">{f.code}</span>
+                  <span className="mt-1 block text-xs font-medium leading-snug">{tr(f.name, locale)}</span>
+                </span>
+                {links.faculty[f.code] && <ArrowUpRight className="absolute right-2 top-2 size-4 text-white" aria-label={en ? "Faculty website, opens in a new tab" : "Situs fakultas, membuka tab baru"} />}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
       {/* 3 · Mobility tiles */}
       <Section tone="light" labelledBy="mobility-title">
         <div className="flex flex-wrap items-end justify-between gap-6">
@@ -169,7 +197,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <div className="relative p-5">
                     <span className="block font-display text-5xl leading-none text-amber">{p.code}</span>
                     <h3 className="mt-1 text-base font-semibold tracking-normal">
-                      <Link href={href(locale, `/mobility/inbound#${p.code.toLowerCase()}`)} className="after:absolute after:inset-0 after:content-['']">
+                      <Link href={href(locale, `/inbound/short-programs#${p.code.toLowerCase()}`)} className="after:absolute after:inset-0 after:content-['']">
                         {p.name}
                       </Link>
                     </h3>
@@ -215,7 +243,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </li>
               ))}
             </ul>
-            <Link href={href(locale, "/partnership/partners")} className="btn btn-amber mt-8">
+            <Link href={href(locale, "/partners")} className="btn btn-amber mt-8">
               {en ? "Explore the partner list" : "Lihat daftar mitra"} <ArrowRight className="size-4" aria-hidden />
             </Link>
           </div>
@@ -238,7 +266,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* 6 · News */}
       <Section tone="light" labelledBy="news-title">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading id="news-title" tone="light" eyebrow={en ? "News & Updates" : "Berita & Kabar"} title={en ? "What's happening at Petra" : "Kabar terbaru dari Petra"} />
+          <SectionHeading id="news-title" tone="light" eyebrow={en ? "News" : "Berita"} title={en ? "What's happening at Petra" : "Kabar terbaru dari Petra"} />
           <Link href={href(locale, "/news")} className="btn btn-midnight">
             {en ? "All news" : "Semua berita"} <ArrowRight className="size-4" aria-hidden />
           </Link>
@@ -261,25 +289,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
           <Gallery items={gallery.map((g) => ({ ...g, caption: tr(g.caption, locale) }))} columns="columns-2 md:columns-3" openLabel={en ? "Open photo" : "Buka foto"} />
         </div>
-      </Section>
-
-      {/* 8 · Faculties strip */}
-      <Section tone="light" labelledBy="fac-title">
-        <SectionHeading id="fac-title" tone="light" eyebrow={en ? "Academic structure" : "Struktur akademik"} title={en ? "Seven faculties, one campus" : "Tujuh fakultas, satu kampus"} />
-        <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
-          {faculties.map((f) => (
-            <li key={f.code}>
-              <Link href={href(locale, `/about/faculties#${f.code.toLowerCase()}`)} className="group relative block aspect-[3/4] overflow-hidden rounded-lg">
-                <Photo image={f.image} className="absolute inset-0 transition-transform duration-700 group-hover:scale-105" sizes="(min-width: 1024px) 14vw, 50vw" />
-                <span className="absolute inset-0 bg-gradient-to-t from-midnight-deep via-midnight-deep/30 to-transparent" />
-                <span className="absolute inset-x-0 bottom-0 p-3 text-white">
-                  <span className="font-display text-3xl leading-none text-amber">{f.code}</span>
-                  <span className="mt-1 block text-xs font-medium leading-snug">{tr(f.name, locale)}</span>
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
       </Section>
 
       <CtaBand

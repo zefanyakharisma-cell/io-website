@@ -19,13 +19,17 @@ npm run lint
 
 ## Sitemap
 
-| Section | Pages |
+The menu follows KUI's content spec: the Google Sheet "WEBSITE IO", Sheet1.
+
+| Menu | Pages (under `/en/` and `/id/`) |
 |---|---|
-| Home | `/` (sends visitors to `/en/` or `/id/`), `/[locale]/` |
-| About PETRA | `about`, `about/campus`, `about/faculties`, `about/research`, `about/ai` |
-| Mobility Program | `mobility/inbound`, `mobility/outbound`, `mobility/international-program` |
-| Partnership | `partnership/partners`, `partnership/consortia`, `partnership/connect` |
-| News & Updates | `news`, `news/[slug]` |
+| Home | `/` — photo slides with testimonial slots, faculties, numbers, programmes, partner map, news, gallery |
+| Inbound Programs | `inbound` (programs, registration info, visa, related costs, dos & don'ts, video testimonies, inquiries) · `inbound/student-exchange` · `inbound/short-programs` · `inbound/tailor-made` · `inbound/international-programs` · `inbound/darmasiswa` |
+| Outbound Programs | `outbound` (IISMA, global outbound, joint/dual degree partners, registration & rules, ICE Institute, local outbound, testimonies, inquiries) |
+| Partners | `partners` (domestic, international by continent, consortiums, EU projects, 8 ways to collaborate) |
+| Get to Know Us | `about` (incl. campus resources) · `about/petramate` · `about/surabaya` · `about/campus` · `about/faculties` · `about/research` · `about/ai` |
+| News | `news` (upcoming and past events) · `news/[slug]` |
+| Contact Us | `contact` (contact routes, KUI persons in charge, WhatsApp, inquiry form) |
 
 ## Where things live
 
@@ -33,11 +37,17 @@ npm run lint
 src/content/         All site copy and data, typed and bilingual ({ en, id })
   profile.ts         Rankings, numbers, accreditation, campus
   faculties.ts       7 faculties, programmes, English-taught degrees
-  mobility.ts        Exchange steps, ICOP/PSP/SPECTRA/ASP, outbound routes, joint degrees, gallery
+  mobility.ts        Exchange steps, ICOP/PSP/SPECTRA/ASP, joint degrees, gallery
   partners.ts        Network numbers, partner list, consortia, EU projects, 8 ways to collaborate
   research.ts        Q1 output, study centres, researcher stories, lab tour
   ai.ts              AI@PCU and Petra Drone Academy
   contact.ts         Office details, inquiry topics
+  links.ts           Every external link, WhatsApp numbers, testimonial video ids (fill these in)
+  inbound.ts         Inbound programmes, requirements, visa, costs, dos & don'ts, tailor-made, Darmasiswa
+  outbound.ts        IISMA, global/online/local outbound, requirements, dos & don'ts
+  getToKnow.ts       Campus resources, Petramate, Beautiful Surabaya
+  team.ts            Contact routes and KUI persons in charge
+  testimonials.ts    Home hero slides
   media.ts           Video slots and YouTube embeds (fill these in)
   media.generated.ts Generated from scripts/media-manifest.json — do not edit
 content/news/*.md    News posts (both languages in one file)
@@ -46,6 +56,23 @@ public/brand/        Logo, fonts and shapes copied from the PCU Design System
 public/images/       WebP photos extracted from the deck
 scripts/             build-media.mjs (deck photos → WebP), build-map.mjs (dotted world map)
 ```
+
+### Fill in links, videos and posters
+
+Most "coming soon" items are filled in from one place:
+
+- **`src/content/links.ts`** holds every external link:
+  - Registration forms and Petramate registration.
+  - The Petra-only Google Drive Excel files (inbound courses; outbound exchange, study abroad, joint and dual degree lists).
+  - Faculty websites, Petra Business School, Darmasiswa, IISMA and ICE Institute.
+  - The WhatsApp numbers and the YouTube testimonial video IDs.
+  - A link left as `""` shows as a non-clickable "Link coming soon" pill.
+- **`src/content/media.ts`** holds the PSP and ASP posters (`posters`) and the background videos.
+- **`src/content/team.ts`** holds the KUI persons in charge: fill in `name` and `photo`.
+- **`src/content/testimonials.ts`** holds the home hero slides. Add `quote`, `name` and `program` when KUI provides real testimonials.
+- **Upcoming events:** add a news post with `kind: upcoming` and `eventDate: YYYY-MM-DD`. It shows under Upcoming Events until that date passes.
+
+For the outbound Excel files, share each one in Google Drive only with the `petra.ac.id` and `john.petra.ac.id` domains, then paste its link in `links.ts`. Google then asks visitors to sign in with a Petra account.
 
 ### Edit copy
 
@@ -115,17 +142,39 @@ Slots: `homeHero` (home), `inboundHero` (Mobility → Inbound), `ipdmReel` (Regu
 
 ## To confirm with the International Office
 
-Content the deck does not cover is marked on the site with a dashed "Details to be confirmed" badge, or is listed here:
+On the site, content that isn't from KUI or the deck carries a dashed "Details to be confirmed" badge, and links that aren't available yet show "Link coming soon".
 
-- **Outbound → IISMA & scholarships**, and **Summer & short programmes abroad**: the deck has no detail on either.
-- **Consortia → NUNI**: the full name and description are missing. **Global Hakka Studies**: the description needs checking.
-- **Partner list:** the site shows the partners named in the deck (52), not the full register of 180+ agreements.
-- **Iowa State University:** listed at QS #540 under a "QS top 500" heading in the deck.
-- **Sherly De Yong:** listed under Architecture on one slide and FHIK on another. She is not shown on the site until this is resolved.
-- **News dates:** the Erasmus+/Horizon post and the JUMBO post use placeholder dates (`datePending: true`), so no date is shown.
-- **Degree awards** for the FHIK English-taught programmes (IPDM, English, Chinese) are not listed in the deck.
-- **Xiaohongshu:** the handle is shown as text only, without a link.
-- **Indonesian translation:** all `id` copy needs a KUI review.
+**Links and files to provide (`src/content/links.ts`):**
+- The inbound courses-offered Excel file.
+- The outbound registration form.
+- The Petramate registration form.
+- The four outbound Excel lists: exchange, study abroad, joint degree, dual degree.
+- The Petra Business School website.
+- The faculty websites (FTSP, FTI, SBM, FHIK, FKIP, FK, FKG).
+- The IISMA, Darmasiswa and ICE Institute URLs. These were taken from public sources and need checking.
+
+**Media to provide:**
+- PSP and ASP posters.
+- 3 inbound testimonial videos.
+- NUNI, BKPTKI and IISMA testimonial videos.
+- Testimonial quotes for the home hero.
+- KUI team names and photos.
+- Surabaya City Government (Pemkot) tourism photos, each with its credit.
+- OMNI's list of campus facilities to highlight.
+- IISMA and ICE Institute activity photos. Deck photos are used for now.
+
+**Drafted text to review**, written from general or public knowledge:
+- Inbound: general requirements, visa types and steps, cost items (no amounts), dos & don'ts, the tailor-made programme description, and the Darmasiswa description.
+- Outbound: the IISMA description and internal selection, definitions of exchange, study abroad, joint degree and dual degree, general requirements, ICE Institute, local outbound (NUNI, BKPTKI), and dos & don'ts.
+- Get to Know Us: Petramate benefits, and the Surabaya travel times to Bali and Malang.
+- Partners: the descriptions for GHAS, P2A and NUNI, and the full list of domestic partners.
+
+**Data flags from the deck:**
+- Iowa State is listed at QS #540 under a "Top 500" heading.
+- Sherly De Yong is listed under two different faculties.
+- Two news posts have unconfirmed dates.
+
+**Copy review:** all Indonesian copy needs a review by KUI.
 
 ## Pending inputs
 

@@ -2,7 +2,9 @@ import Link from "next/link";
 import { ArrowUpRight, Compass, Globe2, UserRound } from "lucide-react";
 import { media } from "@/content/media.generated";
 import { videos } from "@/content/media";
-import { navigation } from "@/content/navigation";
+import { inboundNav } from "@/content/navigation";
+import { links } from "@/content/links";
+import { ExternalLink } from "@/components/sections/links";
 import { englishProgrammes, faculties } from "@/content/faculties";
 import { applyUrl } from "@/content/mobility";
 import { jumbo } from "@/content/research";
@@ -19,7 +21,7 @@ import { VideoSlot } from "@/components/brand/VideoSlot";
 export const generateStaticParams = localeParams;
 
 export async function generateMetadata({ params }: PageProps) {
-  return pageMeta(await resolveLocale(params), "/mobility/international-program", { en: "Regular International Program", id: "Program Internasional Reguler" }, { en: "Eight four-year bachelor's degrees taught in English, with a semester abroad built in.", id: "Delapan program sarjana empat tahun berbahasa Inggris, dengan satu semester di luar negeri." });
+  return pageMeta(await resolveLocale(params), "/inbound/international-programs", { en: "International Programs", id: "Program Internasional" }, { en: "Eight four-year bachelor's degrees taught in English, with a semester abroad built in.", id: "Delapan program sarjana empat tahun berbahasa Inggris, dengan satu semester di luar negeri." });
 }
 
 export default async function InternationalProgramPage({ params }: PageProps) {
@@ -39,9 +41,12 @@ export default async function InternationalProgramPage({ params }: PageProps) {
         eyebrow={en ? "Inbound · route two" : "Inbound · jalur dua"}
         title={en ? "A full bachelor's degree, in English" : "Gelar sarjana penuh, dalam bahasa Inggris"}
         lead={en ? "Eight programmes across four faculties, with mobility built in." : "Delapan program di empat fakultas, dengan mobilitas di dalamnya."}
-        crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(navigation[1].label, locale) }, { label: en ? "Regular International Program" : "Program Internasional Reguler" }]}
+        crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(inboundNav.label, locale), href: href(locale, "/inbound") }, { label: en ? "International Programs" : "Program Internasional" }]}
       >
-        <a href={applyUrl} target="_blank" rel="noreferrer" className="btn btn-amber mt-6">{en ? "Apply" : "Daftar"} <ArrowUpRight className="size-4" aria-hidden /></a>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a href={applyUrl} target="_blank" rel="noreferrer" className="btn btn-amber">{en ? "Apply" : "Daftar"} <ArrowUpRight className="size-4" aria-hidden /></a>
+          <ExternalLink href={links.petraBusinessSchool} label="Petra Business School" locale={locale} variant="glass" className="text-white" />
+        </div>
       </PageHero>
 
       <Section tone="dark" orbs labelledBy="why">

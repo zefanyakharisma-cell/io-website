@@ -20,16 +20,18 @@ type Labels = {
 
 /**
  * Inquiry form without a backend: it composes a prefilled email to the
- * International Office and opens the visitor's mail app.
+ * KUI address for the chosen topic (falling back to `to`) and opens the visitor's mail app.
  */
-export function InquiryForm({ to, topics, labels }: { to: string; topics: { value: string; label: string }[]; labels: Labels }) {
+export function InquiryForm({ to, topics, labels }: { to: string; topics: { value: string; label: string; to?: string }[]; labels: Labels }) {
   const [sent, setSent] = useState(false);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const get = (k: string) => String(data.get(k) ?? "").trim();
-    const topic = topics.find((t) => t.value === get("topic"))?.label ?? get("topic");
+    const chosen = topics.find((t) => t.value === get("topic"));
+    const topic = chosen?.label ?? get("topic");
+    const recipient = chosen?.to ?? to;
     const subject = `${labels.subjectPrefix}: ${topic} — ${get("institution") || get("name")}`;
     const body = [
       get("message"),
@@ -41,7 +43,7 @@ export function InquiryForm({ to, topics, labels }: { to: string; topics: { valu
       `${labels.country}: ${get("country")}`,
       `${labels.topic}: ${topic}`,
     ].join("\n");
-    window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };
 

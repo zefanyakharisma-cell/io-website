@@ -18,3 +18,9 @@ export const videos: Record<"homeHero" | "inboundHero" | "ipdmReel" | "labsHero"
  * Example: { id: "dQw4w9WgXcQ", title: "Petra campus tour" }
  */
 export const youtube: { id: string; title: string }[] = [];
+
+/** Programme posters (portrait images in public/images/posters/). Empty = branded placeholder. */
+export const posters: Record<"PSP" | "ASP", string> = {
+  PSP: "",
+  ASP: "",
+};
