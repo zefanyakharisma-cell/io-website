@@ -108,6 +108,15 @@ Add `datePending: true` to hide a date that is not confirmed yet.
 2. Run `node scripts/build-media.mjs <folder-with-the-source-images>`.
 3. The photo is then available as `media.<group>.<name>`.
 
+### Add photos from Wikimedia Commons
+
+1. Add an entry to `scripts/web-photos.json` in the form `"name": ["File:Exact Commons title.jpg", "Alt text"]`.
+2. Run `node scripts/fetch-web-photos.mjs`. Behind a proxy, prefix it with `NODE_USE_ENV_PROXY=1`. The script:
+   - checks the licence and stops on anything but CC0, public domain, CC BY or CC BY-SA;
+   - saves WebP files at 1600 and 800 px;
+   - writes `src/content/web-photos.generated.ts`.
+3. Use the photo as `webPhotos.<group>.<name>`, and show its credit with `<PhotoCredit>` (a single photo) or `<PhotoCredits>` (a gallery). Add a row to the Photos table in `docs/sources.md`.
+
 ### Adding videos
 
 The deck links 14 videos on Google Drive (fashion studio, DFT, the IPDM showreel and others). They are not in the repository yet. Until they are added, each video slot shows its photo with a slow Ken Burns zoom.
@@ -169,7 +178,7 @@ On the site, content that isn't from KUI or the deck carries a dashed "Details t
 - NUNI, BKPTKI and IISMA testimonial videos.
 - Testimonial quotes for the home hero.
 - KUI team names and photos.
-- Surabaya City Government (Pemkot) tourism photos, each with its credit.
+- Surabaya City Government (Pemkot) tourism photos, each with its credit. Credited Wikimedia Commons photos fill these slots for now.
 - OMNI's list of campus facilities to highlight.
 - IISMA and ICE Institute activity photos. Deck photos are used for now.
 

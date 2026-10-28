@@ -26,6 +26,8 @@ import { NewsCard } from "@/components/sections/NewsCard";
 import { WorldMap } from "@/components/ui/world-map";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { Gallery } from "@/components/ui/gallery";
+import { PhotoCredits } from "@/components/sections/PhotoCredit";
+import { webPhotos } from "@/content/web-photos.generated";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
@@ -310,7 +312,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="lg:sticky lg:top-28 lg:self-start">
             <SectionHeading id="life-title" eyebrow={en ? "In pictures" : "Dalam gambar"} title={en ? "Petranesians in global perspective" : "Petranesian dalam perspektif global"} lead={en ? "Service-learning across eastern Indonesia, international programme life in Surabaya, and Petranesians on exchange worldwide." : "Service-learning di Indonesia timur, kehidupan program internasional di Surabaya, dan Petranesian yang berkuliah di seluruh dunia."} />
           </div>
-          <Gallery items={gallery.map((g) => ({ ...g, caption: tr(g.caption, locale) }))} columns="columns-2 md:columns-3" openLabel={en ? "Open photo" : "Buka foto"} />
+          <div>
+            <Gallery items={gallery.map((g) => ({ ...g, caption: tr(g.caption, locale) }))} columns="columns-2 md:columns-3" openLabel={en ? "Open photo" : "Buka foto"} />
+            <PhotoCredits photos={[webPhotos.petra["cop-2022"], webPhotos.petra["cop-2018"]]} locale={locale} tone="dark" />
+          </div>
         </div>
       </Section>
 

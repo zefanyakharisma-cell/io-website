@@ -1,5 +1,6 @@
 import { MapPin } from "lucide-react";
 import { media } from "@/content/media.generated";
+import { webPhotos } from "@/content/web-photos.generated";
 import { campus } from "@/content/profile";
 import { contact } from "@/content/contact";
 import { aboutNav } from "@/content/navigation";
@@ -10,6 +11,7 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { Reveal } from "@/components/brand/Reveal";
 import { Gallery } from "@/components/ui/gallery";
+import { PhotoCredits } from "@/components/sections/PhotoCredit";
 
 export const generateStaticParams = localeParams;
 
@@ -24,6 +26,8 @@ export default async function CampusPage({ params }: PageProps) {
     media.campus["building-yellow"], media.campus["green-walkway"], media.campus["students-corridor"], media.campus["gazebo-study"],
     media.campus["tree-planting"], media.campus["students-gazebo"], media.campus.landmark, media.ai["study-table"],
   ];
+  // Official Petra photos published on Wikimedia Commons by BrandingPCU (credited below the gallery).
+  const commons = [webPhotos.petra["w-building"], webPhotos.petra["servant-leader"], webPhotos.petra.library];
 
   return (
     <>
@@ -69,7 +73,8 @@ export default async function CampusPage({ params }: PageProps) {
 
       <Section tone="light" labelledBy="campus-life">
         <SectionHeading id="campus-life" tone="light" eyebrow={en ? "Campus" : "Kampus"} title={en ? "A green campus, built for meeting" : "Kampus hijau, tempat bertemu"} lead={en ? "Petra's 40-hectare green campus is managed by its Sustainability & Social Innovation centre." : "Kampus hijau Petra seluas 40 hektare dikelola Pusat Keberlanjutan & Inovasi Sosial."} />
-        <Gallery className="mt-10" items={photos.map((p) => ({ ...p, caption: p.alt }))} openLabel={en ? "Open photo" : "Buka foto"} />
+        <Gallery className="mt-10" items={[...commons, ...photos].map((p) => ({ ...p, caption: p.alt }))} openLabel={en ? "Open photo" : "Buka foto"} />
+        <PhotoCredits photos={commons} locale={locale} />
       </Section>
 
       <CtaBand locale={locale} image={media.mobility["psp-bus"]} title={en ? "Come and see Surabaya." : "Datang dan lihat Surabaya."} body={en ? "Exchange students, summer cohorts and partner delegations are always welcome." : "Mahasiswa pertukaran, peserta musim panas dan delegasi mitra selalu kami sambut."} />

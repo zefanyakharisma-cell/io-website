@@ -1,4 +1,5 @@
 import type { L } from "@/lib/i18n";
+import { webPhotos, type WebPhoto } from "./web-photos.generated";
 import { media } from "./media.generated";
 
 type Img = { src: string; small?: string; alt: string; width?: number; height?: number };
@@ -46,8 +47,9 @@ export const office = {
 };
 
 /**
- * Beautiful Surabaya. KUI asked for Surabaya City Government (Pemkot) photos,
- * each captioned and credited; until those arrive, deck photos stand in.
+ * Beautiful Surabaya. Landmark and sight photos come from Wikimedia Commons under free
+ * licences, each credited on the page. Surabaya City Government (Pemkot) photos can
+ * replace them when KUI provides them.
  */
 export const surabaya = {
   intro: {
@@ -67,17 +69,18 @@ export const surabaya = {
     { place: "Madura", side: "right", lat: -7.05, lng: 112.85, time: { en: "Suramadu Bridge", id: "Jembatan Suramadu" } },
     { place: "Bali", side: "bottom", lat: -8.65, lng: 115.22, time: { en: "≈1¼ h flight", id: "≈1¼ jam terbang" } },
   ] satisfies { place: string; side: "top" | "bottom" | "left" | "right"; lat: number; lng: number; time: L }[],
-  /** Landmarks — surabayaLandmarks, surabayaCultureTrip sources. Photos to be added once image hosts are reachable. */
+  /** Landmarks — surabayaLandmarks, surabayaCultureTrip sources. Photos from Wikimedia Commons (scripts/web-photos.json). */
   landmarks: [
-    { name: "Suramadu Bridge", stat: "5.4 km", body: { en: "Opened in June 2009, it links Java and Madura and is Indonesia's longest bridge. Best at sunset.", id: "Diresmikan Juni 2009, menghubungkan Jawa dan Madura, dan merupakan jembatan terpanjang di Indonesia. Paling indah saat senja." } },
-    { name: "Tugu Pahlawan", stat: "41 m", body: { en: "The Heroes Monument honours the Battle of Surabaya on 10 November 1945; the 10 November Museum sits beside it.", id: "Monumen yang mengenang Pertempuran Surabaya 10 November 1945; Museum 10 November berada di sampingnya." } },
-    { name: "House of Sampoerna", stat: "1932", body: { en: "A heritage complex and museum on the history of kretek, with guided tours of the hand-rolling floor.", id: "Kompleks cagar budaya dan museum sejarah kretek, dengan tur ke ruang pelintingan tangan." } },
-    { name: "Monumen Kapal Selam", stat: "Monkasel", body: { en: "A retired Soviet-built Whiskey-class submarine, now a museum on the bank of the Kalimas River.", id: "Kapal selam kelas Whiskey buatan Soviet yang kini menjadi museum di tepi Kalimas." } },
-  ] satisfies { name: string; stat: string; body: L }[],
+    { name: "Suramadu Bridge", stat: "5.4 km", photo: webPhotos.surabaya.suramadu, body: { en: "Opened in June 2009, it links Java and Madura and is Indonesia's longest bridge. Best at sunset.", id: "Diresmikan Juni 2009, menghubungkan Jawa dan Madura, dan merupakan jembatan terpanjang di Indonesia. Paling indah saat senja." } },
+    { name: "Tugu Pahlawan", stat: "41 m", photo: webPhotos.surabaya["tugu-pahlawan"], body: { en: "The Heroes Monument honours the Battle of Surabaya on 10 November 1945; the 10 November Museum sits beside it.", id: "Monumen yang mengenang Pertempuran Surabaya 10 November 1945; Museum 10 November berada di sampingnya." } },
+    { name: "House of Sampoerna", stat: "1932", photo: webPhotos.surabaya["house-of-sampoerna"], body: { en: "A heritage complex and museum on the history of kretek, with guided tours of the hand-rolling floor.", id: "Kompleks cagar budaya dan museum sejarah kretek, dengan tur ke ruang pelintingan tangan." } },
+    { name: "Monumen Kapal Selam", stat: "Monkasel", photo: webPhotos.surabaya.monkasel, body: { en: "A retired Soviet-built Whiskey-class submarine, now a museum on the bank of the Kalimas River.", id: "Kapal selam kelas Whiskey buatan Soviet yang kini menjadi museum di tepi Kalimas." } },
+  ] satisfies { name: string; stat: string; photo: WebPhoto; body: L }[],
+  /** "Sights around Surabaya": Wikimedia Commons photos, each credited on the page. */
   photos: [
-    { image: media.mobility.bromo, caption: { en: "Sunrise at Mount Bromo", id: "Matahari terbit di Gunung Bromo" }, credit: "Petra International Office" },
-    { image: media.mobility["psp-bus"], caption: { en: "City tour, Surabaya", id: "Tur kota, Surabaya" }, credit: "Petra International Office" },
-    { image: media.mobility["museum-group"], caption: { en: "Museum visit", id: "Kunjungan museum" }, credit: "Petra International Office" },
-    { image: media.mobility["spectra-museum"], caption: { en: "Heritage museum, Surabaya", id: "Museum warisan, Surabaya" }, credit: "Petra International Office" },
-  ],
+    { image: webPhotos.surabaya["skyline-day"], caption: { en: "Surabaya by day", id: "Surabaya di siang hari" } },
+    { image: webPhotos.surabaya["skyline-night"], caption: { en: "The city after dark", id: "Kota di malam hari" } },
+    { image: webPhotos.surabaya.bromo, caption: { en: "Sunrise at Mount Bromo", id: "Matahari terbit di Gunung Bromo" } },
+    { image: webPhotos.surabaya.malang, caption: { en: "Malang at night", id: "Malang di malam hari" } },
+  ] satisfies { image: WebPhoto; caption: L }[],
 };

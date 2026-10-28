@@ -1,5 +1,12 @@
 # Decoration plan: PCU Design System components and web photos
 
+**Status (28 Oct 2026):**
+- **Done:**
+  - §2 components 1–6 and 8–9. The component from §2.7 exists as `GeoCluster` but isn't placed yet, because every page has a header photo.
+  - §3 placements: footer, page heroes, Home, About, Contact, Partners, process flows, and dos and don'ts.
+  - §4 photos: 13 Commons files, 5 of them Petra's own uploads.
+- **Blocked:** petra.ac.id is reachable but sits behind a Cloudflare bot check, so its photos come from BrandingPCU's Commons uploads instead.
+
 Goal: make the site more engaging by using more of the PCU Design System's graphic language, and add real photos from Wikimedia Commons, Wikipedia and petra.ac.id. All rules in the README's "Design rules" section still apply: no shape behind text, contrast at 4.5:1 or better, motion off under reduced motion.
 
 ## 1. What the site uses today, and what it doesn't

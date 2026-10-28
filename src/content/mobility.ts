@@ -1,5 +1,6 @@
 import type { L } from "@/lib/i18n";
 import { media } from "./media.generated";
+import { webPhotos } from "./web-photos.generated";
 
 type Img = { src: string; alt: string; width?: number; height?: number };
 
@@ -213,6 +214,8 @@ export const gallery: (Img & { caption: L })[] = [
   { ...media.mobility["icop-river"], caption: { en: "ICOP · Weihura irrigation", id: "ICOP · Irigasi Weihura" } },
   { ...media.mobility["icop-teaching"], caption: { en: "ICOP · SD Sumberjati", id: "ICOP · SD Sumberjati" } },
   { ...media.mobility["service-learning"], caption: { en: "Service-learning deployment", id: "Penerjunan service-learning" } },
+  { ...webPhotos.petra["cop-2022"], caption: { en: "COP · Surabaya, 2022", id: "COP · Surabaya, 2022" } },
+  { ...webPhotos.petra["cop-2018"], caption: { en: "COP · school mural, 2018", id: "COP · mural sekolah, 2018" } },
   { ...media.mobility.henna, caption: { en: "Summer programme immersion", id: "Imersi program musim panas" } },
   { ...media.mobility["exchange-group"], caption: { en: "Petranesians abroad", id: "Petranesian di luar negeri" } },
   { ...media.mobility.nsysu, caption: { en: "Exchange · NSYSU, Taiwan", id: "Pertukaran · NSYSU, Taiwan" } },
