@@ -12,6 +12,10 @@ import { href, isLocale, localeParams, tr, type Locale } from "@/lib/i18n";
 import { MAP_SIZE, partnerCountryPoints, surabaya } from "@/lib/map-points";
 import { HeroSlides } from "@/components/sections/HeroSlides";
 import { Ring } from "@/components/brand/Ring";
+import { Shape } from "@/components/brand/Shape";
+import { IconBadge, type BadgeTone } from "@/components/brand/IconBadge";
+import { Tag } from "@/components/brand/Tag";
+import { PatternStrip } from "@/components/brand/PatternStrip";
 import { Reveal } from "@/components/brand/Reveal";
 import { Photo } from "@/components/brand/Photo";
 import { SectionHeading } from "@/components/brand/SectionHeading";
@@ -36,21 +40,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const news = getAllNews().slice(0, 4);
   const homeStats = [keyStats[6], { ...networkTotals[1], note: undefined }, keyStats[3], keyStats[4]];
 
-  const audiences = [
+  const audiences: { icon: typeof Building2; tone: BadgeTone; title: string; body: string; path: string }[] = [
     {
       icon: Building2,
+      tone: "sunrise",
       title: en ? "Partner with us" : "Bermitra dengan kami",
       body: en ? "Exchange, joint degrees, research and more." : "Pertukaran, gelar bersama, riset dan lainnya.",
       path: "/partners",
     },
     {
       icon: GraduationCap,
+      tone: "aqua",
       title: en ? "Study at Petra" : "Belajar di Petra",
       body: en ? "Semester exchange and summer programmes." : "Pertukaran semester dan program musim panas.",
       path: "/inbound",
     },
     {
       icon: Plane,
+      tone: "dusk",
       title: en ? "Go abroad" : "Ke luar negeri",
       body: en ? "Petranesians in 10 countries." : "Petranesian di 10 negara.",
       path: "/outbound",
@@ -66,7 +73,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <>
       {/* 1 · Hero */}
-      <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden pb-12 pt-32 text-white md:items-center md:pb-0">
+      <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden pb-28 pt-32 text-white md:items-center md:pb-0">
         <HeroSlides
           slides={heroSlides.map((h) => ({ image: h.image, caption: tr(h.caption, locale), quote: h.quote && tr(h.quote, locale), name: h.name, program: h.program }))}
           labels={{ pause: en ? "Pause slideshow" : "Jeda tayangan", play: en ? "Play slideshow" : "Putar tayangan", slide: en ? "Show photo" : "Tampilkan foto" }}
@@ -89,10 +96,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {audiences.map((a) => (
                 <li key={a.path}>
                   <Link href={href(locale, a.path)} className="glass group flex h-full flex-col rounded-lg p-4 transition-transform hover:-translate-y-0.5">
-                    <a.icon className="size-5 text-amber" aria-hidden />
-                    <span className="mt-3 flex items-center gap-1.5 font-semibold">
-                      {a.title}
-                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                    {/* Badge beside the title on phones (keeps the hero short), above it from sm. */}
+                    <span className="flex items-center gap-3 sm:flex-col sm:items-start">
+                      <IconBadge icon={a.icon} tone={a.tone} size={40} />
+                      <span className="flex items-center gap-1.5 font-semibold">
+                        {a.title}
+                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                      </span>
                     </span>
                     <span className="mt-1 text-sm text-smoke/85">{a.body}</span>
                   </Link>
@@ -126,14 +136,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* 2 · Numbers */}
-      <Section tone="dark" labelledBy="numbers-title" className="!py-16 md:!py-20">
+      <Section tone="dark" labelledBy="numbers-title" className="!py-16 md:!py-20" decor={<PatternStrip className="absolute inset-x-0 top-0 h-4" />}>
         <h2 id="numbers-title" className="sr-only">{en ? "Petra in numbers" : "Petra dalam angka"}</h2>
         <StatGrid stats={homeStats} locale={locale} />
         <p className="mt-6 text-sm text-smoke/80">{tr(rankingNote, locale)}</p>
       </Section>
 
       {/* 2b · Faculties — each links to the faculty website (src/content/links.ts) */}
-      <Section tone="light" labelledBy="fac-title">
+      <Section
+        tone="light"
+        labelledBy="fac-title"
+        decor={<span aria-hidden className="pcu-glow pcu-glow--aqua -right-40 -top-56 hidden size-[34rem] md:block" />}
+      >
         <SectionHeading id="fac-title" tone="light" eyebrow={en ? "Academic structure" : "Struktur akademik"} title={en ? "Seven faculties, one campus" : "Tujuh fakultas, satu kampus"} />
         <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
           {faculties.map((f) => (
@@ -157,7 +171,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </Section>
 
       {/* 3 · Mobility tiles */}
-      <Section tone="light" labelledBy="mobility-title">
+      <Section
+        tone="light"
+        labelledBy="mobility-title"
+        decor={
+          <>
+            <Shape kind="quarter-bl" className="right-0 top-0 w-36 text-amber md:hidden lg:block" />
+            <Shape kind="circle" className="right-40 top-8 w-8 text-cerise md:hidden lg:block" />
+          </>
+        }
+      >
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading id="mobility-title" tone="light" eyebrow={en ? "Mobility Program" : "Program Mobilitas"} title={en ? "Three ways to move" : "Tiga jalur mobilitas"} lead={en ? "Come to Surabaya, go abroad, or take a whole degree in English." : "Datang ke Surabaya, berangkat ke luar negeri, atau kuliah penuh dalam bahasa Inggris."} />
         </div>
@@ -169,7 +192,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <Photo image={t.image} className="absolute inset-0 transition-transform duration-[1.2s] ease-out group-hover:scale-105" sizes="(min-width: 768px) 33vw, 100vw" />
                   <span className="absolute inset-0 bg-gradient-to-t from-midnight-deep/95 via-midnight-deep/30 to-transparent" />
                   <span className="glass relative m-3 block rounded-md p-5">
-                    <span className="eyebrow text-amber">{t.eyebrow}</span>
+                    <Tag outline className="text-amber">{t.eyebrow}</Tag>
                     <span className="mt-2 flex items-start justify-between gap-2 text-xl font-bold leading-snug">
                       {t.title}
                       <ArrowUpRight className="mt-1 size-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />

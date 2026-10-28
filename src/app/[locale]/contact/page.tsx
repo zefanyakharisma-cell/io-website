@@ -1,4 +1,4 @@
-import { AtSign, Mail, MapPin, Phone, UserRound } from "lucide-react";
+import { AtSign, DoorOpen, Mail, MapPin, Phone, UserRound } from "lucide-react";
 import { media } from "@/content/media.generated";
 import { contactNav } from "@/content/navigation";
 import { contact, inquiryTopics } from "@/content/contact";
@@ -12,6 +12,9 @@ import { ToConfirm } from "@/components/sections/bits";
 import { WhatsAppButton } from "@/components/sections/links";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { Photo } from "@/components/brand/Photo";
+import { IconBadge } from "@/components/brand/IconBadge";
+import { Sign } from "@/components/brand/Sign";
+import { Shape } from "@/components/brand/Shape";
 
 export const generateStaticParams = localeParams;
 
@@ -38,7 +41,7 @@ export default async function ContactPage({ params }: PageProps) {
         </div>
       </PageHero>
 
-      <Section tone="light" labelledBy="routes">
+      <Section tone="light" labelledBy="routes" decor={<><Shape kind="quarter-bl" className="right-0 top-0 w-32 text-teal md:hidden lg:block" /><Shape kind="circle" className="right-36 top-6 w-8 text-amber md:hidden lg:block" /></>}>
         <SectionHeading id="routes" tone="light" eyebrow={en ? "Contact" : "Kontak"} title={en ? "Who to contact" : "Siapa yang dihubungi"} />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {contactGroups.map((g) => (
@@ -107,17 +110,20 @@ export default async function ContactPage({ params }: PageProps) {
               />
             </div>
           </div>
-          <aside className="overflow-hidden rounded-lg bg-midnight text-white">
-            <div className="relative aspect-[16/9]"><Photo image={media.campus.landmark} sizes="(min-width: 1024px) 33vw, 100vw" /></div>
-            <div className="p-6">
-              <p className="eyebrow text-amber">{tr(contact.office, locale)}</p>
-              <ul className="mt-4 space-y-3 text-sm">
-                <li className="flex gap-3"><Mail className="mt-0.5 size-4 shrink-0 text-amber" aria-hidden /><a className="prose-link on-dark" href={`mailto:${contact.email}`}>{contact.email}</a></li>
-                <li className="flex gap-3"><Phone className="mt-0.5 size-4 shrink-0 text-amber" aria-hidden /><a className="prose-link on-dark" href={contact.phoneHref}>{contact.phone}</a></li>
-                <li className="flex gap-3"><MapPin className="mt-0.5 size-4 shrink-0 text-amber" aria-hidden /><a className="prose-link on-dark" href={contact.mapUrl} target="_blank" rel="noreferrer">{contact.address}</a></li>
-              </ul>
-            </div>
-          </aside>
+          <div>
+            <aside className="overflow-hidden rounded-lg bg-midnight text-white">
+              <div className="relative aspect-[16/9]"><Photo image={media.campus.landmark} sizes="(min-width: 1024px) 33vw, 100vw" /></div>
+              <div className="p-6">
+                <p className="eyebrow text-amber">{tr(contact.office, locale)}</p>
+                <ul className="mt-4 space-y-3 text-sm">
+                  <li className="flex items-center gap-3"><IconBadge icon={Mail} tone="sunrise" size={36} /><a className="prose-link on-dark" href={`mailto:${contact.email}`}>{contact.email}</a></li>
+                  <li className="flex items-center gap-3"><IconBadge icon={Phone} tone="aqua" size={36} /><a className="prose-link on-dark" href={contact.phoneHref}>{contact.phone}</a></li>
+                  <li className="flex items-center gap-3"><IconBadge icon={MapPin} tone="dusk" size={36} /><a className="prose-link on-dark" href={contact.mapUrl} target="_blank" rel="noreferrer">{contact.address}</a></li>
+                </ul>
+              </div>
+            </aside>
+            <Sign icon={DoorOpen} building={en ? "D Building · Room 104" : "Gedung D · Ruang 104"} room={en ? "International Office" : "Kantor Urusan Internasional"} className="mt-8" />
+          </div>
         </div>
       </Section>
     </>

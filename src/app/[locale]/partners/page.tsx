@@ -9,6 +9,8 @@ import { Section } from "@/components/sections/Section";
 import { StatGrid } from "@/components/sections/StatGrid";
 import { Bars, ToConfirm } from "@/components/sections/bits";
 import { SectionHeading } from "@/components/brand/SectionHeading";
+import { IconBadge } from "@/components/brand/IconBadge";
+import { PatternStrip } from "@/components/brand/PatternStrip";
 import { Reveal } from "@/components/brand/Reveal";
 import { Photo } from "@/components/brand/Photo";
 import { Donut } from "@/components/ui/donut";
@@ -102,7 +104,7 @@ export default async function PartnersPage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section tone="light" labelledBy="domestic-title" id="domestic" className="scroll-mt-20">
+      <Section tone="light" labelledBy="domestic-title" id="domestic" className="scroll-mt-20" decor={<span aria-hidden className="pcu-glow pcu-glow--cerise -right-48 -top-48 hidden size-[30rem] md:block" />}>
         <SectionHeading id="domestic-title" tone="light" eyebrow="A" title={en ? "Domestic partners" : "Mitra dalam negeri"} lead={en ? `${domestic.total}+ partners across industry, government and institutions in Indonesia.` : `${domestic.total}+ mitra dari industri, pemerintah dan institusi di Indonesia.`} />
         <dl className="mt-8 grid gap-3 sm:grid-cols-3">
           {domestic.breakdown.map((b) => (
@@ -155,7 +157,7 @@ export default async function PartnersPage({ params }: PageProps) {
         </ul>
       </Section>
 
-      <Section tone="deep" labelledBy="collaborate-title" id="collaborate" className="scroll-mt-20">
+      <Section tone="deep" labelledBy="collaborate-title" id="collaborate" className="scroll-mt-20" decor={<PatternStrip className="absolute inset-x-0 top-0 h-4" />}>
         <SectionHeading id="collaborate-title" eyebrow={en ? "Potential collaboration" : "Peluang kolaborasi"} title={en ? "8 ways to work with Petra" : "8 cara bekerja sama dengan Petra"} lead={en ? "Every partnership is shaped with you — from a single joint lecture to a full degree pathway." : "Setiap kemitraan dirancang bersama Anda — dari satu kuliah bersama hingga jalur gelar penuh."} />
         <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {collaborationWays.map((w, i) => {
@@ -163,7 +165,7 @@ export default async function PartnersPage({ params }: PageProps) {
             return (
               <li key={w.icon} className="glass relative rounded-lg p-5">
                 <span className="absolute right-4 top-4 font-display text-3xl leading-none text-white/15">0{i + 1}</span>
-                <Icon className="size-6 text-amber" aria-hidden />
+                <IconBadge icon={Icon} tone={(["sunrise", "aqua", "dusk", "amber"] as const)[i % 4]} size={44} />
                 <p className="mt-3 text-lg font-bold">{tr(w.title, locale)}</p>
                 <p className="mt-1 text-sm text-smoke/90">{tr(w.body, locale)}</p>
               </li>

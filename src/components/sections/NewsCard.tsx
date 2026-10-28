@@ -3,12 +3,22 @@ import { ArrowUpRight } from "lucide-react";
 import { categoryLabels, formatDate, type NewsPost } from "@/lib/news";
 import { href, tr, type Locale } from "@/lib/i18n";
 import { Photo } from "@/components/brand/Photo";
+import { Shape } from "@/components/brand/Shape";
+import { Tag } from "@/components/brand/Tag";
 import { cn } from "@/lib/utils";
+
+/** One corner shape per card, its colour following the category. */
+const cornerColor: Record<NewsPost["category"], string> = {
+  Mobility: "text-amber",
+  Partnership: "text-teal",
+  Research: "text-cerise",
+  Events: "text-blue",
+};
 
 export function NewsCard({ post, locale, featured, compact }: { post: NewsPost; locale: Locale; featured?: boolean; compact?: boolean }) {
   const meta = (
     <span className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
-      <span className="rounded-full bg-amber px-2.5 py-0.5 font-semibold text-midnight">{tr(categoryLabels[post.category], locale)}</span>
+      <Tag outline={featured}>{tr(categoryLabels[post.category], locale)}</Tag>
       {!post.datePending && <time dateTime={post.date}>{formatDate(post.date, locale)}</time>}
     </span>
   );
@@ -28,11 +38,12 @@ export function NewsCard({ post, locale, featured, compact }: { post: NewsPost; 
   }
 
   return (
-    <Link href={href(locale, `/news/${post.slug}`)} className={cn("group glass-light flex overflow-hidden rounded-lg text-midnight transition-transform hover:-translate-y-0.5", compact ? "flex-col lg:flex-row" : "flex-col")}>
+    <Link href={href(locale, `/news/${post.slug}`)} className={cn("group glass-light relative flex overflow-hidden rounded-lg text-midnight transition-transform hover:-translate-y-0.5", compact ? "flex-col lg:flex-row" : "flex-col")}>
       <span className={cn("relative block shrink-0 overflow-hidden", compact ? "aspect-[16/10] lg:aspect-auto lg:w-44" : "aspect-[16/10]")}>
         <Photo image={post.cover} className="absolute inset-0 transition-transform duration-700 group-hover:scale-105" sizes="(min-width: 1024px) 25vw, 100vw" />
       </span>
-      <span className="flex flex-1 flex-col p-5">
+      <Shape kind={compact ? "quarter-bl" : "quarter-tl"} mobile className={cn("right-0 w-8", compact ? "top-0" : "bottom-0", cornerColor[post.category])} />
+      <span className="flex flex-1 flex-col p-5 pr-10">
         <span className="text-ink-secondary">{meta}</span>
         <span className="mt-2 flex items-start justify-between gap-2 font-bold leading-snug">
           {tr(post.title, locale)}

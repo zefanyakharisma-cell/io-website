@@ -13,8 +13,11 @@ export function Section({
   className,
   id,
   labelledBy,
+  decor,
 }: {
   children: React.ReactNode;
+  /** Decorative shapes positioned against the section's own edges (aria-hidden, never behind text). */
+  decor?: React.ReactNode;
   tone?: "dark" | "light" | "deep";
   orbs?: boolean;
   className?: string;
@@ -34,6 +37,7 @@ export function Section({
       )}
     >
       {tone === "dark" && <OrbBackground variant={orbs ? "default" : "quiet"} />}
+      {decor}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
     </section>
   );

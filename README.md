@@ -137,6 +137,16 @@ Slots: `homeHero` (home), `inboundHero` (Mobility → Inbound), `ipdmReel` (Regu
 - **Type:** Inter (with `cv11` and `ss01`). Headings are bold at -0.02em. Bebas Neue is for big numerals. Section labels use the eyebrow and tagline styles.
 - **Glass:** `.glass`, `.glass-strong` and `.glass-light` in `src/app/globals.css`. Each always has a base tint so text stays at 4.5:1 or better. It falls back to a solid panel without `backdrop-filter`, or when the visitor prefers reduced transparency.
 - **Shapes:** the half ring (`<Ring>`) bleeds off edges and is never placed behind text. It is hidden on small screens.
+- **Graphic elements** (`src/components/brand/`):
+  - `<Shape>`: filled geometry and rings.
+  - `<GeoCluster>`: the cover composition.
+  - `<IconBadge>`: a white outline icon in a gradient circle.
+  - `<Tag>`: a midnight category label.
+  - `<Sign>`: a wayfinding panel with the amber offset.
+  - `<PatternStrip>`: the quarter-circle pattern as a divider.
+  - Put section-level shapes in `<Section decor>` so they bleed off the section edge and stay clear of text.
+- **Footer:** an ArchBand forms the double-arch top edge of the footer, the one band per page. The footer logo uses the "International Office" DepartmentLockup.
+- **Headline faces:** Inter by default. `SectionHeading face="serif"` (Libre Baskerville) is for formal or academic headings, and a page uses one display face.
 - **Logo:** the approved white logomaster only, on midnight, at least 96px wide.
 - **Focus:** a 3px amber ring at a 3px offset. Motion is off when the visitor prefers reduced motion.
 
