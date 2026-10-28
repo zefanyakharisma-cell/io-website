@@ -10,6 +10,7 @@ export function Reveal({ children, delay = 0, className, y = 24 }: { children: R
   if (reduce) return <div className={className}>{children}</div>;
   return (
     <motion.div
+      data-reveal
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
