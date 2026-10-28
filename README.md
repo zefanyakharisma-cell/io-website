@@ -151,7 +151,7 @@ On the site, content that isn't from KUI or the deck carries a dashed "Details t
 - The four outbound Excel lists: exchange, study abroad, joint degree, dual degree.
 - The Petra Business School website.
 - The faculty websites (FTSP, FTI, SBM, FHIK, FKIP, FK, FKG).
-- The IISMA, Darmasiswa and ICE Institute URLs. These were taken from public sources and need checking.
+- The IISMA (iisma.id), Darmasiswa (darmasiswa / apply.darmasiswa.kemendikdasmen.go.id) and ICE Institute (icei.ac.id) URLs. These were taken from public sources and need checking.
 
 **Media to provide:**
 - PSP and ASP posters.
@@ -168,6 +168,14 @@ On the site, content that isn't from KUI or the deck carries a dashed "Details t
 - Outbound: the IISMA description and internal selection, definitions of exchange, study abroad, joint degree and dual degree, general requirements, ICE Institute, local outbound (NUNI, BKPTKI), and dos & don'ts.
 - Get to Know Us: Petramate benefits, and the Surabaya travel times to Bali and Malang.
 - Partners: the descriptions for GHAS, P2A and NUNI, and the full list of domestic partners.
+
+**Facts taken from the web** (listed with their sources in [docs/sources.md](docs/sources.md); each is cited on its page):
+- The visa steps and documents checklist, including passport validity, which sources disagree on.
+- Darmasiswa 2026/27 dates. These change every year.
+- IISMA applicant figures and ICE Institute statistics.
+- Petramate SKKK points and scholarship eligibility, from the 2024/25 call.
+- KUI office room (D 104) and the mobility phone line. These come from a partner-hosted fact sheet.
+- The Petra history timeline, Surabaya landmark facts, and day-trip travel times.
 
 **Data flags from the deck:**
 - Iowa State is listed at QS #540 under a "Top 500" heading.

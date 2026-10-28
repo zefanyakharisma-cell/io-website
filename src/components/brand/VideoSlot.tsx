@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+
 import { Pause, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Photo, type PhotoSource } from "./Photo";
+import { useReducedMotionSafe } from "@/lib/use-reduced-motion";
 
 /**
  * A muted, looping background video with a photo poster. Until a video file is
@@ -26,7 +27,7 @@ export function VideoSlot({
   pauseLabel?: string;
   playLabel?: string;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
 

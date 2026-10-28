@@ -1,16 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Pause, Play, Quote } from "lucide-react";
 import { Photo, type PhotoSource } from "@/components/brand/Photo";
 import { cn } from "@/lib/utils";
+import { useReducedMotionSafe } from "@/lib/use-reduced-motion";
 
 export type Slide = { image: PhotoSource; caption: string; quote?: string; name?: string; program?: string };
 
 /** Full-bleed crossfading photos with a caption or testimonial. Pauses on request and under reduced motion. */
 export function HeroSlides({ slides, labels }: { slides: Slide[]; labels: { pause: string; play: string; slide: string } }) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [i, setI] = useState(0);
   const [playing, setPlaying] = useState(true);
 

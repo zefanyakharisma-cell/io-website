@@ -23,9 +23,10 @@ export const links = {
   asp: "https://asp.petra.ac.id/",
   spectra: "https://indonesianspectrum.petra.ac.id/",
   petraBusinessSchool: "", // KUI: Petra Business School website
-  darmasiswa: "https://darmasiswa.kemdikbud.go.id/", // TO CONFIRM
-  iisma: "https://iisma.kemdikbud.go.id/", // TO CONFIRM
-  iceInstitute: "https://iceinstitute.id/", // TO CONFIRM
+  darmasiswa: "https://darmasiswa.kemendikdasmen.go.id/", // per 2026/27 guidelines
+  darmasiswaApply: "https://apply.darmasiswa.kemendikdasmen.go.id/", // per 2026/27 guidelines
+  iisma: "https://iisma.id/", // per partner-university guides; older domain iisma.kemdikbud.go.id
+  iceInstitute: "https://icei.ac.id/",
 
   // Faculty websites, keyed by faculty code
   faculty: {

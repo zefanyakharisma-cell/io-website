@@ -84,3 +84,12 @@ export const campus = {
     { image: media.brand["map-surabaya"], label: { en: "Surabaya", id: "Surabaya" } },
   ] satisfies { image: { src: string; alt: string }; label: L }[],
 };
+
+/** Petra history — wikipediaPetra source for 1951–1964, the deck for recent milestones. */
+export const history = [
+  { when: "1951", title: { en: "PPPK Petra founded", id: "PPPK Petra berdiri" }, body: { en: "The Christian education foundation behind Petra, in Surabaya", id: "Yayasan pendidikan Kristen di balik Petra, di Surabaya" } },
+  { when: "1961", title: { en: "Petra Christian University", id: "Universitas Kristen Petra" }, body: { en: "Announced on 22 September, starting with the Faculty of Letters", id: "Diumumkan 22 September, diawali Fakultas Sastra" } },
+  { when: "1962", title: { en: "Second faculty", id: "Fakultas kedua" }, body: { en: "Civil Engineering and Planning opens", id: "Teknik Sipil dan Perencanaan dibuka" } },
+  { when: "2025", title: { en: "AI@PCU", id: "AI@PCU" }, body: { en: "Launched 1 August", id: "Diluncurkan 1 Agustus" } },
+  { when: "2026", title: { en: "QS WUR 2026", id: "QS WUR 2026" }, body: { en: "#1 private university in East Java; Drone Academy opens", id: "Universitas swasta #1 di Jawa Timur; Drone Academy dibuka" } },
+] satisfies { when: string; title: L; body: L }[];

@@ -4,8 +4,9 @@
 // counts when scrolled into view, formats with thousands separators, and
 // shows the final value immediately under reduced motion.
 import { useEffect, useRef } from "react";
-import { animate, useInView, useMotionValue, useReducedMotion, useTransform, motion } from "framer-motion";
+import { animate, useInView, useMotionValue, useTransform, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useReducedMotionSafe } from "@/lib/use-reduced-motion";
 
 export function NumberTicker({
   value,
@@ -24,13 +25,17 @@ export function NumberTicker({
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const reduce = useReducedMotion();
-  const count = useMotionValue(reduce ? value : 0);
+  const reduce = useReducedMotionSafe();
+  const count = useMotionValue(0);
   const fmt = new Intl.NumberFormat(locale === "id" ? "id-ID" : "en-US");
   const text = useTransform(count, (v) => `${prefix}${fmt.format(Math.round(v))}${suffix}`);
 
   useEffect(() => {
-    if (!inView || reduce) return;
+    if (reduce) {
+      count.set(value);
+      return;
+    }
+    if (!inView) return;
     const controls = animate(count, value, { duration, ease: [0.16, 1, 0.3, 1] });
     return () => controls.stop();
   }, [inView, reduce, value, duration, count]);
