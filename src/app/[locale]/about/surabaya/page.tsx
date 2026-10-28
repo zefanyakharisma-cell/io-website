@@ -6,12 +6,12 @@ import { links } from "@/content/links";
 import { href, localeParams, pageMeta, resolveLocale, tr, type PageProps } from "@/lib/i18n";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section } from "@/components/sections/Section";
-import { ToConfirm } from "@/components/sections/bits";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { Reveal } from "@/components/brand/Reveal";
 import { Photo } from "@/components/brand/Photo";
 import { WorldMap } from "@/components/ui/world-map";
 import { SourceNote } from "@/components/sections/SourceNote";
+import { PhotoCredit } from "@/components/sections/PhotoCredit";
 import { EAST_JAVA_SIZE, projectEastJava } from "@/lib/map-projection";
 
 export const generateStaticParams = localeParams;
@@ -58,10 +58,14 @@ export default async function SurabayaPage({ params }: PageProps) {
           {surabaya.landmarks.map((l, i) => (
             <li key={l.name}>
               <Reveal delay={i * 0.05} className="h-full">
-                <article className="glass h-full rounded-lg p-5">
-                  <p className="font-display text-4xl leading-none text-amber">{l.stat}</p>
-                  <h3 className="mt-3 text-lg">{l.name}</h3>
-                  <p className="mt-1 text-sm text-smoke/90">{tr(l.body, locale)}</p>
+                <article className="glass flex h-full flex-col overflow-hidden rounded-lg">
+                  <div className="relative aspect-[4/3]"><Photo image={l.photo} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" /></div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <p className="font-display text-4xl leading-none text-amber">{l.stat}</p>
+                    <h3 className="mt-3 text-lg">{l.name}</h3>
+                    <p className="mt-1 flex-1 text-sm text-smoke/90">{tr(l.body, locale)}</p>
+                    <PhotoCredit credit={l.photo.credit} locale={locale} tone="dark" className="mt-4" />
+                  </div>
                 </article>
               </Reveal>
             </li>
@@ -70,7 +74,7 @@ export default async function SurabayaPage({ params }: PageProps) {
         <SourceNote ids={["surabayaLandmarks", "surabayaCultureTrip", "suramaduWiki"]} locale={locale} tone="dark" className="mt-6" />
       </Section>
       <Section tone="light" labelledBy="photos">
-        <SectionHeading id="photos" tone="light" eyebrow={en ? "In pictures" : "Dalam gambar"} title={en ? "Sights around Surabaya" : "Pesona sekitar Surabaya"} lead={en ? "Photos from the Surabaya City Government will be added here, each credited to its account." : "Foto dari Pemerintah Kota Surabaya akan ditambahkan di sini, lengkap dengan kredit akun pemiliknya."} />
+        <SectionHeading id="photos" tone="light" eyebrow={en ? "In pictures" : "Dalam gambar"} title={en ? "Sights around Surabaya" : "Pesona sekitar Surabaya"} lead={en ? "The city by day and night, and two favourite trips out of it." : "Kota di siang dan malam hari, serta dua tujuan favorit di luar kota."} />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {surabaya.photos.map((p, i) => (
             <li key={p.image.src}>
@@ -79,14 +83,13 @@ export default async function SurabayaPage({ params }: PageProps) {
                   <div className="relative aspect-[4/5]"><Photo image={p.image} sizes="(min-width: 1024px) 25vw, 50vw" /></div>
                   <figcaption className="p-4">
                     <p className="font-semibold text-midnight">{tr(p.caption, locale)}</p>
-                    <p className="text-xs text-ink-secondary">{en ? "Photo: " : "Foto: "}{p.credit}</p>
+                    <PhotoCredit credit={p.image.credit} locale={locale} className="mt-1" />
                   </figcaption>
                 </figure>
               </Reveal>
             </li>
           ))}
         </ul>
-        <ToConfirm locale={locale} className="mt-6 text-emerald" />
       </Section>
       <Section tone="deep" labelledBy="explore">
         <SectionHeading id="explore" eyebrow="Sparkling Surabaya" title={en ? "Plan your visits" : "Rencanakan kunjungan Anda"} lead={en ? "Official tourism channels of the Surabaya City Government." : "Kanal pariwisata resmi Pemerintah Kota Surabaya."} />

@@ -108,6 +108,15 @@ Add `datePending: true` to hide a date that is not confirmed yet.
 2. Run `node scripts/build-media.mjs <folder-with-the-source-images>`.
 3. The photo is then available as `media.<group>.<name>`.
 
+### Add photos from Wikimedia Commons
+
+1. Add an entry to `scripts/web-photos.json` in the form `"name": ["File:Exact Commons title.jpg", "Alt text"]`.
+2. Run `node scripts/fetch-web-photos.mjs`. Behind a proxy, prefix it with `NODE_USE_ENV_PROXY=1`. The script:
+   - checks the licence and stops on anything but CC0, public domain, CC BY or CC BY-SA;
+   - saves WebP files at 1600 and 800 px;
+   - writes `src/content/web-photos.generated.ts`.
+3. Use the photo as `webPhotos.<group>.<name>`, and show its credit with `<PhotoCredit>` (a single photo) or `<PhotoCredits>` (a gallery). Add a row to the Photos table in `docs/sources.md`.
+
 ### Adding videos
 
 The deck links 14 videos on Google Drive (fashion studio, DFT, the IPDM showreel and others). They are not in the repository yet. Until they are added, each video slot shows its photo with a slow Ken Burns zoom.
@@ -137,6 +146,16 @@ Slots: `homeHero` (home), `inboundHero` (Mobility → Inbound), `ipdmReel` (Regu
 - **Type:** Inter (with `cv11` and `ss01`). Headings are bold at -0.02em. Bebas Neue is for big numerals. Section labels use the eyebrow and tagline styles.
 - **Glass:** `.glass`, `.glass-strong` and `.glass-light` in `src/app/globals.css`. Each always has a base tint so text stays at 4.5:1 or better. It falls back to a solid panel without `backdrop-filter`, or when the visitor prefers reduced transparency.
 - **Shapes:** the half ring (`<Ring>`) bleeds off edges and is never placed behind text. It is hidden on small screens.
+- **Graphic elements** (`src/components/brand/`):
+  - `<Shape>`: filled geometry and rings.
+  - `<GeoCluster>`: the cover composition.
+  - `<IconBadge>`: a white outline icon in a gradient circle.
+  - `<Tag>`: a midnight category label.
+  - `<Sign>`: a wayfinding panel with the amber offset.
+  - `<PatternStrip>`: the quarter-circle pattern as a divider.
+  - Put section-level shapes in `<Section decor>` so they bleed off the section edge and stay clear of text.
+- **Footer:** an ArchBand forms the double-arch top edge of the footer, the one band per page. The footer logo uses the "International Office" DepartmentLockup.
+- **Headline faces:** Inter by default. `SectionHeading face="serif"` (Libre Baskerville) is for formal or academic headings, and a page uses one display face.
 - **Logo:** the approved white logomaster only, on midnight, at least 96px wide.
 - **Focus:** a 3px amber ring at a 3px offset. Motion is off when the visitor prefers reduced motion.
 
@@ -159,7 +178,7 @@ On the site, content that isn't from KUI or the deck carries a dashed "Details t
 - NUNI, BKPTKI and IISMA testimonial videos.
 - Testimonial quotes for the home hero.
 - KUI team names and photos.
-- Surabaya City Government (Pemkot) tourism photos, each with its credit.
+- Surabaya City Government (Pemkot) tourism photos, each with its credit. Credited Wikimedia Commons photos fill these slots for now.
 - OMNI's list of campus facilities to highlight.
 - IISMA and ICE Institute activity photos. Deck photos are used for now.
 

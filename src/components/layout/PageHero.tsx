@@ -3,6 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { VideoSlot } from "@/components/brand/VideoSlot";
 import type { PhotoSource } from "@/components/brand/Photo";
 import { Ring } from "@/components/brand/Ring";
+import { Shape } from "@/components/brand/Shape";
 
 /** Subpage header: full-bleed Ken Burns photo (or video), midnight scrim, glass title card and breadcrumb. */
 export function PageHero({
@@ -28,6 +29,8 @@ export function PageHero({
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-midnight-deep via-midnight-deep/55 to-midnight-deep/30" />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-midnight-deep/70 via-transparent to-transparent" />
       <Ring shape="ring-n" className="-right-24 bottom-[-6rem] w-[28rem] text-amber/90 md:w-[34rem]" />
+      <Shape kind="circle" className="right-[22%] top-[34%] w-12 text-cerise md:hidden lg:block" />
+      <Shape kind="ring-u-line" className="right-[8%] top-[24%] w-52 text-teal md:hidden lg:block" />
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav aria-label="Breadcrumb" className="mb-6">
           <ol className="flex flex-wrap items-center gap-1 text-sm text-smoke/85">

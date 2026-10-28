@@ -11,6 +11,7 @@ export function SectionHeading({
   className,
   as: Tag = "h2",
   id,
+  face = "inter",
 }: {
   eyebrow?: string;
   kicker?: string;
@@ -22,12 +23,14 @@ export function SectionHeading({
   as?: "h1" | "h2" | "h3";
   /** Heading id, for the section's aria-labelledby. */
   id?: string;
+  /** Display face: Inter (default) or Libre Baskerville for formal, academic headings. One per page. */
+  face?: "inter" | "serif";
 }) {
   const onDark = tone === "dark";
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center", className)}>
       {eyebrow && <p className={cn("eyebrow mb-4", onDark ? "text-amber" : "text-emerald")}>{eyebrow}</p>}
-      <Tag id={id} className={cn("text-[clamp(2rem,1.5rem+2vw,3rem)] leading-[1.1]", onDark ? "text-white" : "text-midnight")}>
+      <Tag id={id} className={cn("text-[clamp(2rem,1.5rem+2vw,3rem)] leading-[1.1]", face === "serif" && "font-serif tracking-[-0.01em]", onDark ? "text-white" : "text-midnight")}>
         {kicker && <span className="kicker mb-1">{kicker}</span>}
         {title}
       </Tag>

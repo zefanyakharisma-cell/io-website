@@ -50,4 +50,22 @@ These links were found by web search on 28 Oct 2026. They could not be opened fr
 
 ## Photos
 
-No web photos have been added yet. The build environment cannot reach Wikimedia Commons or petra.ac.id. Once those hosts are allowed, use only CC BY, CC BY-SA, CC0 or public-domain Commons files, or Petra's own photos, and credit each one on the page.
+Fetched from Wikimedia Commons on 28 Oct 2026 by `scripts/fetch-web-photos.mjs`, which reads `scripts/web-photos.json`. The script rejects any file whose licence isn't CC0, public domain, CC BY or CC BY-SA. Each photo is credited on its page with author, licence and a link to the file page.
+
+The five Petra photos were uploaded to Commons by **BrandingPCU**, Petra's own branding account. petra.ac.id itself could not be used: it sits behind a Cloudflare bot check that refuses scripted requests.
+
+| Page | Photo | Author | Licence | Commons file |
+|---|---|---|---|---|
+| Get to Know Us → Surabaya (landmarks) | Tugu Pahlawan, the Heroes Monument, under a blue sky in central Surabaya | P. Hughes | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Surabaya_-_Heroes_Monument,_or_Tugu_Pahlawan.jpg |
+| Get to Know Us → Surabaya (landmarks) | Colonnaded façade of the House of Sampoerna museum | consigliere ivan from Bontang, Indonesia | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:House_of_Sampoerna_Mei_2015.jpg |
+| Get to Know Us → Surabaya (landmarks) | Suramadu Bridge spanning the Madura Strait, fishing boats in the foreground | Sakurai Midori | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Suramadu_Bridge_5.JPG |
+| Get to Know Us → Surabaya (landmarks) | The Monkasel submarine museum on the bank of the Kalimas River | Midori | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Submarine_Monument_Surabaya_2.JPG |
+| Get to Know Us → Surabaya (in pictures) | Surabaya rooftops and high-rises on a clear day | Rifky2011 | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Surabaya_City_Skyline_in_July_2025.jpg |
+| Get to Know Us → Surabaya (in pictures) | Surabaya's towers and light trails at night | Pasha Dwantara | CC0 | https://commons.wikimedia.org/wiki/File:Surabaya_at_Night,_2025.jpg |
+| Get to Know Us → Surabaya (in pictures) | Mount Bromo and the Tengger caldera at sunrise | Thomas Fuhrmann | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Gunung_Bromo_sunrise_-_Indonesia.jpg |
+| Get to Know Us → Surabaya (in pictures) | Night view over the lights of Malang | Uliyanti | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Malang_city.jpg |
+| Where We Are (campus gallery) | The Radius Prawiro (W) Building at Petra Christian University | BrandingPCU | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Radius_Prawiro_or_W_Building_in_PCU.jpg |
+| Where We Are (campus gallery) | The Servant Leader sculpture of Jesus washing a disciple's feet, Q Building | BrandingPCU | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Servant_Leader_-_Q_Building.jpg |
+| Where We Are (campus gallery) | Reading tables in Petra's new library | BrandingPCU | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:New_Library_in_PCU.jpg |
+| Home (in pictures) | Community Outreach Program students painting a school mural, 2018 | BrandingPCU | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:COP_-_2018.jpg |
+| Home (in pictures) | Community Outreach Program students laying paving blocks in Surabaya, 2022 | BrandingPCU | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:20220326_-_COP_Surabaya_3.jpg |

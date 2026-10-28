@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, DoorOpen, Mail, MapPin, Phone } from "lucide-react";
 import { media } from "@/content/media.generated";
 import { aboutNav } from "@/content/navigation";
 import { campusResources, office } from "@/content/getToKnow";
@@ -13,6 +13,8 @@ import { SectionHeading } from "@/components/brand/SectionHeading";
 import { Reveal } from "@/components/brand/Reveal";
 import { Photo } from "@/components/brand/Photo";
 import { Ring } from "@/components/brand/Ring";
+import { IconBadge } from "@/components/brand/IconBadge";
+import { Sign } from "@/components/brand/Sign";
 import { Timeline } from "@/components/sections/Timeline";
 import { SourceNote } from "@/components/sections/SourceNote";
 import { MapEmbed } from "@/components/sections/MapEmbed";
@@ -44,8 +46,8 @@ export default async function AboutPage({ params }: PageProps) {
         <p className="mt-6 text-xs text-smoke/85">{en ? "Sources" : "Sumber"}: {tr(statsSource, locale)}</p>
       </Section>
 
-      <Section tone="deep" orbs labelledBy="history">
-        <SectionHeading id="history" eyebrow={en ? "Our story" : "Sejarah kami"} title={en ? "Seventy-five years of Petra education" : "Tujuh puluh lima tahun pendidikan Petra"} lead={en ? "From a Christian education foundation in 1951 to a QS-ranked university." : "Dari yayasan pendidikan Kristen pada 1951 hingga universitas berperingkat QS."} />
+      <Section tone="deep" orbs labelledBy="history" decor={<Ring shape="ring-n-line" className="-right-24 top-8 w-[30rem] text-teal" />}>
+        <SectionHeading id="history" face="serif" eyebrow={en ? "Our story" : "Sejarah kami"} title={en ? "Seventy-five years of Petra education" : "Tujuh puluh lima tahun pendidikan Petra"} lead={en ? "From a Christian education foundation in 1951 to a QS-ranked university." : "Dari yayasan pendidikan Kristen pada 1951 hingga universitas berperingkat QS."} />
         <Timeline className="mt-10" items={history.map((h) => ({ when: h.when, title: tr(h.title, locale), body: tr(h.body, locale) }))} />
         <SourceNote ids={["wikipediaPetra"]} locale={locale} tone="dark" className="mt-6" />
       </Section>
@@ -159,11 +161,12 @@ export default async function AboutPage({ params }: PageProps) {
           <div>
             <SectionHeading id="visit" tone="light" eyebrow={en ? "Visit us" : "Kunjungi kami"} title={en ? "Find the International Office" : "Temukan Kantor Urusan Internasional"} />
             <ul className="mt-6 space-y-4 text-midnight">
-              <li className="flex gap-3"><MapPin className="mt-0.5 size-5 shrink-0 text-emerald" aria-hidden /><span><strong>{tr(office.room, locale)}</strong><br />{campus.address}</span></li>
-              <li className="flex gap-3"><Phone className="mt-0.5 size-5 shrink-0 text-emerald" aria-hidden /><span>{en ? "Student mobility: " : "Mobilitas mahasiswa: "}<a className="font-semibold underline underline-offset-2" href={`tel:${office.mobilityPhone.tel}`}>{office.mobilityPhone.display}</a></span></li>
-              <li className="flex gap-3"><Mail className="mt-0.5 size-5 shrink-0 text-emerald" aria-hidden /><a className="font-semibold underline underline-offset-2" href={`mailto:${office.mobilityEmail}`}>{office.mobilityEmail}</a></li>
+              <li className="flex items-center gap-3"><IconBadge icon={MapPin} size={40} /><span><strong>{tr(office.room, locale)}</strong><br />{campus.address}</span></li>
+              <li className="flex items-center gap-3"><IconBadge icon={Phone} tone="aqua" size={40} /><span>{en ? "Student mobility: " : "Mobilitas mahasiswa: "}<a className="font-semibold underline underline-offset-2" href={`tel:${office.mobilityPhone.tel}`}>{office.mobilityPhone.display}</a></span></li>
+              <li className="flex items-center gap-3"><IconBadge icon={Mail} tone="dusk" size={40} /><a className="font-semibold underline underline-offset-2" href={`mailto:${office.mobilityEmail}`}>{office.mobilityEmail}</a></li>
             </ul>
             <SourceNote ids={["pcuFactSheet"]} locale={locale} />
+            <Sign icon={DoorOpen} building={en ? "D Building · Room 104" : "Gedung D · Ruang 104"} room={en ? "International Office" : "Kantor Urusan Internasional"} className="mt-8 max-w-md" />
           </div>
           <MapEmbed query="Petra Christian University, Siwalankerto, Surabaya" title={en ? "Map of Petra Christian University" : "Peta Universitas Kristen Petra"} labels={en ? { load: "Show map", note: "Loads Google Maps, which may set cookies.", open: "Open in Google Maps" } : { load: "Tampilkan peta", note: "Memuat Google Maps, yang dapat menyimpan cookie.", open: "Buka di Google Maps" }} />
         </div>

@@ -1,11 +1,11 @@
-import { cn } from "@/lib/utils";
+import { Shape } from "@/components/brand/Shape";
 
-type Shape = "ring-u" | "ring-n" | "ring-u-line" | "double-arch";
+type RingShape = "ring-u" | "ring-n" | "ring-u-line" | "ring-n-line" | "double-arch";
 
 /**
  * The design system's signature half ring. Colour comes from `text-*`; let it bleed off edges.
  * Hidden below md: on narrow screens it would sit behind text, which the brand rules forbid.
  */
-export function Ring({ shape = "ring-n", className }: { shape?: Shape; className?: string }) {
-  return <span aria-hidden className={cn("pointer-events-none absolute hidden md:block", shape, className)} />;
+export function Ring({ shape = "ring-n", className }: { shape?: RingShape; className?: string }) {
+  return <Shape kind={shape} className={className} />;
 }

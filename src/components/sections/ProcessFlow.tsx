@@ -1,6 +1,11 @@
 import type { LucideIcon } from "lucide-react";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { IconBadge, type BadgeTone } from "@/components/brand/IconBadge";
+
+// The midnight badge would vanish on dark glass, so dark flows start from aqua.
+const lightTones: BadgeTone[] = ["brand", "aqua", "dusk", "sunrise", "amber", "cerise"];
+const darkTones: BadgeTone[] = ["aqua", "sunrise", "dusk", "amber", "cerise", "aqua"];
 
 /** Numbered process steps with icons; a row on desktop, a column on mobile. */
 export function ProcessFlow({ steps, tone = "light" }: { steps: { icon: LucideIcon; title: string; body: string }[]; tone?: "light" | "dark" }) {
@@ -9,9 +14,7 @@ export function ProcessFlow({ steps, tone = "light" }: { steps: { icon: LucideIc
     <ol className="grid gap-3 md:grid-cols-3 xl:grid-cols-6">
       {steps.map((s, i) => (
         <li key={s.title} className={cn("relative flex gap-3 rounded-lg p-4 xl:flex-col", dark ? "glass" : "glass-light")}>
-          <span className={cn("grid size-10 shrink-0 place-items-center rounded-full", dark ? "bg-amber text-midnight" : "bg-midnight text-white")}>
-            <s.icon className="size-5" aria-hidden />
-          </span>
+          <IconBadge icon={s.icon} tone={(dark ? darkTones : lightTones)[i % 6]} size={44} />
           <span>
             <span className={cn("block text-xs font-semibold", dark ? "text-amber" : "text-emerald")}>{String(i + 1).padStart(2, "0")}</span>
             <span className={cn("block font-bold leading-snug", dark ? "text-white" : "text-midnight")}>{s.title}</span>
