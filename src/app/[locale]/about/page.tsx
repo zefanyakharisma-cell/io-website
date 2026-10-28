@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { media } from "@/content/media.generated";
-import { navigation } from "@/content/navigation";
+import { aboutNav } from "@/content/navigation";
+import { campusResources } from "@/content/getToKnow";
 import { accreditations, badges, keyStats, rankingNote, rankings, standing, statsSource, tagline, vision } from "@/content/profile";
 import { href, localeParams, pageMeta, resolveLocale, tr, type PageProps } from "@/lib/i18n";
 import { PageHero } from "@/components/layout/PageHero";
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function AboutPage({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const en = locale === "en";
-  const about = navigation[0];
+  const about = aboutNav;
 
   return (
     <>
@@ -99,17 +100,37 @@ export default async function AboutPage({ params }: PageProps) {
         </ul>
       </Section>
 
+      <Section tone="light" labelledBy="resources" id="campus-resources" className="scroll-mt-20">
+        <SectionHeading id="resources" tone="light" eyebrow={en ? "Campus resources" : "Fasilitas kampus"} title={en ? "Everything you need on one campus" : "Semua yang Anda butuhkan di satu kampus"} lead={en ? "Facilities that support international students at Petra." : "Fasilitas pendukung bagi mahasiswa internasional di Petra."} />
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {campusResources.map((r, i) => (
+            <li key={r.title.en}>
+              <Reveal delay={(i % 3) * 0.06} className="glass-light h-full overflow-hidden rounded-lg">
+                <div className="relative aspect-[16/10]"><Photo image={r.image} sizes="(min-width: 1024px) 33vw, 50vw" /></div>
+                <div className="p-5">
+                  <p className="text-lg font-bold text-midnight">{tr(r.title, locale)}</p>
+                  <p className="mt-1 text-ink-secondary">{tr(r.body, locale)}</p>
+                </div>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6 text-sm text-ink-secondary">{en ? "International students are welcomed by our " : "Mahasiswa internasional disambut oleh "}<Link className="prose-link" href={href(locale, "/about/petramate")}>Petramate</Link>{en ? " team." : "."}</p>
+      </Section>
+
       <Section tone="deep" labelledBy="explore">
         <SectionHeading id="explore" eyebrow={tagline} title={en ? "Explore Petra" : "Jelajahi Petra"} />
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { link: about.links[1], image: media.campus["building-yellow"] },
-            { link: about.links[2], image: media.faculty.medicine },
-            { link: about.links[3], image: media.labs["structural-beam"] },
-            { link: about.links[4], image: media.drone.launch },
+            { link: about.links[1], image: media.mobility["international-day"] },
+            { link: about.links[2], image: media.mobility.bromo },
+            { link: about.links[3], image: media.campus["building-yellow"] },
+            { link: about.links[4], image: media.faculty.medicine },
+            { link: about.links[5], image: media.labs["structural-beam"] },
+            { link: about.links[6], image: media.drone.launch },
           ].map(({ link, image }) => (
             <li key={link.path}>
-              <Link href={href(locale, link.path)} className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-lg">
+              <Link href={href(locale, link.path)} className="group relative flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-lg">
                 <Photo image={image} className="absolute inset-0 transition-transform duration-1000 group-hover:scale-105" sizes="(min-width: 1024px) 25vw, 50vw" />
                 <span className="absolute inset-0 bg-gradient-to-t from-midnight-deep via-midnight-deep/30 to-transparent" />
                 <span className="glass relative m-3 rounded-md p-4">

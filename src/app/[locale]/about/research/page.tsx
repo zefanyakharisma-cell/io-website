@@ -1,6 +1,6 @@
 import { media } from "@/content/media.generated";
 import { videos } from "@/content/media";
-import { navigation } from "@/content/navigation";
+import { aboutNav } from "@/content/navigation";
 import { coauthorCountries, featuredPapers, journals, jumbo, labTour, outputByFaculty, publishers, researchTotals, stories, studyCentres } from "@/content/research";
 import { href, localeParams, pageMeta, resolveLocale, tr, type PageProps } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -33,7 +33,7 @@ export default async function ResearchPage({ params }: PageProps) {
         eyebrow={en ? "Research & labs" : "Riset & laboratorium"}
         title={en ? "Where ideas get built" : "Tempat ide diwujudkan"}
         lead={en ? "Co-authored worldwide, published at home, and tested hands-on in 65+ labs across seven faculties." : "Ditulis bersama mitra dunia, diterbitkan di rumah sendiri, dan diuji langsung di 65+ laboratorium di tujuh fakultas."}
-        crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(navigation[0].label, locale), href: href(locale, "/about") }, { label: en ? "Research & Labs" : "Riset & Laboratorium" }]}
+        crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(aboutNav.label, locale), href: href(locale, "/about") }, { label: en ? "Research & Labs" : "Riset & Laboratorium" }]}
       />
 
       <Section tone="dark" orbs labelledBy="output">

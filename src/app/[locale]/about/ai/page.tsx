@@ -1,5 +1,5 @@
 import { media } from "@/content/media.generated";
-import { navigation } from "@/content/navigation";
+import { aboutNav } from "@/content/navigation";
 import { aiAcross, aiFacts, aiModules, aiQuote, aiTeaching, aiTimeline, drone } from "@/content/ai";
 import { href, localeParams, pageMeta, resolveLocale, tr, type PageProps } from "@/lib/i18n";
 import { PageHero } from "@/components/layout/PageHero";
@@ -28,7 +28,7 @@ export default async function AiPage({ params }: PageProps) {
         eyebrow="AI@PCU"
         title={en ? "An AI-native campus" : "Kampus AI-native"}
         lead={tr(aiQuote, locale)}
-        crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(navigation[0].label, locale), href: href(locale, "/about") }, { label: "AI@PCU & Drone Academy" }]}
+        crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(aboutNav.label, locale), href: href(locale, "/about") }, { label: "AI@PCU & Drone Academy" }]}
       />
 
       <Section tone="dark" orbs labelledBy="timeline">

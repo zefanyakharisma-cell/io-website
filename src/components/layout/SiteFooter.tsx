@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { navigation, newsNav } from "@/content/navigation";
+import { directNav, navigation } from "@/content/navigation";
 import { contact } from "@/content/contact";
 import { tagline, vision } from "@/content/profile";
 import { ui } from "@/lib/dictionary";
@@ -32,7 +32,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               </li>
             </ul>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
             {navigation.map((group) => (
               <div key={group.path}>
                 <p className="eyebrow mb-4 text-amber">{tr(group.label, locale)}</p>
@@ -46,9 +46,11 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               </div>
             ))}
             <div>
-              <p className="eyebrow mb-4 text-amber">{tr(newsNav.label, locale)}</p>
+              <p className="eyebrow mb-4 text-amber">{locale === "en" ? "More" : "Lainnya"}</p>
               <ul className="space-y-2 text-sm">
-                <li><Link href={href(locale, newsNav.path)} className="text-smoke/85 hover:text-white">{tr(ui.allNews, locale)}</Link></li>
+                {directNav.map((d) => (
+                  <li key={d.path}><Link href={href(locale, d.path)} className="text-smoke/85 hover:text-white">{tr(d.label, locale)}</Link></li>
+                ))}
               </ul>
               <p className="eyebrow mb-4 mt-8 text-amber">Social</p>
               <ul className="space-y-2 text-sm">

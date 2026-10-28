@@ -20,6 +20,9 @@ export type NewsPost = {
   date: string;
   /** True when the publish date is a placeholder that KUI still has to confirm. */
   datePending: boolean;
+  /** "upcoming" posts announce a future KUI event (with eventDate); everything else is a past event or news. */
+  kind: "past" | "upcoming";
+  eventDate?: string;
   category: NewsCategory;
   cover: Media;
   title: L;
@@ -56,6 +59,8 @@ export function getAllNews(): NewsPost[] {
         slug: file.replace(/\.md$/, ""),
         date: new Date(data.date).toISOString().slice(0, 10),
         datePending: Boolean(data.datePending),
+        kind: (data.kind === "upcoming" ? "upcoming" : "past") as NewsPost["kind"],
+        eventDate: data.eventDate ? new Date(data.eventDate).toISOString().slice(0, 10) : undefined,
         category: data.category as NewsCategory,
         cover: resolveCover(data.cover),
         title: data.title as L,

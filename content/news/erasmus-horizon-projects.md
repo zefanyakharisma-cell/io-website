@@ -21,7 +21,7 @@ Petra Christian University is a funded partner in two European Union projects, t
 
 *Engineered Erythrocytes and Erythrocyte Extracellular Vesicles for Advanced Photodynamic and Sonodynamic Therapy* joins 14 institutions in 10 countries, from FAU Erlangen-Nürnberg and Technion to Chulalongkorn, Mahidol and the University of Mauritius.
 
-[See all consortia →](/en/partnership/consortia/)
+[See all consortia →](/en/partners/#consortiums)
 ::id
 Universitas Kristen Petra menjadi mitra yang didanai dalam dua proyek Uni Eropa, yang menghubungkannya dengan **21 institusi mitra di 12 negara**.
 
@@ -33,4 +33,4 @@ Universitas Kristen Petra menjadi mitra yang didanai dalam dua proyek Uni Eropa,
 
 *Engineered Erythrocytes and Erythrocyte Extracellular Vesicles for Advanced Photodynamic and Sonodynamic Therapy* menghubungkan 14 institusi di 10 negara, dari FAU Erlangen-Nürnberg dan Technion hingga Chulalongkorn, Mahidol dan University of Mauritius.
 
-[Lihat semua konsorsium →](/id/partnership/consortia/)
+[Lihat semua konsorsium →](/id/partners/#consortiums)

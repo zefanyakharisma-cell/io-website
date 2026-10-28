@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { media } from "@/content/media.generated";
 import { faculties, structureTotals } from "@/content/faculties";
-import { navigation } from "@/content/navigation";
+import { aboutNav } from "@/content/navigation";
 import { href, localeParams, pageMeta, resolveLocale, tr, type PageProps } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { PageHero } from "@/components/layout/PageHero";
@@ -30,7 +30,7 @@ export default async function FacultiesPage({ params }: PageProps) {
         eyebrow={en ? "Academic structure" : "Struktur akademik"}
         title={en ? "Seven faculties, one campus" : "Tujuh fakultas, satu kampus"}
         lead={en ? "Every faculty runs study programmes; most branch further into named programmes and specialisation tracks." : "Setiap fakultas menaungi program studi; sebagian besar bercabang menjadi program dan peminatan."}
-        crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(navigation[0].label, locale), href: href(locale, "/about") }, { label: en ? "Faculties & Programmes" : "Fakultas & Program Studi" }]}
+        crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(aboutNav.label, locale), href: href(locale, "/about") }, { label: en ? "Faculties & Programmes" : "Fakultas & Program Studi" }]}
       >
         <dl className="mt-6 flex flex-wrap gap-6 border-t border-white/15 pt-5">
           {structureTotals.map((t) => (
@@ -94,7 +94,7 @@ export default async function FacultiesPage({ params }: PageProps) {
       <Section tone="dark" orbs>
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
           <SectionHeading eyebrow={en ? "Taught in English" : "Berbahasa Inggris"} title={en ? "Eight programmes, fully in English" : "Delapan program, sepenuhnya berbahasa Inggris"} />
-          <Link href={href(locale, "/mobility/international-program")} className="btn btn-amber">{en ? "See the Regular International Program" : "Lihat Program Internasional Reguler"}</Link>
+          <Link href={href(locale, "/inbound/international-programs")} className="btn btn-amber">{en ? "See the International Programs" : "Lihat Program Internasional"}</Link>
         </div>
       </Section>
 

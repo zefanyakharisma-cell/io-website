@@ -132,13 +132,42 @@ export const qsNote: L = {
   id: "Iowa State University tercantum di peringkat #540 pada sumber, di luar kelompok QS top 500. KUI sedang mengonfirmasi angka ini.",
 };
 
+/** Consortiums named in KUI's spec (WEBSITE IO, Sheet1 → Partners). */
 export const consortia = [
   { name: "ACUCA", full: "Association of Christian Universities and Colleges in Asia", body: { en: "A network of Christian universities across Asia, linking Petra to sister institutions for exchange and leadership programmes.", id: "Jejaring universitas Kristen se-Asia yang menghubungkan Petra dengan institusi saudara untuk pertukaran dan program kepemimpinan." } },
-  { name: "AUN-QA", full: "ASEAN University Network – Quality Assurance", body: { en: "The ASEAN quality-assurance network that benchmarks Petra's programmes against regional standards.", id: "Jejaring penjaminan mutu ASEAN yang menjadi tolok ukur program Petra terhadap standar regional." } },
-  { name: "NUNI", full: "NUNI", body: { en: "A university network in which Petra is a member. A full description is pending from the International Office.", id: "Jejaring universitas tempat Petra menjadi anggota. Deskripsi lengkap menunggu dari KUI." }, confirm: true },
-  { name: "Global Hakka Studies", full: "Global Hakka Studies network", body: { en: "An international research network on Hakka studies, alongside Petra's Chinese Indonesian Studies centre (est. 2011).", id: "Jejaring riset internasional tentang studi Hakka, sejalan dengan Pusat Studi Tionghoa Indonesia Petra (berdiri 2011)." }, confirm: true },
-  { name: "Asia Summer Program", full: "ASP founding consortium", body: { en: "Five founders in four countries rotate a three-week, credit-bearing summer programme.", id: "Lima pendiri di empat negara bergiliran menyelenggarakan program musim panas tiga minggu berkredit." } },
+  { name: "GHAS", full: "Global Hakka Studies network", body: { en: "An international research network on Hakka studies, alongside Petra's Chinese Indonesian Studies centre (est. 2011).", id: "Jejaring riset internasional tentang studi Hakka, sejalan dengan Pusat Studi Tionghoa Indonesia Petra (berdiri 2011)." }, confirm: true },
+  { name: "P2A", full: "P2A", body: { en: "A consortium in which Petra is a member. A full description is pending from the International Office.", id: "Konsorsium tempat Petra menjadi anggota. Deskripsi lengkap menunggu dari KUI." }, confirm: true },
+  { name: "BKPTKI", full: "Badan Kerja Sama Perguruan Tinggi Kristen Indonesia", body: { en: "The association of Indonesian Christian higher-education institutions, including a local student exchange among members.", id: "Badan kerja sama perguruan tinggi Kristen di Indonesia, termasuk pertukaran mahasiswa antaranggota." } },
+  { name: "NUNI", full: "NUNI", body: { en: "A university network in which Petra is a member, with student exchange among members. A full description is pending from the International Office.", id: "Jejaring universitas tempat Petra menjadi anggota, dengan pertukaran mahasiswa antaranggota. Deskripsi lengkap menunggu dari KUI." }, confirm: true },
 ] satisfies { name: string; full: string; body: L; confirm?: boolean }[];
+
+export type Continent = "Asia" | "Europe" | "Oceania" | "Americas" | "Africa";
+export const continentLabels: Record<Continent, L> = {
+  Asia: { en: "Asia", id: "Asia" },
+  Europe: { en: "Europe", id: "Eropa" },
+  Oceania: { en: "Oceania", id: "Oseania" },
+  Americas: { en: "Americas", id: "Amerika" },
+  Africa: { en: "Africa", id: "Afrika" },
+};
+const continentOf: Record<string, Continent> = {
+  Australia: "Oceania", "New Zealand": "Oceania",
+  USA: "Americas", Argentina: "Americas",
+  Netherlands: "Europe", Switzerland: "Europe", Finland: "Europe", Austria: "Europe", Germany: "Europe", Spain: "Europe", Bulgaria: "Europe", Italy: "Europe",
+  Mauritius: "Africa",
+};
+export function continent(country: string): Continent {
+  return continentOf[country] ?? "Asia";
+}
+
+/** Domestic partners. Totals from the deck; the full list is pending from KUI. */
+export const domestic = {
+  total: 430,
+  breakdown: [
+    { value: "165+", label: { en: "National industry", id: "Industri nasional" } },
+    { value: "15+", label: { en: "Government", id: "Pemerintah" } },
+    { value: "15+", label: { en: "International companies", id: "Perusahaan internasional" } },
+  ] satisfies { value: string; label: L }[],
+};
 
 export const industry = {
   totals: { en: "165+ national · 15+ government · 15+ international", id: "165+ nasional · 15+ pemerintah · 15+ internasional" } satisfies L,
