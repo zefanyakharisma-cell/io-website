@@ -39,11 +39,14 @@ export type SignatureProgramme = {
   facts: { value: string; label: L }[];
   highlights: L[];
   images: Img[];
+  /** The programme's own website. */
+  website: string;
 };
 
 export const signatureProgrammes: SignatureProgramme[] = [
   {
     code: "ICOP",
+    website: "https://cop.petra.ac.id/",
     name: "International Community Outreach Program",
     kicker: { en: "Signature programme · since 1996", id: "Program unggulan · sejak 1996" },
     summary: {
@@ -65,6 +68,7 @@ export const signatureProgrammes: SignatureProgramme[] = [
   },
   {
     code: "PSP",
+    website: "https://psp.petra.ac.id/",
     name: "Petra Summer Program",
     kicker: { en: "Signature programme · summer immersion", id: "Program unggulan · imersi musim panas" },
     summary: {
@@ -87,6 +91,7 @@ export const signatureProgrammes: SignatureProgramme[] = [
   },
   {
     code: "SPECTRA",
+    website: "https://indonesianspectrum.petra.ac.id/",
     name: "Indonesian Spectrum",
     kicker: { en: "Signature programme · culture & language", id: "Program unggulan · budaya & bahasa" },
     summary: {
@@ -108,6 +113,7 @@ export const signatureProgrammes: SignatureProgramme[] = [
   },
   {
     code: "ASP",
+    website: "https://asp.petra.ac.id/",
     name: "Asia Summer Program",
     kicker: { en: "Signature programme · regional consortium", id: "Program unggulan · konsorsium regional" },
     summary: {
@@ -164,8 +170,9 @@ export const outboundRoutes = [
     },
     image: media.mobility["asp-thailand"],
     confirm: true,
+    link: { href: "https://asp.petra.ac.id/", label: { en: "Asia Summer Program website", id: "Situs Asia Summer Program" } },
   },
-] satisfies { title: L; body: L; image: Img; confirm: boolean }[];
+] satisfies { title: L; body: L; image: Img; confirm: boolean; link?: { href: string; label: L } }[];
 
 /** Slides 40–41: joint and double degree partners. */
 export type DegreeLevel = "B" | "M" | "D";

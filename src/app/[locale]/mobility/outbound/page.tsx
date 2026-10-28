@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import { media } from "@/content/media.generated";
 import { navigation } from "@/content/navigation";
 import { gallery, jointDegrees, mobilityGlance, outboundRoutes } from "@/content/mobility";
@@ -59,7 +60,13 @@ export default async function OutboundPage({ params }: PageProps) {
                 <div className="p-6">
                   <p className="text-xl font-bold text-midnight">{tr(r.title, locale)}</p>
                   <p className="mt-2 text-ink-secondary">{tr(r.body, locale)}</p>
-                  {r.confirm && <ToConfirm locale={locale} className="mt-4 text-emerald" />}
+                  {r.link && (
+                    <a href={r.link.href} target="_blank" rel="noreferrer" className="btn btn-midnight mt-4 !px-4 !py-2 text-sm">
+                      {tr(r.link.label, locale)} <ArrowUpRight className="size-4" aria-hidden />
+                      <span className="sr-only">{en ? "(opens in a new tab)" : "(membuka tab baru)"}</span>
+                    </a>
+                  )}
+                  {r.confirm && <ToConfirm locale={locale} className="mt-4 flex w-fit text-emerald" />}
                 </div>
               </Reveal>
             </li>

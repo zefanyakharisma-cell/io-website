@@ -13,10 +13,12 @@ export function isLocale(value: string): value is Locale {
   return (locales as readonly string[]).includes(value);
 }
 
-/** Prefix an internal path with the locale, e.g. href("en", "/news") -> "/en/news/". */
+/** Prefix an internal path with the locale, e.g. href("en", "/news#top") -> "/en/news/#top". */
 export function href(locale: Locale, path = "/") {
-  const clean = path.replace(/^\/+|\/+$/g, "");
-  return clean ? `/${locale}/${clean}/` : `/${locale}/`;
+  const [route, hash] = path.split("#");
+  const clean = route.replace(/^\/+|\/+$/g, "");
+  const base = clean ? `/${locale}/${clean}/` : `/${locale}/`;
+  return hash ? `${base}#${hash}` : base;
 }
 
 export function localeParams() {
