@@ -18,6 +18,7 @@ export const sources = {
   surabayaLandmarks: { title: "Famous Surabaya landmarks (What's New Indonesia)", url: "https://whatsnewindonesia.com/ultimate-guide/things-do-travel/famous-surabaya-landmarks-you-need-see" },
   surabayaCultureTrip: { title: "10 must-visit attractions in Surabaya (Culture Trip)", url: "https://theculturetrip.com/asia/indonesia/articles/10-must-visit-attractions-surabaya-indonesia" },
   suramaduWiki: { title: "Suramadu Bridge — Wikipedia", url: "https://en.wikipedia.org/wiki/Suramadu_Bridge" },
+  naturalEarth: { title: "Map data: Natural Earth admin-1 provinces (public domain)", url: "https://github.com/nvkelso/natural-earth-vector" },
   malangToll: { title: "Surabaya–Malang travel time (Jawa Pos, 2026)", url: "https://www.jawapos.com/travelling/2602160071/5-jalur-tercepat-surabaya-malang-2026-via-tol-kereta-atau-bus-ini-panduan-lengkapnya" },
   bromoTransfer: { title: "Surabaya Airport to Mount Bromo (Backindo)", url: "https://www.backindo.com/?p=10362" },
 } as const;

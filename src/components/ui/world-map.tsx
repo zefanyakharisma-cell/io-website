@@ -27,6 +27,7 @@ export function WorldMap({
   mapSrc = "/brand/world-dots.svg",
   dotOpacity = "opacity-25",
   showLabels = false,
+  fade = true,
 }: {
   origin: { x: number; y: number };
   points: MapPoint[];
@@ -39,6 +40,8 @@ export function WorldMap({
   dotOpacity?: string;
   /** Always show each point's label and detail (for maps with few points). */
   showLabels?: boolean;
+  /** Fade the base map out at the top and bottom edges. */
+  fade?: boolean;
 }) {
   const reduce = useReducedMotionSafe();
   const [active, setActive] = useState<number | null>(null);
@@ -55,7 +58,7 @@ export function WorldMap({
         src={mapSrc}
         alt=""
         aria-hidden
-        className={`pointer-events-none absolute inset-0 h-full w-full select-none ${dotOpacity} [mask-image:linear-gradient(to_bottom,transparent,black_8%,black_92%,transparent)]`}
+        className={cn("pointer-events-none absolute inset-0 h-full w-full select-none", dotOpacity, fade && "[mask-image:linear-gradient(to_bottom,transparent,black_8%,black_92%,transparent)]")}
         draggable={false}
       />
       <svg viewBox={`0 0 ${size.width} ${size.height}`} className="absolute inset-0 h-full w-full" role="group" aria-label={points.map((p) => p.label).join(", ")}>

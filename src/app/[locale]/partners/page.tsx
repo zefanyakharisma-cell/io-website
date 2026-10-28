@@ -1,7 +1,7 @@
 import { BriefcaseBusiness, FlaskConical, GraduationCap, Mail, Mic, Presentation, Repeat, Ruler, Sun } from "lucide-react";
 import { media } from "@/content/media.generated";
 import { partnersNav } from "@/content/navigation";
-import { byFaculty, byRegion, byScope, collaborationWays, consortia, continent, continentLabels, domestic, euProjects, industry, mostPartnered, networkTotals, partners, qsNote, type Continent } from "@/content/partners";
+import { byFaculty, byRegion, byScope, collaborationWays, consortia, continent, continentLabels, domestic, domesticPartners, euProjects, mostPartnered, networkTotals, partners, qsNote, type Continent } from "@/content/partners";
 import { href, localeParams, pageMeta, resolveLocale, tr, type PageProps } from "@/lib/i18n";
 import { MAP_SIZE, partnerCountryPoints, surabaya } from "@/lib/map-points";
 import { PageHero } from "@/components/layout/PageHero";
@@ -13,6 +13,9 @@ import { Reveal } from "@/components/brand/Reveal";
 import { Photo } from "@/components/brand/Photo";
 import { Donut } from "@/components/ui/donut";
 import { WorldMap } from "@/components/ui/world-map";
+import { LogoGrid } from "@/components/sections/LogoGrid";
+import { ExternalLink } from "@/components/sections/links";
+import { partnerSites } from "@/content/partner-sites";
 
 export const generateStaticParams = localeParams;
 
@@ -26,6 +29,8 @@ const continentOrder: Continent[] = ["Asia", "Europe", "Oceania", "Americas", "A
 export default async function PartnersPage({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const en = locale === "en";
+  const newTab = en ? "(opens in a new tab)" : "(membuka tab baru)";
+  const kindLabel = { University: en ? "University" : "Universitas", Industry: en ? "Industry" : "Industri", "Government & banking": en ? "Government & banking" : "Pemerintah & perbankan" } as const;
 
   // B. International partners: continent → country → universities (partners named in the deck).
   const grouped = continentOrder
@@ -94,9 +99,8 @@ export default async function PartnersPage({ params }: PageProps) {
             </div>
           ))}
         </dl>
-        <ul className="mt-6 flex flex-wrap gap-2">
-          {industry.names.map((n) => <li key={n} className="rounded-full border border-midnight/15 bg-white px-4 py-2 font-semibold text-midnight">{n}</li>)}
-        </ul>
+        <h3 className="mt-10 text-lg text-midnight">{en ? `A selection of our ${domestic.total}+ national partners` : `Sebagian dari ${domestic.total}+ mitra nasional kami`}</h3>
+        <LogoGrid className="mt-4" newTab={newTab} items={domesticPartners.map((d) => ({ name: d.name, meta: kindLabel[d.kind], href: d.website }))} />
         <p className="mt-6 text-sm text-ink-secondary">{en ? "The full list of domestic partners will be published here." : "Daftar lengkap mitra dalam negeri akan dipublikasikan di sini."}</p>
         <ToConfirm locale={locale} className="mt-3 text-emerald" />
       </Section>
@@ -108,27 +112,15 @@ export default async function PartnersPage({ params }: PageProps) {
             <details key={g.c} open={gi === 0} className="group glass-light rounded-lg">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5">
                 <span className="text-xl font-bold text-midnight">B.{gi + 1} {tr(continentLabels[g.c], locale)}</span>
-                <span className="text-sm font-semibold text-ink-secondary">{g.count} {en ? "universities" : "universitas"} · {g.countries.length} {en ? "countries" : "negara"}<span aria-hidden className="ml-3 inline-block transition-transform group-open:rotate-180">▾</span></span>
+                <span className="text-sm font-semibold text-ink-secondary">{g.count} {en ? (g.count === 1 ? "university" : "universities") : "universitas"} · {g.countries.length} {en ? (g.countries.length === 1 ? "country" : "countries") : "negara"}<span aria-hidden className="ml-3 inline-block transition-transform group-open:rotate-180">▾</span></span>
               </summary>
-              <div className="grid gap-x-8 gap-y-5 border-t border-midnight/10 p-5 sm:grid-cols-2 lg:grid-cols-3">
-                {g.countries.map(({ country, unis }) => (
-                  <div key={country}>
-                    <p className="eyebrow text-emerald">{country}</p>
-                    <ul className="mt-2 space-y-1.5">
-                      {unis.map((u) => (
-                        <li key={u.name} className="flex items-baseline justify-between gap-3 text-midnight">
-                          <span>{u.name}</span>
-                          {u.qs && <span className="shrink-0 text-xs font-semibold text-ink-secondary">QS #{u.qs}</span>}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+              <div className="border-t border-midnight/10 p-5">
+                <LogoGrid newTab={newTab} items={g.countries.flatMap(({ country, unis }) => unis.map((u) => ({ name: u.name, meta: country, badge: u.qs ? `QS #${u.qs}` : undefined, href: partnerSites[u.name], logo: u.logo })))} />
               </div>
             </details>
           ))}
         </div>
-        <p className="mt-6 text-xs text-ink-secondary">{tr(qsNote, locale)}</p>
+        <p className="mt-6 text-xs text-ink-secondary">{tr(qsNote, locale)} {en ? "Logos are trademarks of their respective institutions, shown to identify partnerships; initials stand in where a logo is still to be added." : "Logo adalah merek dagang institusi masing-masing, ditampilkan untuk menandai kemitraan; inisial dipakai bila logo belum tersedia."}</p>
       </Section>
 
       <Section tone="dark" orbs labelledBy="consortiums-title" id="consortiums" className="scroll-mt-20">
@@ -141,6 +133,7 @@ export default async function PartnersPage({ params }: PageProps) {
                 {c.full !== c.name && <p className="mt-2 text-sm font-semibold text-smoke">{c.full}</p>}
                 <p className="mt-3 flex-1 text-sm text-smoke/90">{tr(c.body, locale)}</p>
                 {"confirm" in c && c.confirm && <ToConfirm locale={locale} className="mt-4 self-start text-amber" />}
+                <ExternalLink href={c.website} label={en ? "Visit website" : "Kunjungi situs"} locale={locale} variant="glass" className="mt-4 self-start" />
               </Reveal>
             </li>
           ))}

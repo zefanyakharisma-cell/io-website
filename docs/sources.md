@@ -22,6 +22,32 @@ Where sources disagree, the page uses cautious wording and keeps the "Details to
 | Get to Know Us → Surabaya | Surabaya to Bromo: 3–4 h by road. | bromoTransfer | https://www.backindo.com/?p=10362 |
 | Get to Know Us → Surabaya | Surabaya to Bali: about 1¼ h by air. Estimated from airline schedules, so no single source. | — | — |
 
+| Get to Know Us → Surabaya | The day-trips map outline, made from the Natural Earth admin-1 provinces by `scripts/build-regionmap.mjs`. The data is public domain. | naturalEarth | https://github.com/nvkelso/natural-earth-vector |
+
+## Links found by web search (to confirm with KUI)
+
+These links were found by web search on 28 Oct 2026. They could not be opened from the build environment, so KUI should confirm them.
+
+- **Consortium websites** (`src/content/partners.ts`):
+  - ACUCA: acuca.net. The address comes from UKI's ACUCA page and is unverified.
+  - GHAS: ghas.hakka.nycu.edu.tw. Petra is listed as an overseas founding member.
+  - P2A: passagetoasean.org, from the ASEAN entities directory. No source confirms Petra's membership, so the card keeps the to-confirm badge.
+  - NUNI: BINUS Global's NUNI page. NUNI's secretariat is at BINUS.
+  - BKPTKI: no official website was found.
+- **Faculty and programme websites** (`src/content/links.ts`): taken from the `*.petra.ac.id` subdomains that appeared in search results.
+  - Faculties: ftsp, fti, fk, fkg.
+  - Programmes: civil, architecture, electrical, smed (Mechanical Engineering), industrial, informatics, foodtech, ibe, bacc, pbs, pgsd, pgpaud, itep.
+  - Tracks and postgraduate: mcivil, doctoral-civil, mars, sib, dsa, mti, ibm, ibacc, retail, culinary, mm, mm-online, dm, dkv, interior, fashion, ipdm.
+  - Not found: the SBM, FHIK and FKIP faculty sites, and the Management, English, Chinese, Design (the umbrella programme), Communication and professional-programme sites.
+- **Partner homepages** (`src/content/partner-sites.ts`): the official domain of each named partner.
+- **Domestic partners** (`domesticPartners` in `partners.ts`):
+  - Industry names from the deck (slide on industry partners).
+  - Monash University, Indonesia: MoU signed 17 Sep 2024 (monash.edu/indonesia news).
+  - Universitas Gadjah Mada: cooperation announced on ugm.ac.id (news 23617).
+  - Bank Jatim: MoU signed 17 Jun 2025 (Jatim Times).
+  - Maspion Group: cooperation from Aug 2022 (Jawa Pos).
+  - Universitas Sumatera Utara: partner in the Erasmus+ project.
+
 ## Photos
 
 No web photos have been added yet. The build environment cannot reach Wikimedia Commons or petra.ac.id. Once those hosts are allowed, use only CC BY, CC BY-SA, CC0 or public-domain Commons files, or Petra's own photos, and credit each one on the page.

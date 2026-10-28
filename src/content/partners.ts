@@ -132,14 +132,34 @@ export const qsNote: L = {
   id: "Iowa State University tercantum di peringkat #540 pada sumber, di luar kelompok QS top 500. KUI sedang mengonfirmasi angka ini.",
 };
 
-/** Consortiums named in KUI's spec (WEBSITE IO, Sheet1 → Partners). */
+/** Consortiums named in KUI's spec (WEBSITE IO, Sheet1 → Partners). Websites from web search (docs/sources.md). */
 export const consortia = [
-  { name: "ACUCA", full: "Association of Christian Universities and Colleges in Asia", body: { en: "A network of Christian universities across Asia, linking Petra to sister institutions for exchange and leadership programmes.", id: "Jejaring universitas Kristen se-Asia yang menghubungkan Petra dengan institusi saudara untuk pertukaran dan program kepemimpinan." } },
-  { name: "GHAS", full: "Global Hakka Studies network", body: { en: "An international research network on Hakka studies, alongside Petra's Chinese Indonesian Studies centre (est. 2011).", id: "Jejaring riset internasional tentang studi Hakka, sejalan dengan Pusat Studi Tionghoa Indonesia Petra (berdiri 2011)." }, confirm: true },
-  { name: "P2A", full: "P2A", body: { en: "A consortium in which Petra is a member. A full description is pending from the International Office.", id: "Konsorsium tempat Petra menjadi anggota. Deskripsi lengkap menunggu dari KUI." }, confirm: true },
-  { name: "BKPTKI", full: "Badan Kerja Sama Perguruan Tinggi Kristen Indonesia", body: { en: "The association of Indonesian Christian higher-education institutions, including a local student exchange among members.", id: "Badan kerja sama perguruan tinggi Kristen di Indonesia, termasuk pertukaran mahasiswa antaranggota." } },
-  { name: "NUNI", full: "NUNI", body: { en: "A university network in which Petra is a member, with student exchange among members. A full description is pending from the International Office.", id: "Jejaring universitas tempat Petra menjadi anggota, dengan pertukaran mahasiswa antaranggota. Deskripsi lengkap menunggu dari KUI." }, confirm: true },
-] satisfies { name: string; full: string; body: L; confirm?: boolean }[];
+  { name: "ACUCA", full: "Association of Christian Universities and Colleges in Asia", website: "http://acuca.net/", body: { en: "A network of Christian universities across Asia, linking Petra to sister institutions for exchange and leadership programmes.", id: "Jejaring universitas Kristen se-Asia yang menghubungkan Petra dengan institusi saudara untuk pertukaran dan program kepemimpinan." } },
+  { name: "GHAS", full: "Consortium of Global Hakka Studies", website: "https://ghas.hakka.nycu.edu.tw/", body: { en: "An international platform for Hakka and ethnic studies, founded in 2019 at National Chiao Tung University with Petra among its overseas founding members.", id: "Platform internasional untuk studi Hakka dan etnis, didirikan 2019 di National Chiao Tung University dengan Petra sebagai salah satu anggota pendiri luar negeri." } },
+  { name: "P2A", full: "Passage to ASEAN", website: "https://www.passagetoasean.org/", body: { en: "A network of universities across ASEAN, founded in 2012, for student and staff exchange and cooperation among members.", id: "Jejaring universitas se-ASEAN, berdiri 2012, untuk pertukaran mahasiswa dan staf serta kerja sama antaranggota." }, confirm: true },
+  { name: "BKPTKI", full: "Badan Kerja Sama Perguruan Tinggi Kristen di Indonesia", website: "", body: { en: "The association of Indonesian Christian higher-education institutions, including a local student exchange among members.", id: "Badan kerja sama perguruan tinggi Kristen di Indonesia, termasuk pertukaran mahasiswa antaranggota." } },
+  { name: "NUNI", full: "Nationwide University Network in Indonesia", website: "https://global.binus.ac.id/nationwide-university-network-in-indonesia-nuni/", body: { en: "A network of Indonesian universities founded in 2011 for student and faculty mobility and joint research, including a credit-earning exchange semester.", id: "Jejaring universitas Indonesia yang berdiri 2011 untuk mobilitas mahasiswa dan dosen serta riset bersama, termasuk semester pertukaran berkredit." } },
+] satisfies { name: string; full: string; website: string; body: L; confirm?: boolean }[];
+
+/**
+ * A selection of named domestic partners: industry names from the deck plus
+ * publicly announced agreements (sources in docs/sources.md).
+ */
+export const domesticPartners: { name: string; kind: "University" | "Industry" | "Government & banking"; website: string }[] = [
+  { name: "Universitas Gadjah Mada", kind: "University", website: "https://ugm.ac.id/" },
+  { name: "Monash University, Indonesia", kind: "University", website: "https://www.monash.edu/indonesia" },
+  { name: "Universitas Sumatera Utara", kind: "University", website: "https://www.usu.ac.id/" },
+  { name: "Bank Jatim", kind: "Government & banking", website: "https://www.bankjatim.co.id/" },
+  { name: "BCA", kind: "Industry", website: "https://www.bca.co.id/" },
+  { name: "Astra", kind: "Industry", website: "https://www.astra.co.id/" },
+  { name: "Maspion Group", kind: "Industry", website: "https://www.maspion.com/" },
+  { name: "Wings", kind: "Industry", website: "https://www.wingscorp.com/" },
+  { name: "Polygon", kind: "Industry", website: "https://www.polygonbikes.com/" },
+  { name: "Schneider Electric", kind: "Industry", website: "https://www.se.com/id/" },
+  { name: "Nutrifood", kind: "Industry", website: "https://www.nutrifood.co.id/" },
+  { name: "SPIL", kind: "Industry", website: "https://www.spil.co.id/" },
+  { name: "Kempinski", kind: "Industry", website: "https://www.kempinski.com/" },
+];
 
 export type Continent = "Asia" | "Europe" | "Oceania" | "Americas" | "Africa";
 export const continentLabels: Record<Continent, L> = {

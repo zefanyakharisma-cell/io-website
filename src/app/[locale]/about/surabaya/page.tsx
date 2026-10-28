@@ -48,9 +48,9 @@ export default async function SurabayaPage({ params }: PageProps) {
         </ul>
         <div className="glass mt-6 rounded-lg p-4 md:p-6">
           <h3 className="text-lg">{en ? "Day trips from Surabaya" : "Perjalanan sehari dari Surabaya"}</h3>
-          <WorldMap className="mx-auto mt-4 max-w-3xl" origin={origin} points={trips} size={EAST_JAVA_SIZE} mapSrc="/brand/eastjava-dots.svg" dotOpacity="opacity-40" showLabels />
+          <WorldMap className="mx-auto mt-4 max-w-3xl" origin={origin} points={trips} size={EAST_JAVA_SIZE} mapSrc="/brand/eastjava-map.svg" dotOpacity="opacity-100" fade={false} showLabels />
         </div>
-        <SourceNote ids={["malangToll", "bromoTransfer"]} locale={locale} tone="dark" />
+        <SourceNote ids={["malangToll", "bromoTransfer", "naturalEarth"]} locale={locale} tone="dark" />
       </Section>
       <Section tone="deep" labelledBy="landmarks">
         <SectionHeading id="landmarks" eyebrow={en ? "City of Heroes" : "Kota Pahlawan"} title={en ? "Landmarks to see" : "Ikon kota yang wajib dikunjungi"} />
