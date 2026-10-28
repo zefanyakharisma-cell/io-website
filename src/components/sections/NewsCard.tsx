@@ -1,0 +1,45 @@
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { categoryLabels, formatDate, type NewsPost } from "@/lib/news";
+import { href, tr, type Locale } from "@/lib/i18n";
+import { Photo } from "@/components/brand/Photo";
+import { cn } from "@/lib/utils";
+
+export function NewsCard({ post, locale, featured, compact }: { post: NewsPost; locale: Locale; featured?: boolean; compact?: boolean }) {
+  const meta = (
+    <span className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+      <span className="rounded-full bg-amber px-2.5 py-0.5 font-semibold text-midnight">{tr(categoryLabels[post.category], locale)}</span>
+      {!post.datePending && <time dateTime={post.date}>{formatDate(post.date, locale)}</time>}
+    </span>
+  );
+
+  if (featured) {
+    return (
+      <Link href={href(locale, `/news/${post.slug}`)} className="group relative flex min-h-[28rem] flex-col justify-end overflow-hidden rounded-lg text-white shadow-card">
+        <Photo image={post.cover} className="absolute inset-0 transition-transform duration-[1.2s] group-hover:scale-105" />
+        <span className="absolute inset-0 bg-gradient-to-t from-midnight-deep via-midnight-deep/50 to-transparent" />
+        <span className="glass relative m-4 block rounded-md p-6">
+          <span className="text-smoke">{meta}</span>
+          <span className="mt-3 block text-2xl font-bold leading-snug">{tr(post.title, locale)}</span>
+          <span className="mt-2 block text-smoke/90">{tr(post.excerpt, locale)}</span>
+        </span>
+      </Link>
+    );
+  }
+
+  return (
+    <Link href={href(locale, `/news/${post.slug}`)} className={cn("group glass-light flex overflow-hidden rounded-lg text-midnight transition-transform hover:-translate-y-0.5", compact ? "flex-col lg:flex-row" : "flex-col")}>
+      <span className={cn("relative block shrink-0 overflow-hidden", compact ? "aspect-[16/10] lg:aspect-auto lg:w-44" : "aspect-[16/10]")}>
+        <Photo image={post.cover} className="absolute inset-0 transition-transform duration-700 group-hover:scale-105" sizes="(min-width: 1024px) 25vw, 100vw" />
+      </span>
+      <span className="flex flex-1 flex-col p-5">
+        <span className="text-ink-secondary">{meta}</span>
+        <span className="mt-2 flex items-start justify-between gap-2 font-bold leading-snug">
+          {tr(post.title, locale)}
+          <ArrowUpRight className="mt-0.5 size-4 shrink-0 opacity-60 transition group-hover:opacity-100" aria-hidden />
+        </span>
+        {!compact && <span className="mt-2 text-sm text-ink-secondary">{tr(post.excerpt, locale)}</span>}
+      </span>
+    </Link>
+  );
+}
