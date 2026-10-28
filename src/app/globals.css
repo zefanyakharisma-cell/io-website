@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   PCU Design System tokens (tokens.json, PCU Design System artifact) mapped to
+   Tailwind v4 theme variables. Brand rules live in the design system README:
+   midnight leads; text on midnight may be white, smoke, amber, yellow, teal,
+   green, orange or purple; text on light grounds only midnight, black,
+   emerald or red (blue and cerise at 24px+).
+   ------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Italic-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bebas Neue";
+  src: url("/fonts/BebasNeue-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@theme {
+  --color-midnight: #19304b;
+  --color-midnight-deep: #133256;
+  --color-midnight-light: #245484;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-smoke: #f1f1f1;
+  --color-cerise: #ec008c;
+  --color-amber: #ffbc00;
+  --color-teal: #45b8bc;
+  --color-blue: #3880d0;
+  --color-red: #e31f26;
+  --color-yellow: #f7ec00;
+  --color-green: #6aaa43;
+  --color-orange: #f37121;
+  --color-emerald: #135d50;
+  --color-purple: #be93e4;
+  --color-border: #e2e5e9;
+  --color-ink-secondary: #46505c;
+  --color-ink-muted: #5f6b78;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Bebas Neue", "Oswald", Impact, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  --shadow-card: 0 1px 0 rgba(25, 48, 75, 0.06), 0 12px 32px -16px rgba(25, 48, 75, 0.25);
+  --shadow-sign: 14px -14px 0 0 #ffbc00;
+
+  --animate-drift: drift 28s ease-in-out infinite alternate;
+  --animate-kenburns: kenburns 24s ease-out infinite alternate;
+
+  @keyframes drift {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(6%, -4%, 0) scale(1.08); }
+    100% { transform: translate3d(-4%, 5%, 0) scale(0.96); }
+  }
+  @keyframes kenburns {
+    0% { transform: scale(1.02) translate3d(0, 0, 0); }
+    100% { transform: scale(1.14) translate3d(-2%, -2%, 0); }
+  }
+}
+
+:root {
+  --gradient-midnight: linear-gradient(135deg, #245484, #133256);
+  --gradient-aqua: linear-gradient(135deg, #54feeb, #133256);
+  --gradient-sunrise: linear-gradient(100deg, #ec008c, #ffbc00);
+  --gradient-dusk: linear-gradient(115deg, #ec008c, #3880d0);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    background: var(--color-midnight-deep);
+    color: var(--color-white);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  /* Brand focus ring: 3px amber at 3px offset (focus-ring-brand). */
+  :focus-visible {
+    outline: 3px solid var(--color-amber);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--color-amber);
+    color: var(--color-midnight);
+  }
+}
+
+@layer components {
+  .bg-gradient-midnight { background-image: var(--gradient-midnight); }
+  .bg-gradient-aqua { background-image: var(--gradient-aqua); }
+  .bg-gradient-sunrise { background-image: var(--gradient-sunrise); }
+  .bg-gradient-dusk { background-image: var(--gradient-dusk); }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .tagline {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+  .kicker {
+    display: block;
+    font-weight: 400;
+    font-size: 1.375rem;
+    line-height: 1.2;
+    opacity: 0.8;
+  }
+
+  /* Midnight Glass: frosted panel over the midnight canvas. The base tint
+     keeps white text at 4.5:1 even over the brightest orb. */
+  .glass {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06)) , rgba(19, 50, 86, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 24px 48px -24px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+  }
+  .glass-strong {
+    background: rgba(19, 50, 86, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+  }
+  /* Light frosted card for smoke sections. */
+  .glass-light {
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass, .glass-strong { background: rgba(25, 48, 75, 0.92); }
+    .glass-light { background: #ffffff; }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .glass, .glass-strong { background: rgba(25, 48, 75, 0.92); backdrop-filter: none; -webkit-backdrop-filter: none; }
+    .glass-light { background: #ffffff; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  }
+
+  /* Signature half ring, masked from the design system's ring SVGs. */
+  .ring-u, .ring-n, .ring-u-line {
+    aspect-ratio: 2 / 1;
+    background: currentColor;
+    -webkit-mask: var(--_m) center / 100% 100% no-repeat;
+    mask: var(--_m) center / 100% 100% no-repeat;
+  }
+  .ring-u { --_m: url("/brand/ring-u.svg"); }
+  .ring-n { --_m: url("/brand/ring-n.svg"); }
+  .ring-u-line { --_m: url("/brand/ring-u-line.svg"); }
+  .double-arch {
+    aspect-ratio: 2 / 1;
+    background: currentColor;
+    -webkit-mask: url("/brand/double-arch.svg") center / 100% 100% no-repeat;
+    mask: url("/brand/double-arch.svg") center / 100% 100% no-repeat;
+  }
+  .pcu-pattern {
+    background-image: url("/brand/pattern-tile.svg");
+    background-size: 80px 80px;
+  }
+
+  /* Links in running text: inherited colour, 1.5px blue underline. */
+  .prose-link {
+    text-decoration: underline;
+    text-decoration-color: var(--color-blue);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+  }
+  .on-dark .prose-link { text-decoration-color: var(--color-teal); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.8rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-amber { background: var(--color-amber); color: var(--color-midnight); }
+  .btn-amber:hover { background: #ffc933; }
+  .btn-glass {
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .btn-glass:hover { background: rgba(255, 255, 255, 0.18); }
+  .btn-midnight { background: var(--color-midnight); color: var(--color-white); }
+  .btn-midnight:hover { background: #245484; }
+
+  .md-body h2 { font-size: 1.5rem; margin: 2rem 0 0.75rem; color: var(--color-midnight); }
+  .md-body h3 { font-size: 1.2rem; margin: 1.5rem 0 0.5rem; color: var(--color-midnight); }
+  .md-body p { margin: 0 0 1rem; max-width: 68ch; }
+  .md-body ul { list-style: disc; padding-left: 1.25rem; margin: 0 0 1rem; }
+  .md-body li { margin: 0.25rem 0; }
+  .md-body a { text-decoration: underline; text-decoration-color: var(--color-blue); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  .md-body strong { color: var(--color-midnight); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .btn:hover { transform: none; }
+}
