@@ -13,7 +13,7 @@ import { Reveal } from "@/components/brand/Reveal";
 import { Photo } from "@/components/brand/Photo";
 import { Donut } from "@/components/ui/donut";
 import { WorldMap } from "@/components/ui/world-map";
-import { LogoGrid } from "@/components/sections/LogoGrid";
+import { MovingLogoGrid, type LogoRow } from "@/components/sections/MovingLogoGrid";
 import { ExternalLink } from "@/components/sections/links";
 import { partnerSites } from "@/content/partner-sites";
 
@@ -30,6 +30,7 @@ export default async function PartnersPage({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const en = locale === "en";
   const newTab = en ? "(opens in a new tab)" : "(membuka tab baru)";
+  const motionLabels = en ? { pause: "Pause scrolling", play: "Play scrolling" } : { pause: "Jeda gerakan", play: "Putar gerakan" };
   const kindLabel = { University: en ? "University" : "Universitas", Industry: en ? "Industry" : "Industri", "Government & banking": en ? "Government & banking" : "Pemerintah & perbankan" } as const;
 
   // B. International partners: continent → country → universities (partners named in the deck).
@@ -40,6 +41,18 @@ export default async function PartnersPage({ params }: PageProps) {
       return { c, countries: countries.map((country) => ({ country, unis: list.filter((p) => p.country === country).sort((a, b) => a.name.localeCompare(b.name)) })), count: list.length };
     })
     .filter((g) => g.count > 0);
+
+  const tiles = (g: (typeof grouped)[number]) => g.countries.flatMap(({ country, unis }) => unis.map((u) => ({ name: u.name, meta: country, badge: u.qs ? `QS #${u.qs}` : undefined, href: partnerSites[u.name], logo: u.logo })));
+  const label = (cs: typeof grouped) => cs.map((g) => `${tr(continentLabels[g.c], locale)} (${g.count})`).join(" · ");
+  const [asia, europe, ...rest] = grouped;
+  const asiaTiles = tiles(asia);
+  const half = Math.ceil(asiaTiles.length / 2);
+  const internationalRows: LogoRow[] = [
+    { label: label([asia]), items: asiaTiles.slice(0, half) },
+    { items: asiaTiles.slice(half) },
+    { label: label([europe]), items: tiles(europe) },
+    { label: label(rest), items: rest.flatMap(tiles) },
+  ];
 
   return (
     <>
@@ -100,26 +113,14 @@ export default async function PartnersPage({ params }: PageProps) {
           ))}
         </dl>
         <h3 className="mt-10 text-lg text-midnight">{en ? `A selection of our ${domestic.total}+ national partners` : `Sebagian dari ${domestic.total}+ mitra nasional kami`}</h3>
-        <LogoGrid className="mt-4" newTab={newTab} items={domesticPartners.map((d) => ({ name: d.name, meta: kindLabel[d.kind], href: d.website }))} />
+        <MovingLogoGrid className="mt-4" newTab={newTab} labels={motionLabels} rows={[{ items: domesticPartners.map((d) => ({ name: d.name, meta: kindLabel[d.kind], href: d.website })) }]} />
         <p className="mt-6 text-sm text-ink-secondary">{en ? "The full list of domestic partners will be published here." : "Daftar lengkap mitra dalam negeri akan dipublikasikan di sini."}</p>
         <ToConfirm locale={locale} className="mt-3 text-emerald" />
       </Section>
 
       <Section tone="light" labelledBy="international-title" id="international" className="scroll-mt-20 !pt-0">
         <SectionHeading id="international-title" tone="light" eyebrow="B" title={en ? "International partners" : "Mitra internasional"} lead={en ? "Partners named in our international profile, by continent. The full register of 180+ agreements is kept by the International Office." : "Mitra yang tercantum dalam profil internasional kami, per benua. Daftar lengkap 180+ perjanjian disimpan oleh KUI."} />
-        <div className="mt-10 space-y-4">
-          {grouped.map((g, gi) => (
-            <details key={g.c} open={gi === 0} className="group glass-light rounded-lg">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5">
-                <span className="text-xl font-bold text-midnight">B.{gi + 1} {tr(continentLabels[g.c], locale)}</span>
-                <span className="text-sm font-semibold text-ink-secondary">{g.count} {en ? (g.count === 1 ? "university" : "universities") : "universitas"} · {g.countries.length} {en ? (g.countries.length === 1 ? "country" : "countries") : "negara"}<span aria-hidden className="ml-3 inline-block transition-transform group-open:rotate-180">▾</span></span>
-              </summary>
-              <div className="border-t border-midnight/10 p-5">
-                <LogoGrid newTab={newTab} items={g.countries.flatMap(({ country, unis }) => unis.map((u) => ({ name: u.name, meta: country, badge: u.qs ? `QS #${u.qs}` : undefined, href: partnerSites[u.name], logo: u.logo })))} />
-              </div>
-            </details>
-          ))}
-        </div>
+        <MovingLogoGrid className="mt-10" rows={internationalRows} newTab={newTab} labels={motionLabels} />
         <p className="mt-6 text-xs text-ink-secondary">{tr(qsNote, locale)} {en ? "Logos are trademarks of their respective institutions, shown to identify partnerships; initials stand in where a logo is still to be added." : "Logo adalah merek dagang institusi masing-masing, ditampilkan untuk menandai kemitraan; inisial dipakai bila logo belum tersedia."}</p>
       </Section>
 

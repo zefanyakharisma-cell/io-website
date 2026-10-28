@@ -14,6 +14,7 @@ export function InfiniteSlider({
   duration = 40,
   durationOnHover,
   reverse = false,
+  paused = false,
   className,
 }: {
   children: React.ReactNode;
@@ -21,6 +22,8 @@ export function InfiniteSlider({
   duration?: number;
   durationOnHover?: number;
   reverse?: boolean;
+  /** Stops the motion (e.g. from a pause button) without resetting position. */
+  paused?: boolean;
   className?: string;
 }) {
   const reduce = useReducedMotionSafe();
@@ -29,13 +32,22 @@ export function InfiniteSlider({
   const x = useMotionValue(0);
 
   useEffect(() => {
-    if (reduce || !width) return;
-    const size = width + gap;
-    const from = reverse ? -size / 2 : 0;
-    const to = reverse ? 0 : -size / 2;
-    const controls = animate(x, [from, to], { ease: "linear", duration: current, repeat: Infinity, repeatType: "loop" });
-    return controls.stop;
-  }, [x, current, width, gap, reverse, reduce]);
+    if (reduce || paused || !width) return;
+    const half = (width + gap) / 2;
+    // Resume from the current offset so pausing doesn't jump back to the start.
+    const from = Math.min(0, Math.max(-half, x.get()));
+    const to = reverse ? 0 : -half;
+    x.set(from);
+    const first = animate(x, to, { ease: "linear", duration: (current * Math.abs(to - from)) / half });
+    let loop: ReturnType<typeof animate> | undefined;
+    first.then(() => {
+      loop = animate(x, reverse ? [-half, 0] : [0, -half], { ease: "linear", duration: current, repeat: Infinity, repeatType: "loop" });
+    });
+    return () => {
+      first.stop();
+      loop?.stop();
+    };
+  }, [x, current, width, gap, reverse, reduce, paused]);
 
   if (reduce) {
     return <div className={cn("flex flex-wrap items-center justify-center", className)} style={{ gap }}>{children}</div>;
@@ -51,7 +63,8 @@ export function InfiniteSlider({
         onHoverEnd={durationOnHover ? () => setCurrent(duration) : undefined}
       >
         {children}
-        <div aria-hidden className="flex items-center" style={{ gap }}>{children}</div>
+        {/* Visual duplicate for the seamless loop: hidden from assistive tech and keyboard. */}
+        <div aria-hidden inert className="flex items-center" style={{ gap }}>{children}</div>
       </motion.div>
     </div>
   );
