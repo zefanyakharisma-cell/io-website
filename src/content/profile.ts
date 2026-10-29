@@ -9,10 +9,18 @@ export const vision: L = {
   id: "Universitas Kristen kelas dunia yang mentransformasi masyarakat untuk kemuliaan Tuhan.",
 };
 
+/** Founded 22 September 1961 (see the timeline below). The static export computes the age at build time. */
+const founded = new Date(Date.UTC(1961, 8, 22));
+function yearsSinceFounding(now = new Date()) {
+  const years = now.getUTCFullYear() - founded.getUTCFullYear();
+  const beforeAnniversary = now.getUTCMonth() < founded.getUTCMonth() || (now.getUTCMonth() === founded.getUTCMonth() && now.getUTCDate() < founded.getUTCDate());
+  return beforeAnniversary ? years - 1 : years;
+}
+
 export type Stat = { value: number; suffix?: string; prefix?: string; label: L; note?: L };
 
 export const keyStats: Stat[] = [
-  { value: 65, label: { en: "Years since 1961", id: "Tahun sejak 1961" }, note: { en: "One of East Java's oldest private universities", id: "Salah satu universitas swasta tertua di Jawa Timur" } },
+  { value: yearsSinceFounding(), label: { en: "Years since 1961", id: "Tahun sejak 1961" }, note: { en: "One of East Java's oldest private universities", id: "Salah satu universitas swasta tertua di Jawa Timur" } },
   { value: 7, label: { en: "Faculties", id: "Fakultas" }, note: { en: "All with “Excellent” institutional standing", id: "Seluruhnya berstatus “Unggul”" } },
   { value: 59, label: { en: "Programmes", id: "Program" }, note: { en: "Bachelor to doctoral and professional", id: "Sarjana hingga doktor dan profesi" } },
   { value: 7000, suffix: "+", label: { en: "Active students", id: "Mahasiswa aktif" }, note: { en: "Plus a growing international cohort", id: "Ditambah mahasiswa internasional yang terus bertambah" } },

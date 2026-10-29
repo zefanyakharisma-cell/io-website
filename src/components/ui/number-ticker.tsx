@@ -41,7 +41,7 @@ export function NumberTicker({
   }, [inView, reduce, value, duration, count]);
 
   return (
-    <span ref={ref} className={cn("tabular-nums", className)}>
+    <span ref={ref} data-ticker className={cn("tabular-nums", className)}>
       <span className="sr-only">{`${prefix}${fmt.format(value)}${suffix}`}</span>
       <motion.span aria-hidden>{text}</motion.span>
     </span>

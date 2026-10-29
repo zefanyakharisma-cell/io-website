@@ -12,6 +12,14 @@ export function generateStaticParams() {
 
 const SITE_URL = "https://io.petra.ac.id";
 
+/**
+ * Without JavaScript, scroll reveals would stay at opacity 0 and number tickers at 0.
+ * Show the content as-is, and the tickers' screen-reader value in place of the animated one.
+ */
+const noScriptStyles = `[data-reveal]{opacity:1!important;transform:none!important}
+[data-ticker]>.sr-only{position:static!important;width:auto!important;height:auto!important;margin:0!important;padding:0!important;overflow:visible!important;clip:auto!important;clip-path:none!important;white-space:normal!important}
+[data-ticker]>[aria-hidden]{display:none!important}`;
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const en = locale === "en";
@@ -37,6 +45,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   return (
     <html lang={locale}>
       <body className="min-h-screen">
+        <noscript dangerouslySetInnerHTML={{ __html: `<style>${noScriptStyles}</style>` }} />
         <SiteHeader locale={locale as Locale} />
         <main id="main">{children}</main>
         <SiteFooter locale={locale as Locale} />
