@@ -14,7 +14,7 @@ import { Gallery } from "@/components/ui/gallery";
 export const generateStaticParams = localeParams;
 
 export async function generateMetadata({ params }: PageProps) {
-  return pageMeta(await resolveLocale(params), "/about/ai", { en: "AI@PCU & Drone Academy", id: "AI@PCU & Drone Academy" }, { en: "An AI-native campus since 2023, a new Artificial Intelligence degree, and Indonesia's first credit-based UAV academy.", id: "Kampus AI-native sejak 2023, program studi Artificial Intelligence baru, dan akademi UAV berbasis kredit pertama di Indonesia." });
+  return pageMeta(await resolveLocale(params), "/about/ai", { en: "AI@PETRA & Drone Academy", id: "AI@PETRA & Drone Academy" }, { en: "An AI-native campus since 2023, a new Artificial Intelligence degree, and Indonesia's first credit-based UAV academy.", id: "Kampus AI-native sejak 2023, program studi Artificial Intelligence baru, dan akademi UAV berbasis kredit pertama di Indonesia." });
 }
 
 export default async function AiPage({ params }: PageProps) {
@@ -25,10 +25,10 @@ export default async function AiPage({ params }: PageProps) {
     <>
       <PageHero
         image={media.ai.launch}
-        eyebrow="AI@PCU"
+        eyebrow="AI@PETRA"
         title={en ? "An AI-native campus" : "Kampus AI-native"}
         lead={tr(aiQuote, locale)}
-        crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(aboutNav.label, locale), href: href(locale, "/about") }, { label: "AI@PCU & Drone Academy" }]}
+        crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(aboutNav.label, locale), href: href(locale, "/about") }, { label: "AI@PETRA & Drone Academy" }]}
       />
 
       <Section tone="dark" cinematic bgImage={media.campus.landmark} orbs labelledBy="timeline">

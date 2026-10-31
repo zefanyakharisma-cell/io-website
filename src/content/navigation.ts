@@ -65,7 +65,7 @@ export const aboutNav: NavGroup = {
     { label: { en: "Where We Are", id: "Lokasi Kami" }, path: "/about/campus", description: { en: "Surabaya, East Java", id: "Surabaya, Jawa Timur" } },
     { label: { en: "Faculties & Programmes", id: "Fakultas & Program Studi" }, path: "/about/faculties", description: { en: "7 faculties, 59 programmes", id: "7 fakultas, 59 program" } },
     { label: { en: "Research & Labs", id: "Riset & Laboratorium" }, path: "/about/research", description: { en: "65+ labs, 36 Q1 articles", id: "65+ laboratorium, 36 artikel Q1" } },
-    { label: { en: "AI@PCU & Drone Academy", id: "AI@PCU & Drone Academy" }, path: "/about/ai", description: { en: "An AI-native campus", id: "Kampus AI-native" } },
+    { label: { en: "AI@PETRA & Drone Academy", id: "AI@PETRA & Drone Academy" }, path: "/about/ai", description: { en: "An AI-native campus", id: "Kampus AI-native" } },
   ],
 };
 

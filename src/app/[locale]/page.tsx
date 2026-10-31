@@ -147,7 +147,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <Section
         tone="light"
         labelledBy="fac-title"
-        decor={<span aria-hidden className="pcu-glow pcu-glow--aqua -right-40 -top-56 hidden size-[34rem] md:block" />}
+        decor={<span aria-hidden className="petra-glow petra-glow--aqua -right-40 -top-56 hidden size-[34rem] md:block" />}
       >
         <SectionHeading id="fac-title" tone="light" eyebrow={en ? "Academic structure" : "Struktur akademik"} title={en ? "Seven faculties, one campus" : "Tujuh fakultas, satu kampus"} />
         <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">

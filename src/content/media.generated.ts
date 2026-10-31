@@ -633,7 +633,7 @@ export const media = {
       "small": "/images/ai/launch-800.webp",
       "width": 821,
       "height": 558,
-      "alt": "Launch of the AI@PCU artificial intelligence programme"
+      "alt": "Launch of the AI@PETRA artificial intelligence programme"
     },
     "3d-printing": {
       "src": "/images/ai/3d-printing-900.webp",

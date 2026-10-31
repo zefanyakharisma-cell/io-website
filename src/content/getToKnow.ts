@@ -35,11 +35,11 @@ export const petramate = {
   /** From Petra's 2024/25 open-recruitment notice (petramate2425 source). Confirm for the current year. */
   recruitmentFacts: [
     { value: "SKKK", label: { en: "Credit points for completing a Petramate term", id: "Poin SKKK setelah menyelesaikan satu periode Petramate" } },
-    { value: "Scholarship", label: { en: "Members can qualify for a scholarship when joining PCU's International Programs", id: "Anggota dapat memperoleh beasiswa saat bergabung di Program Internasional PCU" } },
+    { value: "Scholarship", label: { en: "Members can qualify for a scholarship when joining PETRA's International Programs", id: "Anggota dapat memperoleh beasiswa saat bergabung di Program Internasional PETRA" } },
   ] satisfies { value: string; label: L }[],
 };
 
-/** International Office location and mobility line (pcuFactSheet source). */
+/** International Office location and mobility line (petraFactSheet source). */
 export const office = {
   room: { en: "Main Campus, D Building, Room 104", id: "Kampus Utama, Gedung D, Ruang 104" } satisfies L,
   mobilityPhone: { display: "+62 31 298 3188", tel: "+62312983188" },

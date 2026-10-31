@@ -1,13 +1,13 @@
-# Decoration plan: PCU Design System components and web photos
+# Decoration plan: PETRA Design System components and web photos
 
 **Status (28 Oct 2026):**
 - **Done:**
   - §2 components 1–6 and 8–9. The component from §2.7 exists as `GeoCluster` but isn't placed yet, because every page has a header photo.
   - §3 placements: footer, page heroes, Home, About, Contact, Partners, process flows, and dos and don'ts.
   - §4 photos: 13 Commons files, 5 of them Petra's own uploads.
-- **Blocked:** petra.ac.id is reachable but sits behind a Cloudflare bot check, so its photos come from BrandingPCU's Commons uploads instead.
+- **Blocked:** petra.ac.id is reachable but sits behind a Cloudflare bot check, so its photos come from BrandingPETRA's Commons uploads instead.
 
-Goal: make the site more engaging by using more of the PCU Design System's graphic language, and add real photos from Wikimedia Commons, Wikipedia and petra.ac.id. All rules in the README's "Design rules" section still apply: no shape behind text, contrast at 4.5:1 or better, motion off under reduced motion.
+Goal: make the site more engaging by using more of the PETRA Design System's graphic language, and add real photos from Wikimedia Commons, Wikipedia and petra.ac.id. All rules in the README's "Design rules" section still apply: no shape behind text, contrast at 4.5:1 or better, motion off under reduced motion.
 
 ## 1. What the site uses today, and what it doesn't
 
@@ -16,10 +16,10 @@ Goal: make the site more engaging by using more of the PCU Design System's graph
 | Half ring (`ring-u`, `ring-n`, `ring-u-line`) | Yes, via `<Ring>` on 6 pages | `ring-n-line` is missing |
 | Glass panels, brand buttons, eyebrow and tagline | Yes | — |
 | Bebas Neue numerals | Yes | — |
-| **Pattern** (`.pcu-pattern`, quarter-circle tile) | CSS class exists, not used anywhere | Unused |
+| **Pattern** (`.petra-pattern`, quarter-circle tile) | CSS class exists, not used anywhere | Unused |
 | **ArchBand** (double-arch top edge) | `double-arch.svg` is in `public/brand/`, not used | Unused |
 | **Filled geometry** (blocks, quarters, discs, as on the Cover) | No | Unused |
-| **Gradient overlay glows** (`.pcu-glow--cerise/aqua/amber`) | No (OrbBackground is similar but not the DS class) | Unused |
+| **Gradient overlay glows** (`.petra-glow--cerise/aqua/amber`) | No (OrbBackground is similar but not the DS class) | Unused |
 | **IconBadge** (white outline icon in a gradient circle) | No; icons are bare Lucide glyphs | Unused |
 | **Tag** (midnight category label) | No; cards use plain eyebrows | Unused |
 | **Card** with one corner Shape | No | Unused |
@@ -36,7 +36,7 @@ Goal: make the site more engaging by using more of the PCU Design System's graph
 5. **`Tag.tsx`**: a midnight-gradient category label, with an `outline` variant for dark cards.
 6. **`Sign.tsx`**: a midnight panel with a pill right end and the flat amber `shadow-sign` offset.
 7. **`GeoCover.tsx`**: the filled-geometry composition from the DS Cover (midnight slab, blue block, amber quarter, cerise disc, teal block, three half rings). It replaces the photo on pages that don't have one.
-8. **Glows**: add `.pcu-glow--cerise/aqua/amber` to `globals.css` (multiply blend at 0.55) for light sections.
+8. **Glows**: add `.petra-glow--cerise/aqua/amber` to `globals.css` (multiply blend at 0.55) for light sections.
 9. **Fonts**: copy `LibreBaskerville-Variable.woff2` and `-Italic.woff2` from the DS. Add a `font-serif` token. Use one display face per page.
 
 ## 3. Where each piece goes
