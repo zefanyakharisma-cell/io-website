@@ -29,6 +29,7 @@ export default async function ContactPage({ params }: PageProps) {
   return (
     <>
       <PageHero
+        size="compact"
         image={media.mobility["international-day"]}
         eyebrow={tr(contact.office, locale)}
         title={en ? "Contact Us" : "Hubungi Kami"}

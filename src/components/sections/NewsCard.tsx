@@ -6,6 +6,7 @@ import { Photo } from "@/components/brand/Photo";
 import { Shape } from "@/components/brand/Shape";
 import { Tag } from "@/components/brand/Tag";
 import { cn } from "@/lib/utils";
+import { ui } from "@/lib/dictionary";
 
 /** One corner shape per card, its colour following the category. */
 const cornerColor: Record<NewsPost["category"], string> = {
@@ -13,13 +14,18 @@ const cornerColor: Record<NewsPost["category"], string> = {
   Partnership: "text-teal",
   Research: "text-cerise",
   Events: "text-blue",
+  Opportunities: "text-amber",
 };
 
 export function NewsCard({ post, locale, featured, compact }: { post: NewsPost; locale: Locale; featured?: boolean; compact?: boolean }) {
+  // Events show when they happen, opportunities their deadline, everything else the publish date.
+  const shownDate = post.kind === "upcoming" ? post.eventDate : post.kind === "opportunity" ? post.deadline : post.datePending ? undefined : post.date;
+  const prefix = post.kind === "opportunity" ? `${tr(ui.deadline, locale)}: ` : "";
   const meta = (
     <span className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
       <Tag outline={featured}>{tr(categoryLabels[post.category], locale)}</Tag>
-      {!post.datePending && <time dateTime={post.date}>{formatDate(post.date, locale)}</time>}
+      {post.sample && <span className="rounded-full border border-current px-2 py-0.5 font-semibold uppercase tracking-wide opacity-80" title={tr(ui.sampleNote, locale)}>{tr(ui.sample, locale)}</span>}
+      {shownDate && <time dateTime={shownDate}>{prefix}{formatDate(shownDate, locale)}{post.eventEnd ? ` – ${formatDate(post.eventEnd, locale)}` : ""}</time>}
     </span>
   );
 

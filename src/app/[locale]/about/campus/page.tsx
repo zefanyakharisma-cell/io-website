@@ -12,6 +12,7 @@ import { SectionHeading } from "@/components/brand/SectionHeading";
 import { Reveal } from "@/components/brand/Reveal";
 import { Gallery } from "@/components/ui/gallery";
 import { PhotoCredits } from "@/components/sections/PhotoCredit";
+import { CampusMap } from "@/components/sections/CampusMap";
 
 export const generateStaticParams = localeParams;
 
@@ -41,15 +42,33 @@ export default async function CampusPage({ params }: PageProps) {
 
       <Section tone="dark" cinematic bgImage={media.campus["building-yellow"]} orbs labelledBy="zoom">
         <SectionHeading id="zoom" eyebrow={en ? "Zoom in" : "Perbesar"} title={en ? "Indonesia → East Java → Surabaya" : "Indonesia → Jawa Timur → Surabaya"} lead={tr(campus.city, locale)} />
-        <ol className="mt-12 grid gap-4 md:grid-cols-3">
+        <div className="mt-12">
+          <CampusMap
+            pois={campus.pois.map((p) => ({ ...p, name: tr(p.name, locale), body: tr(p.body, locale) }))}
+            steps={[
+              { label: "Indonesia", center: [-2.5, 117.5], zoom: 4 },
+              { label: en ? "East Java" : "Jawa Timur", center: [-7.65, 112.7], zoom: 8 },
+              { label: "Surabaya", center: [-7.3, 112.755], zoom: 12 },
+              { label: en ? "Campus" : "Kampus", center: [campus.pois[0].lat, campus.pois[0].lng], zoom: 16 },
+            ]}
+            labels={{
+              load: en ? "Load interactive map" : "Muat peta interaktif",
+              note: en ? "The map loads tiles from OpenStreetMap only after you click." : "Peta memuat data dari OpenStreetMap hanya setelah Anda klik.",
+              directions: en ? "Directions" : "Petunjuk arah",
+              steps: en ? "Zoom to" : "Perbesar ke",
+              legend: { campus: en ? "Campus" : "Kampus", transport: en ? "Getting here" : "Transportasi", city: en ? "City" : "Kota", trip: en ? "Trips" : "Wisata" },
+            }}
+          />
+        </div>
+        <ol className="mt-6 grid grid-cols-3 gap-3 md:gap-4">
           {campus.maps.map((m, i) => (
             <li key={m.image.src}>
-              <Reveal delay={i * 0.12} className="glass h-full rounded-lg p-5">
-                <p className="flex items-center gap-3">
-                  <span className="grid size-8 place-items-center rounded-full bg-amber font-bold text-midnight">{i + 1}</span>
-                  <span className="text-lg font-bold">{tr(m.label, locale)}</span>
+              <Reveal delay={i * 0.12} className="glass h-full rounded-lg p-3">
+                <p className="flex items-center gap-2 text-sm font-bold">
+                  <span className="grid size-6 shrink-0 place-items-center rounded-full bg-amber text-xs text-midnight">{i + 1}</span>
+                  <span className="truncate">{tr(m.label, locale)}</span>
                 </p>
-                <div className="mt-4 grid aspect-[4/3] place-items-center overflow-hidden rounded-md bg-white/95 p-3">
+                <div className="mt-3 grid aspect-[4/3] place-items-center overflow-hidden rounded-md bg-white/95 p-2">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={m.image.src} alt={m.image.alt} className="max-h-full w-auto object-contain" loading="lazy" />
                 </div>

@@ -7,21 +7,31 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Globe, Menu, X, ArrowRight } from "lucide-react";
-import { directNav, navigation } from "@/content/navigation";
+import { ChevronDown, Globe, Menu, X, ArrowRight, Search } from "lucide-react";
+import { directNav, navigation, newsNav } from "@/content/navigation";
 import { ui } from "@/lib/dictionary";
 import { href, tr, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/brand/Logo";
 import { useReducedMotionSafe } from "@/lib/use-reduced-motion";
+import type { SearchItem } from "@/lib/search-index";
+import { newsTabs } from "@/components/sections/NewsTabs";
+import { SearchDialog } from "./SearchDialog";
 
-export function SiteHeader({ locale }: { locale: Locale }) {
+export function SiteHeader({ locale, index }: { locale: Locale; index: SearchItem[] }) {
   const pathname = usePathname() ?? "/";
   const reduce = useReducedMotionSafe();
   const [open, setOpen] = useState<number | null>(null);
   const [mobile, setMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [search, setSearch] = useState<{ open: boolean; q: string }>({ open: false, q: "" });
+  const [expanded, setExpanded] = useState<number | null>(null);
+  const openSearch = (q = "") => {
+    setOpen(null);
+    setMobile(false);
+    setSearch({ open: true, q });
+  };
 
   const rest = pathname.replace(/^\/(en|id)(?=\/|$)/, "");
   const otherLocale: Locale = locale === "en" ? "id" : "en";
@@ -39,6 +49,21 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     setMobile(false);
   }, [pathname]);
 
+  // Ctrl/Cmd+K anywhere, or "/" when not typing, opens search.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const typing = (e.target as HTMLElement | null)?.closest("input, textarea, select, [contenteditable]");
+      if ((e.key.toLowerCase() === "k" && (e.metaKey || e.ctrlKey)) || (e.key === "/" && !typing)) {
+        e.preventDefault();
+        setOpen(null);
+        setMobile(false);
+        setSearch({ open: true, q: "" });
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -53,6 +78,11 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   useEffect(() => {
     document.body.style.overflow = mobile ? "hidden" : "";
   }, [mobile]);
+
+  // In the drawer, the section holding the current page starts open.
+  useEffect(() => {
+    if (mobile) setExpanded(navigation.findIndex((g) => rest.startsWith(`/${g.path.split("/")[1]}`)));
+  }, [mobile, rest]);
 
   const isActive = (path: string) => {
     const section = path.split("/")[1];
@@ -129,7 +159,17 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <button
+              type="button"
+              onClick={() => openSearch()}
+              className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-smoke/90 hover:bg-white/10 hover:text-white"
+              aria-label={`${tr(ui.search, locale)} (Ctrl+K)`}
+              aria-haspopup="dialog"
+            >
+              <Search className="size-4" aria-hidden />
+              <kbd className="hidden rounded border border-white/25 px-1.5 py-0.5 font-sans text-[11px] text-smoke/80 2xl:inline">⌘K</kbd>
+            </button>
             <Link
               href={switchHref}
               hrefLang={otherLocale}
@@ -176,6 +216,8 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         </AnimatePresence>
       </header>
 
+      <SearchDialog index={index} locale={locale} open={search.open} initialQuery={search.q} onClose={() => setSearch({ open: false, q: "" })} />
+
       {/* Mobile drawer */}
       <AnimatePresence>
         {mobile && (
@@ -184,38 +226,85 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={reduce ? undefined : { opacity: 0 }}
-            className="glass-strong fixed inset-0 z-40 overflow-y-auto px-5 pb-10 pt-24 xl:hidden"
+            className="fixed inset-0 z-40 overflow-y-auto bg-midnight-deep/[0.97] px-5 pb-10 pt-24 backdrop-blur-xl xl:hidden"
             onClick={closeOnLink}
           >
-            <nav aria-label="Mobile">
-              <ul className="space-y-6">
-                {navigation.map((group) => (
-                  <li key={group.path}>
-                    <p className="eyebrow mb-2 text-amber">{tr(group.label, locale)}</p>
-                    <ul className="space-y-1">
-                      {group.links.map((l) => (
-                        <li key={l.path}>
-                          <Link href={href(locale, l.path)} className="flex items-center justify-between rounded-md px-3 py-2.5 text-lg font-semibold text-white hover:bg-white/10">
-                            {tr(l.label, locale)}
-                            <ArrowRight className="size-4 text-smoke/60" aria-hidden />
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
-                {directNav.map((d) => (
-                  <li key={d.path}>
-                    <Link href={href(locale, d.path)} className="flex items-center justify-between rounded-md px-3 py-2.5 text-lg font-semibold text-white hover:bg-white/10">
-                      {tr(d.label, locale)}
-                      <ArrowRight className="size-4 text-smoke/60" aria-hidden />
-                    </Link>
-                  </li>
-                ))}
+            <nav aria-label="Mobile" className="pb-24">
+              <button
+                type="button"
+                onClick={() => openSearch()}
+                className="mb-6 flex w-full items-center gap-3 rounded-full border border-white/20 bg-white/10 px-4 py-3 text-left text-smoke/85"
+              >
+                <Search className="size-5" aria-hidden />
+                {tr(ui.searchPlaceholder, locale)}
+              </button>
+              <ul className="divide-y divide-white/10">
+                {navigation.map((group, gi) => {
+                  const isOpen = expanded === gi;
+                  return (
+                    <li key={group.path}>
+                      <button
+                        type="button"
+                        aria-expanded={isOpen}
+                        aria-controls={`m-group-${gi}`}
+                        onClick={() => setExpanded(isOpen ? null : gi)}
+                        className={cn("flex w-full items-center justify-between py-4 text-left text-xl font-bold", isActive(group.path) ? "text-amber" : "text-white")}
+                      >
+                        {tr(group.label, locale)}
+                        <ChevronDown className={cn("size-5 transition-transform", isOpen && "rotate-180")} aria-hidden />
+                      </button>
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.ul
+                            id={`m-group-${gi}`}
+                            initial={reduce ? false : { height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={reduce ? undefined : { height: 0, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="space-y-1 overflow-hidden pb-4"
+                          >
+                            <li>
+                              <Link href={href(locale, group.path)} className="flex items-center justify-between rounded-md px-3 py-2 font-semibold text-amber hover:bg-white/10">
+                                {tr(group.blurb, locale)}
+                                <ArrowRight className="size-4 shrink-0" aria-hidden />
+                              </Link>
+                            </li>
+                            {group.links.map((l) => (
+                              <li key={l.path}>
+                                <Link href={href(locale, l.path)} aria-current={rest.replace(/\/$/, "") === l.path ? "page" : undefined} className="block rounded-md px-3 py-2 hover:bg-white/10">
+                                  <span className="block font-semibold text-white">{tr(l.label, locale)}</span>
+                                  <span className="block text-sm text-smoke/70">{tr(l.description, locale)}</span>
+                                </Link>
+                              </li>
+                            ))}
+                          </motion.ul>
+                        )}
+                      </AnimatePresence>
+                    </li>
+                  );
+                })}
+                <li className="py-4">
+                  <Link href={href(locale, newsNav.path)} className={cn("flex items-center justify-between text-xl font-bold", isActive(newsNav.path) ? "text-amber" : "text-white")}>
+                    {tr(newsNav.label, locale)}
+                    <ArrowRight className="size-5 text-smoke/60" aria-hidden />
+                  </Link>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {newsTabs.slice(1).map((t) => (
+                      <li key={t.key}>
+                        <Link href={href(locale, t.path)} className="block rounded-full border border-white/20 px-3 py-1.5 text-sm font-semibold text-smoke hover:bg-white/10">{tr(t.label, locale)}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
               </ul>
-              <Link href={href(locale, "/contact")} className="btn btn-amber mt-8 w-full justify-center">
-                {tr(ui.connect, locale)}
-              </Link>
+              <div className="fixed inset-x-0 bottom-0 flex gap-3 border-t border-white/10 bg-midnight-deep px-5 py-4">
+                <Link href={href(locale, "/contact")} className="btn btn-amber flex-1 justify-center">
+                  {tr(ui.connect, locale)}
+                </Link>
+                <Link href={switchHref} hrefLang={otherLocale} className="btn btn-glass shrink-0" aria-label={tr(ui.language, locale)}>
+                  <Globe className="size-4" aria-hidden /> {tr(ui.languageShort, locale)}
+                </Link>
+              </div>
             </nav>
           </motion.div>
         )}
