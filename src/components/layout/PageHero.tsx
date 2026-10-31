@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { VideoSlot } from "@/components/brand/VideoSlot";
 import type { PhotoSource } from "@/components/brand/Photo";
 import { Ring } from "@/components/brand/Ring";
@@ -15,6 +16,7 @@ export function PageHero({
   lead,
   crumbs,
   children,
+  size = "full",
 }: {
   image: PhotoSource;
   video?: { mp4: string; webm?: string };
@@ -23,9 +25,11 @@ export function PageHero({
   lead?: string;
   crumbs: { label: string; href?: string }[];
   children?: React.ReactNode;
+  /** "full" fills the screen like the home hero; "compact" for article-style pages. */
+  size?: "full" | "compact";
 }) {
   return (
-    <header className="relative isolate flex min-h-[78vh] items-end overflow-hidden pb-14 pt-36 md:min-h-[72vh]">
+    <header className={cn("relative isolate flex w-full items-end overflow-hidden pt-36", size === "full" ? "min-h-[100svh] pb-24" : "min-h-[78vh] pb-14 md:min-h-[72vh]")}>
       {/* Photo-only heroes drift slowly; a video keeps its own layer so its pause button stays on top. */}
       {video ? (
         <VideoSlot poster={image} src={video} priority />
@@ -57,6 +61,12 @@ export function PageHero({
           {children}
         </div>
       </SceneExit>
+      {size === "full" && (
+        <a href="#after-hero" className="absolute bottom-6 left-1/2 z-10 grid size-11 -translate-x-1/2 place-items-center rounded-full border border-white/30 text-white/85 transition-colors hover:bg-white/10 hover:text-white motion-safe:animate-bounce" aria-label="Scroll down">
+          <ChevronDown className="size-5" aria-hidden />
+        </a>
+      )}
+      <span id="after-hero" className="absolute bottom-0 scroll-mt-20" aria-hidden />
     </header>
   );
 }

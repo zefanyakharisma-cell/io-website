@@ -4,9 +4,9 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 /** Category filter over server-rendered news cards. Each child carries its category key. */
-export function NewsList({ categories, allLabel, items }: { categories: { key: string; label: string }[]; allLabel: string; items: { key: string; category: string; node: React.ReactNode }[] }) {
+export function NewsList({ categories, allLabel, items, universal }: { categories: { key: string; label: string }[]; allLabel: string; items: { key: string; category: string; node: React.ReactNode }[]; /** Items with this key show under every filter. */ universal?: string }) {
   const [active, setActive] = useState<string | null>(null);
-  const shown = items.filter((i) => !active || i.category === active);
+  const shown = items.filter((i) => !active || i.category === active || (universal && i.category === universal));
   const chip = (on: boolean) => cn("rounded-full border px-4 py-2 text-sm font-semibold transition-colors", on ? "border-midnight bg-midnight text-white" : "border-midnight/15 bg-white text-midnight hover:border-midnight/40");
   return (
     <>

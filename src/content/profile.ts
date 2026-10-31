@@ -91,6 +91,15 @@ export const campus = {
     { image: media.brand["map-eastjava"], label: { en: "East Java", id: "Jawa Timur" } },
     { image: media.brand["map-surabaya"], label: { en: "Surabaya", id: "Surabaya" } },
   ] satisfies { image: { src: string; alt: string }; label: L }[],
+  /** Points on the interactive campus map. Coordinates from OpenStreetMap (Nominatim), checked Oct 2026. */
+  pois: [
+    { id: "campus", kind: "campus", lat: -7.33947, lng: 112.73756, name: { en: "Petra Christian University", id: "Universitas Kristen Petra" }, body: { en: "Main campus, Siwalankerto 121–131. The International Office is on campus.", id: "Kampus utama, Siwalankerto 121–131. Kantor Urusan Internasional ada di kampus." } },
+    { id: "airport", kind: "transport", lat: -7.38071, lng: 112.78549, name: { en: "Juanda International Airport (SUB)", id: "Bandara Internasional Juanda (SUB)" }, body: { en: "About 25 minutes by car. Petramates can meet you at arrivals.", id: "Sekitar 25 menit dengan mobil. Petramate bisa menjemput Anda di kedatangan." } },
+    { id: "gubeng", kind: "transport", lat: -7.26531, lng: 112.75264, name: { en: "Gubeng railway station", id: "Stasiun Gubeng" }, body: { en: "Trains to Malang, Banyuwangi (for Bali), Yogyakarta and Jakarta.", id: "Kereta ke Malang, Banyuwangi (ke Bali), Yogyakarta dan Jakarta." } },
+    { id: "tunjungan", kind: "city", lat: -7.26239, lng: 112.73901, name: { en: "Tunjungan Plaza", id: "Tunjungan Plaza" }, body: { en: "The city's best-known shopping centre, on historic Jalan Tunjungan.", id: "Pusat perbelanjaan paling terkenal di kota, di Jalan Tunjungan yang bersejarah." } },
+    { id: "pahlawan", kind: "city", lat: -7.24586, lng: 112.73782, name: { en: "Heroes Monument (Tugu Pahlawan)", id: "Tugu Pahlawan" }, body: { en: "Surabaya's landmark, remembering the Battle of Surabaya of 10 November 1945.", id: "Ikon Surabaya, mengenang Pertempuran Surabaya 10 November 1945." } },
+    { id: "bromo", kind: "trip", lat: -7.94207, lng: 112.95298, name: { en: "Mount Bromo", id: "Gunung Bromo" }, body: { en: "Sunrise over the volcano — a favourite weekend trip for exchange students.", id: "Matahari terbit di atas gunung api — perjalanan akhir pekan favorit mahasiswa pertukaran." } },
+  ] satisfies { id: string; kind: "campus" | "transport" | "city" | "trip"; lat: number; lng: number; name: L; body: L }[],
 };
 
 /** Petra history — wikipediaPetra source for 1951–1964, the deck for recent milestones. */
