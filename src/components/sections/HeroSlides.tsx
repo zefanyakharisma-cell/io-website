@@ -24,7 +24,7 @@ export function HeroSlides({ slides, labels }: { slides: Slide[]; labels: { paus
   const s = slides[i];
   return (
     <>
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="fade-bottom absolute inset-0 overflow-hidden">
         <AnimatePresence initial={false}>
           <motion.div
             key={s.image.src}

@@ -14,7 +14,8 @@ import { Reveal } from "@/components/brand/Reveal";
 export function CtaBand({ locale, image, title, body }: { locale: Locale; image: PhotoSource; title: string; body: string }) {
   const en = locale === "en";
   return (
-    <section className="relative isolate overflow-hidden bg-white py-20 text-midnight md:py-28">
+    <section data-tone="white" className="relative isolate overflow-hidden py-20 text-midnight md:py-28">
+      <div aria-hidden className="section-ground bg-white" />
       <PatternBlock corner="tr" />
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 md:grid-cols-[1fr_1.1fr] lg:gap-16 lg:px-8">
         <Reveal className="relative md:order-2">

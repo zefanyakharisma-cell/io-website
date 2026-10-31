@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import "../globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { OrbBackground } from "@/components/brand/OrbBackground";
 import { isLocale, localeParams, type Locale } from "@/lib/i18n";
 import { buildSearchIndex } from "@/lib/search-index";
 
@@ -47,6 +48,8 @@ export default async function LocaleLayout({ children, params }: { children: Rea
     <html lang={locale}>
       <body className="min-h-screen">
         <noscript dangerouslySetInnerHTML={{ __html: `<style>${noScriptStyles}</style>` }} />
+        {/* One continuous midnight canvas behind every dark section, so they join without seams. */}
+        <OrbBackground variant="quiet" className="fixed" />
         <SiteHeader locale={locale as Locale} index={buildSearchIndex()} />
         <main id="main">{children}</main>
         <SiteFooter locale={locale as Locale} />

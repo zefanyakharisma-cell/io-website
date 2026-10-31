@@ -29,17 +29,17 @@ export function PageHero({
   size?: "full" | "compact";
 }) {
   return (
-    <header className={cn("relative isolate flex w-full items-end overflow-hidden pt-36", size === "full" ? "min-h-[100svh] pb-24" : "min-h-[78vh] pb-14 md:min-h-[72vh]")}>
+    <header data-tone="dark" className={cn("relative isolate flex w-full items-end overflow-hidden pt-36", size === "full" ? "min-h-[100svh] pb-24" : "min-h-[78vh] pb-14 md:min-h-[72vh]")}>
       {/* Photo-only heroes drift slowly; a video keeps its own layer so its pause button stays on top. */}
       {video ? (
-        <VideoSlot poster={image} src={video} priority />
+        <VideoSlot poster={image} src={video} priority mediaClassName="fade-bottom" />
       ) : (
-        <Parallax className="absolute inset-0 overflow-hidden" amount={6}>
+        <Parallax className="fade-bottom absolute inset-0 overflow-hidden" amount={6}>
           <VideoSlot poster={image} priority />
         </Parallax>
       )}
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-midnight-deep via-midnight-deep/55 to-midnight-deep/30" />
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-midnight-deep/70 via-transparent to-transparent" />
+      <div aria-hidden className="fade-bottom absolute inset-0 bg-gradient-to-t from-midnight-deep via-midnight-deep/55 to-midnight-deep/30" />
+      <div aria-hidden className="fade-bottom absolute inset-0 bg-gradient-to-r from-midnight-deep/70 via-transparent to-transparent" />
       <Ring shape="ring-n" className="-right-24 bottom-[-6rem] w-[28rem] text-amber/90 md:w-[34rem]" />
       <Shape kind="circle" className="right-[22%] top-[34%] w-12 text-cerise md:hidden lg:block" />
       <Shape kind="ring-u-line" className="right-[8%] top-[24%] w-52 text-teal md:hidden lg:block" />

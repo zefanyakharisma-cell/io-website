@@ -16,6 +16,7 @@ export function VideoSlot({
   poster,
   src,
   className,
+  mediaClassName,
   priority,
   pauseLabel = "Pause background video",
   playLabel = "Play background video",
@@ -23,6 +24,8 @@ export function VideoSlot({
   poster: PhotoSource;
   src?: { mp4: string; webm?: string };
   className?: string;
+  /** Applied to the poster and video layers only (not the pause button), e.g. an edge fade. */
+  mediaClassName?: string;
   priority?: boolean;
   pauseLabel?: string;
   playLabel?: string;
@@ -49,14 +52,14 @@ export function VideoSlot({
 
   return (
     <div className={cn("absolute inset-0 overflow-hidden", className)}>
-      <div className={cn("absolute inset-0", !src && !reduce && "animate-kenburns")}>
+      <div className={cn("absolute inset-0", !src && !reduce && "animate-kenburns", mediaClassName)}>
         <Photo image={poster} priority={priority} sizes="100vw" alt="" />
       </div>
       {src && (
         <>
           <video
             ref={ref}
-            className="absolute inset-0 h-full w-full object-cover"
+            className={cn("absolute inset-0 h-full w-full object-cover", mediaClassName)}
             muted
             loop
             playsInline

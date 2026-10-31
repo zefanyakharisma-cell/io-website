@@ -154,6 +154,7 @@ Slots: `homeHero` (home), `inboundHero` (Mobility → Inbound), `ipdmReel` (Regu
 - **Shapes:** the half ring (`<Ring>`) bleeds off edges and is never placed behind text. It is hidden on small screens.
 - **Pattern:** only as a `<PatternBlock>` bleeding off one section corner, away from the heading. No thin pattern strips.
 - **Last section before the footer is always white** (`<Section tone="white">` or `<CtaBand>`), so the footer's double-arch edge reads.
+- **Seamless grounds:** dark sections have no background of their own. One fixed midnight canvas (`OrbBackground` in the locale layout) runs behind them all, so dark and deep sections join without a line. Where dark meets light, the light ground fades in from the canvas inside the section's padding (`.section-ground` and `data-tone` in `globals.css`). Use `<Section tone>` rather than painting a section background by hand.
 - **Dark sections** may carry a photo tint (`<Section bgImage={…}>`): grayscale at 14%, text always on glass cards.
 - **Motion:** sections enter with a scroll-linked scene effect (`<Section cinematic>`), page heroes drift and lift away (`Parallax`, `SceneExit`). All of it is static under reduced motion and without JavaScript.
 - **Graphic elements** (`src/components/brand/`):

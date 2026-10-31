@@ -74,13 +74,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <>
       {/* 1 · Hero */}
-      <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden pb-28 pt-32 text-white md:items-center md:pb-0">
+      <section data-tone="dark" className="relative isolate flex min-h-[100svh] items-end overflow-hidden pb-28 pt-32 text-white md:items-center md:pb-0">
         <HeroSlides
           slides={heroSlides.map((h) => ({ image: h.image, caption: tr(h.caption, locale), quote: h.quote && tr(h.quote, locale), name: h.name, program: h.program }))}
           labels={{ pause: en ? "Pause slideshow" : "Jeda tayangan", play: en ? "Play slideshow" : "Putar tayangan", slide: en ? "Show photo" : "Tampilkan foto" }}
         />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-midnight-deep/95 via-midnight-deep/60 to-midnight-deep/20" />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-midnight-deep via-transparent to-midnight-deep/40" />
+        <div aria-hidden className="fade-bottom absolute inset-0 bg-gradient-to-r from-midnight-deep/95 via-midnight-deep/60 to-midnight-deep/20" />
+        <div aria-hidden className="fade-bottom absolute inset-0 bg-gradient-to-t from-midnight-deep via-transparent to-midnight-deep/40" />
         <Ring shape="ring-u" className="-right-24 -top-10 w-[22rem] text-amber md:-right-32 md:w-[34rem]" />
         <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:px-8">
           <Reveal>

@@ -286,6 +286,43 @@
   .btn-midnight { background: var(--color-midnight); color: var(--color-white); }
   .btn-midnight:hover { background: #245484; }
 
+  /* ---- Seamless section grounds -------------------------------------------
+     Dark sections are transparent over the fixed page canvas (OrbBackground in
+     the locale layout). Light, white and deep sections paint their ground on a
+     .section-ground layer whose top/bottom edge can fade into that canvas.
+     The fade stays inside the section's own vertical padding, so text never
+     sits on it. */
+  [data-tone] { --fade-top: 0px; --fade-bottom: 0px; --fade: 4.5rem; }
+  @media (min-width: 768px) { [data-tone] { --fade: 6.25rem; } }
+  .section-ground { position: absolute; inset: 0; z-index: -10; }
+  /* Decor (glows, rings) fades out at the same edges instead of being cut off. */
+  .section-decor { position: absolute; inset: 0; }
+  .section-ground, .section-decor {
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 var(--fade-top), #000 calc(100% - var(--fade-bottom)), transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 var(--fade-top), #000 calc(100% - var(--fade-bottom)), transparent 100%);
+  }
+  /* Light or white next to dark: fade the ground in from the canvas. */
+  :is([data-tone="dark"], [data-tone="deep"]) + :is([data-tone="light"], [data-tone="white"]) { --fade-top: var(--fade); }
+  :is([data-tone="light"], [data-tone="white"]):has(+ :is([data-tone="dark"], [data-tone="deep"])) { --fade-bottom: var(--fade); }
+  /* Dark next to light: only its decor uses these. */
+  :is([data-tone="light"], [data-tone="white"]) + [data-tone="dark"] { --fade-top: var(--fade); }
+  [data-tone="dark"]:has(+ :is([data-tone="light"], [data-tone="white"])) { --fade-bottom: var(--fade); }
+  /* Deep scrim always dissolves into the canvas, except where two deep sections meet. */
+  [data-tone="deep"] { --fade-top: var(--fade); --fade-bottom: var(--fade); }
+  [data-tone="deep"] + [data-tone="deep"] { --fade-top: 0px; }
+  [data-tone="deep"]:has(+ [data-tone="deep"]) { --fade-bottom: 0px; }
+
+  /* Edge fades for photo textures, orb layers and hero media. */
+  .fade-edges {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 6rem, #000 calc(100% - 6rem), transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 6rem, #000 calc(100% - 6rem), transparent);
+  }
+  .fade-bottom {
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 10rem), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 10rem), transparent);
+  }
+
   .md-body h2 { font-size: 1.5rem; margin: 2rem 0 0.75rem; color: var(--color-midnight); }
   .md-body h3 { font-size: 1.2rem; margin: 1.5rem 0 0.5rem; color: var(--color-midnight); }
   .md-body p { margin: 0 0 1rem; max-width: 68ch; }

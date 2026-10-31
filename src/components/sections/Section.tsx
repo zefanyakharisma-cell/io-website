@@ -4,10 +4,15 @@ import { Cinematic, Parallax } from "@/components/brand/Cinematic";
 import { Photo, type PhotoSource } from "@/components/brand/Photo";
 
 /**
- * Page section in one of the Midnight Glass grounds: "dark" (midnight canvas
- * with orbs, white text), "deep" (flat midnight), "light" (smoke ground for
- * dense content) or "white" (the last section before the footer, so the
- * footer's double-arch edge reads).
+ * Page section in one of the Midnight Glass grounds: "dark" (the shared page
+ * canvas shows through, white text), "deep" (a darker midnight scrim over that
+ * canvas), "light" (smoke ground for dense content) or "white" (the last
+ * section before the footer, so the footer's double-arch edge reads).
+ *
+ * Dark sections have no background of their own: the one fixed canvas in the
+ * locale layout runs behind all of them, so they join without seams. Where a
+ * dark section meets a light one, the light ground fades in (see
+ * `.section-ground` in globals.css).
  */
 export function Section({
   children,
@@ -42,23 +47,24 @@ export function Section({
     <section
       id={id}
       aria-labelledby={labelledBy}
+      data-tone={tone}
       className={cn(
         "relative isolate overflow-hidden py-20 md:py-28",
-        tone === "light" && "bg-smoke text-midnight",
-        tone === "white" && "bg-white text-midnight",
-        tone === "deep" && "bg-midnight-deep text-white on-dark",
-        tone === "dark" && "text-white on-dark",
+        dark ? "text-white on-dark" : "text-midnight",
         className,
       )}
     >
-      {tone === "dark" && <OrbBackground variant={orbs ? "default" : "quiet"} />}
+      {tone === "light" && <div aria-hidden className="section-ground bg-smoke" />}
+      {tone === "white" && <div aria-hidden className="section-ground bg-white" />}
+      {tone === "deep" && <div aria-hidden className="section-ground bg-midnight-deep/70" />}
+      {tone === "dark" && orbs && <OrbBackground className="fade-edges bg-none" />}
       {dark && bgImage && (
-        <Parallax className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <Parallax className="fade-edges pointer-events-none absolute inset-0 -z-10 overflow-hidden">
           <Photo image={bgImage} sizes="100vw" alt="" className="opacity-[0.14] mix-blend-luminosity grayscale" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(19,50,86,0.65)_85%)]" />
         </Parallax>
       )}
-      {decor}
+      {decor && <div aria-hidden className="section-decor">{decor}</div>}
       {cinematic ? <Cinematic className={inner}>{children}</Cinematic> : <div className={inner}>{children}</div>}
     </section>
   );
