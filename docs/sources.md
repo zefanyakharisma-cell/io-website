@@ -55,7 +55,7 @@ These links were found by web search on 28 Oct 2026. They could not be opened fr
 | 71 national partner logos (`public/images/logos/national/`) | KUI's Google Drive folder "partner logos" (shared by the International Office, May 2026) |
 | GHAS | https://ghas.hakka.nycu.edu.tw/images/logo-wide.svg |
 | P2A | https://passagetoasean.org/assets/icons/P2A_new_logo.png |
-| ACUCA, BKPTKI, NUNI | No logo yet; initials shown. ACUCA's old domain acuca.net now serves an unrelated gambling site, so the link is removed until KUI confirms the current one. |
+| ACUCA, BKPTKI, NUNI | No logo yet; initials shown. ACUCA's old domain acuca.net now serves an unrelated gambling site; the site links to https://acuca.asia/ instead (confirmed by KUI). |
 
 ## Photos
 
