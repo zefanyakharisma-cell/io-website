@@ -49,7 +49,7 @@ export default async function NewsPostPage({ params }: Props) {
           <Link href={href(locale, "/news")} className="btn btn-midnight"><ArrowLeft className="size-4" aria-hidden /> {en ? "All news" : "Semua berita"}</Link>
         </div>
       </article>
-      <Section tone="light" labelledBy="more">
+      <Section tone="white" labelledBy="more">
         <h2 id="more" className="text-3xl text-midnight">{en ? "More news" : "Berita lainnya"}</h2>
         <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {more.map((p) => <li key={p.slug}><NewsCard post={p} locale={locale} /></li>)}

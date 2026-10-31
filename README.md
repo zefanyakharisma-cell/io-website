@@ -108,6 +108,12 @@ Add `datePending: true` to hide a date that is not confirmed yet.
 2. Run `node scripts/build-media.mjs <folder-with-the-source-images>`.
 3. The photo is then available as `media.<group>.<name>`.
 
+### Add national partner logos
+
+1. Put one logo file per partner (PNG, JPG or SVG) in a folder, each named after the partner, e.g. `PT Tokopedia.png`.
+2. Run `node scripts/build-partner-logos.mjs <folder>`. It trims, resizes and writes WebP files to `public/images/logos/national/` and regenerates `src/content/national-partners.generated.ts`.
+3. If the partner is already in `domesticPartners` under another name, add it to `sameAs` in `src/content/partners.ts` so the two merge.
+
 ### Add photos from Wikimedia Commons
 
 1. Add an entry to `scripts/web-photos.json` in the form `"name": ["File:Exact Commons title.jpg", "Alt text"]`.
@@ -146,6 +152,10 @@ Slots: `homeHero` (home), `inboundHero` (Mobility → Inbound), `ipdmReel` (Regu
 - **Type:** Inter (with `cv11` and `ss01`). Headings are bold at -0.02em. Bebas Neue is for big numerals. Section labels use the eyebrow and tagline styles.
 - **Glass:** `.glass`, `.glass-strong` and `.glass-light` in `src/app/globals.css`. Each always has a base tint so text stays at 4.5:1 or better. It falls back to a solid panel without `backdrop-filter`, or when the visitor prefers reduced transparency.
 - **Shapes:** the half ring (`<Ring>`) bleeds off edges and is never placed behind text. It is hidden on small screens.
+- **Pattern:** only as a `<PatternBlock>` bleeding off one section corner, away from the heading. No thin pattern strips.
+- **Last section before the footer is always white** (`<Section tone="white">` or `<CtaBand>`), so the footer's double-arch edge reads.
+- **Dark sections** may carry a photo tint (`<Section bgImage={…}>`): grayscale at 14%, text always on glass cards.
+- **Motion:** sections enter with a scroll-linked scene effect (`<Section cinematic>`), page heroes drift and lift away (`Parallax`, `SceneExit`). All of it is static under reduced motion and without JavaScript.
 - **Graphic elements** (`src/components/brand/`):
   - `<Shape>`: filled geometry and rings.
   - `<GeoCluster>`: the cover composition.

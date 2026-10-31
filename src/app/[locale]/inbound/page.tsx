@@ -75,7 +75,7 @@ export default async function InboundPage({ params }: PageProps) {
         </ul>
       </Section>
 
-      <Section tone="dark" orbs labelledBy="glance">
+      <Section tone="dark" cinematic bgImage={media.mobility["asp-group"]} orbs labelledBy="glance">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:items-center">
           <SectionHeading id="glance" eyebrow={en ? "Inbound · 2025–2026" : "Inbound · 2025–2026"} title={en ? `Students from ${mobilityGlance.inbound.countries} countries, ${mobilityGlance.inbound.continents} continents` : `Mahasiswa dari ${mobilityGlance.inbound.countries} negara, ${mobilityGlance.inbound.continents} benua`} lead={en ? `Including ${mobilityGlance.inbound.named.join(", ")}.` : `Termasuk ${mobilityGlance.inbound.named.join(", ")}.`} />
           <WorldMap origin={surabaya} size={MAP_SIZE} points={countryPoints(mobilityGlance.inbound.named, "#45b8bc")} dashed />
@@ -117,7 +117,7 @@ export default async function InboundPage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section tone="dark" labelledBy="visa-steps">
+      <Section tone="dark" cinematic bgImage={media.campus["students-corridor"]} labelledBy="visa-steps">
         <SectionHeading id="visa-steps" eyebrow={en ? "Visa & stay permit" : "Visa & izin tinggal"} title={en ? "From acceptance letter to ITAS" : "Dari surat penerimaan hingga ITAS"} lead={en ? "The usual sequence for a student stay in Indonesia. KUI guides you through each step." : "Urutan umum untuk tinggal sebagai mahasiswa di Indonesia. KUI mendampingi setiap langkah."} />
         <div className="mt-10">
           <ProcessFlow steps={visa.steps.map((s, i) => ({ icon: visaIcons[i], title: tr(s.title, locale), body: tr(s.body, locale) }))} />
@@ -133,7 +133,7 @@ export default async function InboundPage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section tone="deep" labelledBy="costs">
+      <Section tone="deep" cinematic bgImage={media.campus.landmark} labelledBy="costs">
         <SectionHeading id="costs" eyebrow={en ? "Related costs" : "Biaya terkait"} title={en ? "What to budget for" : "Yang perlu dianggarkan"} lead={en ? "KUI will confirm current amounts for your programme." : "KUI akan mengonfirmasi jumlah terkini untuk program Anda."} />
         <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {relatedCosts.map((c) => (
@@ -152,7 +152,7 @@ export default async function InboundPage({ params }: PageProps) {
         <ToConfirm locale={locale} className="mt-5 text-emerald" />
       </Section>
 
-      <Section tone="dark" orbs labelledBy="testimonies">
+      <Section tone="dark" cinematic bgImage={media.campus["green-walkway"]} orbs labelledBy="testimonies">
         <SectionHeading id="testimonies" eyebrow={en ? "Video testimonies" : "Video testimoni"} title={en ? "Hear it from past exchange students" : "Dengar langsung dari alumni pertukaran"} />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {testimonialVideos.inbound.map((id, i) => (
@@ -161,12 +161,12 @@ export default async function InboundPage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section tone="deep" labelledBy="inquiries">
+      <Section tone="white" labelledBy="inquiries">
         <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-center">
-          <SectionHeading id="inquiries" eyebrow={en ? "Inquiries" : "Pertanyaan"} title={en ? "Questions about studying at Petra?" : "Ada pertanyaan tentang belajar di Petra?"} lead={en ? "Chat with us on WhatsApp (chat only, no calls) or send an email." : "Hubungi kami via WhatsApp (khusus chat, tanpa telepon) atau email."} />
+          <SectionHeading id="inquiries" tone="light" eyebrow={en ? "Inquiries" : "Pertanyaan"} title={en ? "Questions about studying at Petra?" : "Ada pertanyaan tentang belajar di Petra?"} lead={en ? "Chat with us on WhatsApp (chat only, no calls) or send an email." : "Hubungi kami via WhatsApp (khusus chat, tanpa telepon) atau email."} />
           <div className="flex flex-col gap-3">
             <WhatsAppButton digits={whatsapp.inbound.digits} display={whatsapp.inbound.display} locale={locale} className="justify-center" />
-            <a href="mailto:head-mobility@petra.ac.id" className="btn btn-glass justify-center"><Mail className="size-4" aria-hidden /> head-mobility@petra.ac.id</a>
+            <a href="mailto:head-mobility@petra.ac.id" className="btn justify-center border border-midnight/25 text-midnight hover:bg-midnight/5"><Mail className="size-4" aria-hidden /> head-mobility@petra.ac.id</a>
           </div>
         </div>
       </Section>

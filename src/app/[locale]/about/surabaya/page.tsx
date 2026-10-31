@@ -35,7 +35,7 @@ export default async function SurabayaPage({ params }: PageProps) {
         lead={tr(surabaya.intro, locale)}
         crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(aboutNav.label, locale), href: href(locale, "/about") }, { label: en ? "Beautiful Surabaya" : "Surabaya yang Indah" }]}
       />
-      <Section tone="dark" orbs labelledBy="nearby">
+      <Section tone="dark" cinematic bgImage={media.campus["building-yellow"]} orbs labelledBy="nearby">
         <SectionHeading id="nearby" eyebrow={en ? "Close to it all" : "Dekat ke mana saja"} title={en ? "Your base for exploring Indonesia" : "Titik awal menjelajah Indonesia"} />
         <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {surabaya.nearby.map((n) => (
@@ -52,7 +52,7 @@ export default async function SurabayaPage({ params }: PageProps) {
         </div>
         <SourceNote ids={["malangToll", "bromoTransfer", "naturalEarth"]} locale={locale} tone="dark" />
       </Section>
-      <Section tone="deep" labelledBy="landmarks">
+      <Section tone="deep" cinematic bgImage={media.mobility["cultural-night"]} labelledBy="landmarks">
         <SectionHeading id="landmarks" eyebrow={en ? "City of Heroes" : "Kota Pahlawan"} title={en ? "Landmarks to see" : "Ikon kota yang wajib dikunjungi"} />
         <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {surabaya.landmarks.map((l, i) => (
@@ -91,14 +91,14 @@ export default async function SurabayaPage({ params }: PageProps) {
           ))}
         </ul>
       </Section>
-      <Section tone="deep" labelledBy="explore">
-        <SectionHeading id="explore" eyebrow="Sparkling Surabaya" title={en ? "Plan your visits" : "Rencanakan kunjungan Anda"} lead={en ? "Official tourism channels of the Surabaya City Government." : "Kanal pariwisata resmi Pemerintah Kota Surabaya."} />
+      <Section tone="white" labelledBy="explore">
+        <SectionHeading id="explore" tone="light" eyebrow="Sparkling Surabaya" title={en ? "Plan your visits" : "Rencanakan kunjungan Anda"} lead={en ? "Official tourism channels of the Surabaya City Government." : "Kanal pariwisata resmi Pemerintah Kota Surabaya."} />
         <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {links.surabaya.map((l) => (
             <li key={l.url}>
-              <a href={l.url} target="_blank" rel="noreferrer" className="glass flex h-full items-start justify-between gap-3 rounded-lg p-5 font-semibold hover:bg-white/10">
+              <a href={l.url} target="_blank" rel="noreferrer" className="glass-light flex h-full items-start justify-between gap-3 rounded-lg p-5 font-semibold hover:bg-smoke">
                 {l.label}
-                <ArrowUpRight className="size-4 shrink-0 text-amber" aria-hidden />
+                <ArrowUpRight className="size-4 shrink-0 text-emerald" aria-hidden />
                 <span className="sr-only">{en ? "(opens in a new tab)" : "(membuka tab baru)"}</span>
               </a>
             </li>

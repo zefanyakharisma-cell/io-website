@@ -57,7 +57,7 @@ export default async function DarmasiswaPage({ params }: PageProps) {
           </div>
         </div>
       </Section>
-      <Section tone="dark" orbs labelledBy="timeline">
+      <Section tone="dark" cinematic bgImage={media.mobility["international-day"]} orbs labelledBy="timeline">
         <SectionHeading id="timeline" eyebrow={en ? "2026/27 cycle" : "Periode 2026/27"} title={en ? "Key dates" : "Tanggal penting"} lead={en ? "From the official 2026/27 guidelines. Dates change each year — always check the portal." : "Dari panduan resmi 2026/27. Tanggal berubah setiap tahun — selalu cek portal."} />
         <Timeline className="mt-10" items={darmasiswa.timeline.map((t) => ({ when: tr(t.when, locale), title: tr(t.title, locale), body: t.body ? tr(t.body, locale) : undefined }))} />
         <SourceNote ids={["darmasiswaGuidelines"]} locale={locale} tone="dark" className="mt-6" />

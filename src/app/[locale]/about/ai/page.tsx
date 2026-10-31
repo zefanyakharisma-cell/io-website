@@ -31,7 +31,7 @@ export default async function AiPage({ params }: PageProps) {
         crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(aboutNav.label, locale), href: href(locale, "/about") }, { label: "AI@PCU & Drone Academy" }]}
       />
 
-      <Section tone="dark" orbs labelledBy="timeline">
+      <Section tone="dark" cinematic bgImage={media.campus.landmark} orbs labelledBy="timeline">
         <SectionHeading id="timeline" eyebrow={en ? "On the record since 2023" : "Tercatat sejak 2023"} title={en ? "A degree built on three years of practice" : "Program studi yang dibangun dari tiga tahun praktik"} />
         <ol className="relative mt-12 grid gap-4 md:grid-cols-3">
           <span aria-hidden className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-amber via-teal to-cerise md:block" />
@@ -76,7 +76,7 @@ export default async function AiPage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section tone="deep" labelledBy="across">
+      <Section tone="deep" cinematic bgImage={media.campus["green-walkway"]} labelledBy="across">
         <SectionHeading id="across" eyebrow={en ? "A layer across disciplines, not a department" : "Lapisan lintas disiplin, bukan satu departemen"} title={en ? "Where AI turns up" : "Di mana AI hadir"} />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {aiAcross.map((a, i) => (
@@ -103,7 +103,7 @@ export default async function AiPage({ params }: PageProps) {
         </ul>
       </Section>
 
-      <Section tone="dark" orbs labelledBy="drone" id="drone-academy">
+      <Section tone="dark" cinematic bgImage={media.mobility["exchange-group"]} orbs labelledBy="drone" id="drone-academy">
         <Ring shape="ring-n" className="-left-24 -bottom-24 w-[30rem] text-cerise/70" />
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr]">
           <div>

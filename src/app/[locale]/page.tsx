@@ -15,7 +15,6 @@ import { Ring } from "@/components/brand/Ring";
 import { Shape } from "@/components/brand/Shape";
 import { IconBadge, type BadgeTone } from "@/components/brand/IconBadge";
 import { Tag } from "@/components/brand/Tag";
-import { PatternStrip } from "@/components/brand/PatternStrip";
 import { Reveal } from "@/components/brand/Reveal";
 import { Photo } from "@/components/brand/Photo";
 import { SectionHeading } from "@/components/brand/SectionHeading";
@@ -138,7 +137,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* 2 · Numbers */}
-      <Section tone="dark" labelledBy="numbers-title" className="!py-16 md:!py-20" decor={<PatternStrip className="absolute inset-x-0 top-0 h-4" />}>
+      <Section tone="dark" cinematic bgImage={media.campus.landmark} labelledBy="numbers-title" className="!py-16 md:!py-20">
         <h2 id="numbers-title" className="sr-only">{en ? "Petra in numbers" : "Petra dalam angka"}</h2>
         <StatGrid stats={homeStats} locale={locale} />
         <p className="mt-6 text-sm text-smoke/80">{tr(rankingNote, locale)}</p>
@@ -209,7 +208,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </Section>
 
       {/* 4 · Signature programmes */}
-      <Section tone="deep" labelledBy="sig-title">
+      <Section tone="deep" cinematic bgImage={media.campus["green-walkway"]} labelledBy="sig-title">
         <Ring shape="ring-u-line" className="-right-32 top-10 w-[32rem] text-teal/50" />
         <SectionHeading id="sig-title" eyebrow={en ? "Signature programmes" : "Program unggulan"} title={en ? "Short stays, lasting stories" : "Singgah sebentar, cerita selamanya"} lead={en ? "From village outreach since 1996 to a summer consortium across four countries." : "Dari pengabdian desa sejak 1996 hingga konsorsium musim panas di empat negara."} />
         <ul tabIndex={0} aria-label={en ? "Signature programmes" : "Program unggulan"} className="-mx-4 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:thin] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
@@ -253,7 +252,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </Section>
 
       {/* 5 · Global network */}
-      <Section tone="dark" orbs labelledBy="network-title">
+      <Section tone="dark" cinematic bgImage={media.mobility["exchange-group"]} orbs labelledBy="network-title">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:items-center">
           <div>
             <SectionHeading id="network-title" eyebrow={en ? "International partnership" : "Kemitraan internasional"} kicker={en ? "Embrace the global stage." : "Rangkul panggung global."} title={en ? "Go beyond borders." : "Melampaui batas."} />
@@ -307,7 +306,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </Section>
 
       {/* 7 · Life mosaic */}
-      <Section tone="deep" labelledBy="life-title">
+      <Section tone="deep" cinematic bgImage={media.campus["building-yellow"]} labelledBy="life-title">
         <div className="grid gap-8 lg:grid-cols-[1fr_2fr]">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <SectionHeading id="life-title" eyebrow={en ? "In pictures" : "Dalam gambar"} title={en ? "Petranesians in global perspective" : "Petranesian dalam perspektif global"} lead={en ? "Service-learning across eastern Indonesia, international programme life in Surabaya, and Petranesians on exchange worldwide." : "Service-learning di Indonesia timur, kehidupan program internasional di Surabaya, dan Petranesian yang berkuliah di seluruh dunia."} />

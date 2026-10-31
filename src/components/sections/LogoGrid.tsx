@@ -31,7 +31,7 @@ export function LogoTile({ item: it, newTab, className }: { item: LogoItem; newT
           <span aria-hidden className="grid size-16 place-items-center rounded-full bg-midnight font-display text-xl leading-none tracking-wide text-amber">{monogram(it.name)}</span>
         )}
       </span>
-      <span className="mt-3 block text-sm font-semibold leading-snug text-midnight">{it.name}</span>
+      <span className="mt-3 line-clamp-3 text-sm font-semibold leading-snug text-midnight" title={it.name}>{it.name}</span>
       {it.meta && <span className="mt-0.5 block text-xs text-ink-secondary">{it.meta}</span>}
       {it.badge && <span className="mt-2 inline-block rounded-full bg-midnight/5 px-2 py-0.5 text-[11px] font-semibold text-midnight">{it.badge}</span>}
       {it.href && <ArrowUpRight aria-hidden className="absolute right-3 top-3 size-4 text-ink-secondary transition group-hover:text-midnight" />}

@@ -47,7 +47,7 @@ export const partnersNav: NavGroup = {
   blurb: { en: "430+ national and 180+ international partners, and five consortia.", id: "430+ mitra nasional dan 180+ mitra internasional, serta lima konsorsium." },
   links: [
     { label: { en: "Domestic partners", id: "Mitra dalam negeri" }, path: "/partners#domestic", description: { en: "Industry, government, institutions", id: "Industri, pemerintah, institusi" } },
-    { label: { en: "International partners", id: "Mitra internasional" }, path: "/partners#international", description: { en: "By continent", id: "Per benua" } },
+    { label: { en: "International partners", id: "Mitra internasional" }, path: "/partners#international", description: { en: "Universities in 33 countries", id: "Universitas di 33 negara" } },
     { label: { en: "Consortiums", id: "Konsorsium" }, path: "/partners#consortiums", description: { en: "ACUCA, GHAS, P2A, BKPTKI, NUNI", id: "ACUCA, GHAS, P2A, BKPTKI, NUNI" } },
     { label: { en: "Work with us", id: "Bekerja sama" }, path: "/partners#collaborate", description: { en: "8 ways to collaborate", id: "8 cara berkolaborasi" } },
   ],

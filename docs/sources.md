@@ -48,6 +48,15 @@ These links were found by web search on 28 Oct 2026. They could not be opened fr
   - Maspion Group: cooperation from Aug 2022 (Jawa Pos).
   - Universitas Sumatera Utara: partner in the Erasmus+ project.
 
+## Partner logos
+
+| Logos | Source |
+|---|---|
+| 71 national partner logos (`public/images/logos/national/`) | KUI's Google Drive folder "partner logos" (shared by the International Office, May 2026) |
+| GHAS | https://ghas.hakka.nycu.edu.tw/images/logo-wide.svg |
+| P2A | https://passagetoasean.org/assets/icons/P2A_new_logo.png |
+| ACUCA, BKPTKI, NUNI | No logo yet; initials shown. ACUCA's old domain acuca.net now serves an unrelated gambling site, so the link is removed until KUI confirms the current one. |
+
 ## Photos
 
 Fetched from Wikimedia Commons on 28 Oct 2026 by `scripts/fetch-web-photos.mjs`, which reads `scripts/web-photos.json`. The script rejects any file whose licence isn't CC0, public domain, CC BY or CC BY-SA. Each photo is credited on its page with author, licence and a link to the file page.

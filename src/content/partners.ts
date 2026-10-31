@@ -1,5 +1,6 @@
 import type { L } from "@/lib/i18n";
 import { media } from "./media.generated";
+import { nationalPartners, type NationalKind } from "./national-partners.generated";
 
 type Img = { src: string; alt: string };
 
@@ -134,22 +135,22 @@ export const qsNote: L = {
 
 /** Consortiums named in KUI's spec (WEBSITE IO, Sheet1 → Partners). Websites from web search (docs/sources.md). */
 export const consortia = [
-  { name: "ACUCA", full: "Association of Christian Universities and Colleges in Asia", website: "http://acuca.net/", body: { en: "A network of Christian universities across Asia, linking Petra to sister institutions for exchange and leadership programmes.", id: "Jejaring universitas Kristen se-Asia yang menghubungkan Petra dengan institusi saudara untuk pertukaran dan program kepemimpinan." } },
-  { name: "GHAS", full: "Consortium of Global Hakka Studies", website: "https://ghas.hakka.nycu.edu.tw/", body: { en: "An international platform for Hakka and ethnic studies, founded in 2019 at National Chiao Tung University with Petra among its overseas founding members.", id: "Platform internasional untuk studi Hakka dan etnis, didirikan 2019 di National Chiao Tung University dengan Petra sebagai salah satu anggota pendiri luar negeri." } },
-  { name: "P2A", full: "Passage to ASEAN", website: "https://www.passagetoasean.org/", body: { en: "A network of universities across ASEAN, founded in 2012, for student and staff exchange and cooperation among members.", id: "Jejaring universitas se-ASEAN, berdiri 2012, untuk pertukaran mahasiswa dan staf serta kerja sama antaranggota." }, confirm: true },
-  { name: "BKPTKI", full: "Badan Kerja Sama Perguruan Tinggi Kristen di Indonesia", website: "", body: { en: "The association of Indonesian Christian higher-education institutions, including a local student exchange among members.", id: "Badan kerja sama perguruan tinggi Kristen di Indonesia, termasuk pertukaran mahasiswa antaranggota." } },
-  { name: "NUNI", full: "Nationwide University Network in Indonesia", website: "https://global.binus.ac.id/nationwide-university-network-in-indonesia-nuni/", body: { en: "A network of Indonesian universities founded in 2011 for student and faculty mobility and joint research, including a credit-earning exchange semester.", id: "Jejaring universitas Indonesia yang berdiri 2011 untuk mobilitas mahasiswa dan dosen serta riset bersama, termasuk semester pertukaran berkredit." } },
-] satisfies { name: string; full: string; website: string; body: L; confirm?: boolean }[];
+  { name: "ACUCA", full: "Association of Christian Universities and Colleges in Asia", website: "", logo: null, body: { en: "A network of Christian universities across Asia, linking Petra to sister institutions for exchange and leadership programmes.", id: "Jejaring universitas Kristen se-Asia yang menghubungkan Petra dengan institusi saudara untuk pertukaran dan program kepemimpinan." } },
+  { name: "GHAS", full: "Consortium of Global Hakka Studies", website: "https://ghas.hakka.nycu.edu.tw/", logo: { src: "/images/logos/consortia/ghas.webp", alt: "GHAS logo" }, body: { en: "An international platform for Hakka and ethnic studies, founded in 2019 at National Chiao Tung University with Petra among its overseas founding members.", id: "Platform internasional untuk studi Hakka dan etnis, didirikan 2019 di National Chiao Tung University dengan Petra sebagai salah satu anggota pendiri luar negeri." } },
+  { name: "P2A", full: "Passage to ASEAN", website: "https://passagetoasean.org/", logo: { src: "/images/logos/consortia/p2a.webp", alt: "Passage to ASEAN logo" }, body: { en: "A network of universities across ASEAN, founded in 2012, for student and staff exchange and cooperation among members.", id: "Jejaring universitas se-ASEAN, berdiri 2012, untuk pertukaran mahasiswa dan staf serta kerja sama antaranggota." }, confirm: true },
+  { name: "BKPTKI", full: "Badan Kerja Sama Perguruan Tinggi Kristen di Indonesia", website: "", logo: null, body: { en: "The association of Indonesian Christian higher-education institutions, including a local student exchange among members.", id: "Badan kerja sama perguruan tinggi Kristen di Indonesia, termasuk pertukaran mahasiswa antaranggota." } },
+  { name: "NUNI", full: "Nationwide University Network in Indonesia", website: "https://global.binus.ac.id/nationwide-university-network-in-indonesia-nuni/", logo: null, body: { en: "A network of Indonesian universities founded in 2011 for student and faculty mobility and joint research, including a credit-earning exchange semester.", id: "Jejaring universitas Indonesia yang berdiri 2011 untuk mobilitas mahasiswa dan dosen serta riset bersama, termasuk semester pertukaran berkredit." } },
+] satisfies { name: string; full: string; website: string; logo: Img | null; body: L; confirm?: boolean }[];
 
 /**
  * A selection of named domestic partners: industry names from the deck plus
  * publicly announced agreements (sources in docs/sources.md).
  */
-export const domesticPartners: { name: string; kind: "University" | "Industry" | "Government & banking"; website: string }[] = [
+export const domesticPartners: { name: string; kind: NationalKind; website: string }[] = [
   { name: "Universitas Gadjah Mada", kind: "University", website: "https://ugm.ac.id/" },
   { name: "Monash University, Indonesia", kind: "University", website: "https://www.monash.edu/indonesia" },
   { name: "Universitas Sumatera Utara", kind: "University", website: "https://www.usu.ac.id/" },
-  { name: "Bank Jatim", kind: "Government & banking", website: "https://www.bankjatim.co.id/" },
+  { name: "Bank Jatim", kind: "Government", website: "https://www.bankjatim.co.id/" },
   { name: "BCA", kind: "Industry", website: "https://www.bca.co.id/" },
   { name: "Astra", kind: "Industry", website: "https://www.astra.co.id/" },
   { name: "Maspion Group", kind: "Industry", website: "https://www.maspion.com/" },
@@ -160,6 +161,29 @@ export const domesticPartners: { name: string; kind: "University" | "Industry" |
   { name: "SPIL", kind: "Industry", website: "https://www.spil.co.id/" },
   { name: "Kempinski", kind: "Industry", website: "https://www.kempinski.com/" },
 ];
+
+/** Logo files whose partner is already in domesticPartners under a shorter name. */
+const sameAs: Record<string, string> = {
+  "Yayasan Monash University Indonesia": "Monash University, Indonesia",
+  "PT Bank Pembangunan Daerah Jawa Timur Tbk (Bank Jatim)": "Bank Jatim",
+  "Maspion Group": "Maspion Group",
+  "Wings Group Surabaya": "Wings",
+  "PT. Graha Alam Lestari (The Apurva Kempinski Bali)": "Kempinski",
+};
+
+/**
+ * Every named national partner: the logos supplied by KUI
+ * (scripts/build-partner-logos.mjs) plus the publicly announced partners above.
+ */
+export const nationalList: { name: string; kind: NationalKind; website?: string; logo?: Img }[] = [
+  ...nationalPartners.map((n) => {
+    const d = domesticPartners.find((x) => x.name === sameAs[n.name]);
+    return { name: d?.name ?? n.name, kind: d?.kind ?? n.kind, website: d?.website, logo: n.logo };
+  }),
+  ...domesticPartners
+    .filter((d) => !Object.values(sameAs).includes(d.name))
+    .map((d) => ({ ...d, logo: d.name === "Universitas Sumatera Utara" ? media.logos.usu : undefined })),
+].sort((a, b) => a.name.replace(/^PT\.? /, "").localeCompare(b.name.replace(/^PT\.? /, "")));
 
 export type Continent = "Asia" | "Europe" | "Oceania" | "Americas" | "Africa";
 export const continentLabels: Record<Continent, L> = {

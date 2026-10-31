@@ -9,7 +9,7 @@ import { Logo } from "@/components/brand/Logo";
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   return (
-    <footer className="bg-smoke">
+    <footer className="bg-white">
       {/* ArchBand: the design system's double-arch top edge, one per page, at the bottom. */}
       <div className="pcu-arch-band isolate overflow-hidden text-smoke">
         <div className="relative mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">

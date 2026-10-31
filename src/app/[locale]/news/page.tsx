@@ -30,7 +30,7 @@ export default async function NewsPage({ params }: PageProps) {
         title={en ? "Events at the International Office" : "Kegiatan Kantor Urusan Internasional"}
         crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: en ? "News" : "Berita" }]}
       />
-      <Section tone="dark" orbs labelledBy="upcoming">
+      <Section tone="dark" cinematic bgImage={media.mobility["cultural-night"]} orbs labelledBy="upcoming">
         <SectionHeading id="upcoming" eyebrow={en ? "Upcoming events" : "Acara mendatang"} title={en ? "Coming up at KUI" : "Segera di KUI"} />
         {upcoming.length ? (
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -43,7 +43,7 @@ export default async function NewsPage({ params }: PageProps) {
           </div>
         )}
       </Section>
-      <Section tone="light" labelledBy="past">
+      <Section tone="white" labelledBy="past">
         <SectionHeading id="past" tone="light" eyebrow={en ? "Past events" : "Acara sebelumnya"} title={en ? "Visits, programmes and stories" : "Kunjungan, program dan cerita"} />
         {featured && <div className="mt-10"><NewsCard post={featured} locale={locale} featured /></div>}
         <div className="mt-12">

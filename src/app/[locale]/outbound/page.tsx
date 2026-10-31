@@ -90,7 +90,7 @@ export default async function OutboundPage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section tone="dark" orbs labelledBy="global-title" id="global" className="scroll-mt-20">
+      <Section tone="dark" cinematic bgImage={media.campus["gazebo-study"]} orbs labelledBy="global-title" id="global" className="scroll-mt-20">
         <Ring shape="ring-u-line" className="-right-40 top-0 w-[34rem] text-amber/40" />
         <SectionHeading id="global-title" eyebrow={en ? "Global outbound" : "Outbound global"} title={en ? "Five ways to go abroad" : "Lima cara ke luar negeri"} lead={petraOnly} />
         <ul className="mt-10 grid gap-4 md:grid-cols-2">
@@ -127,7 +127,7 @@ export default async function OutboundPage({ params }: PageProps) {
         </ul>
       </Section>
 
-      <Section tone="deep" labelledBy="degrees" id="degree-partners">
+      <Section tone="deep" cinematic bgImage={media.mobility["international-day"]} labelledBy="degrees" id="degree-partners">
         <SectionHeading id="degrees" eyebrow={en ? "Joint & double degree" : "Gelar bersama & ganda"} title={en ? "Study at Petra, graduate twice" : "Kuliah di Petra, lulus dua kali"} lead={en ? `${jointDegrees.length} partners and ${trackCount} programmes. Years at Petra + years abroad.` : `${jointDegrees.length} mitra dan ${trackCount} program. Tahun di Petra + tahun di luar negeri.`} />
         <div className="mt-6 flex flex-wrap gap-4 text-sm text-smoke">
           {["FTI", "SBM", "FHIK", "FTSP"].map((f) => (
@@ -186,7 +186,7 @@ export default async function OutboundPage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section tone="deep" labelledBy="online-title" id="online" className="scroll-mt-20">
+      <Section tone="deep" cinematic bgImage={media.campus["tree-planting"]} labelledBy="online-title" id="online" className="scroll-mt-20">
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <SectionHeading id="online-title" eyebrow={en ? "Online outbound" : "Outbound daring"} title="ICE Institute" lead={tr(ice.intro, locale)} />
@@ -215,7 +215,7 @@ export default async function OutboundPage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section tone="dark" orbs labelledBy="where">
+      <Section tone="dark" cinematic bgImage={media.mobility["asp-group"]} orbs labelledBy="where">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:items-center">
           <div>
             <SectionHeading id="where" eyebrow={en ? "Outbound · 2025–2026" : "Outbound · 2025–2026"} title={en ? "Where Petranesians go" : "Ke mana Petranesian pergi"} lead={en ? `Destinations include ${mobilityGlance.outbound.named.join(", ")}.` : `Tujuan antara lain ${mobilityGlance.outbound.named.join(", ")}.`} />
@@ -225,7 +225,7 @@ export default async function OutboundPage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section tone="dark" labelledBy="testimonies">
+      <Section tone="dark" cinematic bgImage={media.campus["students-corridor"]} labelledBy="testimonies">
         <SectionHeading id="testimonies" eyebrow={en ? "Testimonies" : "Testimoni"} title={en ? "From NUNI, BKPTKI and IISMA students" : "Dari peserta NUNI, BKPTKI dan IISMA"} />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {testimonialVideos.outbound.map((id, i) => (
@@ -234,12 +234,12 @@ export default async function OutboundPage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section tone="deep" labelledBy="inquiries">
+      <Section tone="white" labelledBy="inquiries">
         <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-center">
-          <SectionHeading id="inquiries" eyebrow={en ? "Inquiries" : "Pertanyaan"} title={en ? "Outgoing student inquiries" : "Pertanyaan mahasiswa outbound"} lead={en ? "Chat with us on WhatsApp (chat only, no calls) or send an email." : "Hubungi kami via WhatsApp (khusus chat, tanpa telepon) atau email."} />
+          <SectionHeading id="inquiries" tone="light" eyebrow={en ? "Inquiries" : "Pertanyaan"} title={en ? "Outgoing student inquiries" : "Pertanyaan mahasiswa outbound"} lead={en ? "Chat with us on WhatsApp (chat only, no calls) or send an email." : "Hubungi kami via WhatsApp (khusus chat, tanpa telepon) atau email."} />
           <div className="flex flex-col gap-3">
             <WhatsAppButton digits={whatsapp.outbound.digits} display={whatsapp.outbound.display} locale={locale} className="justify-center" />
-            <a href="mailto:staff-mobility@petra.ac.id" className="btn btn-glass justify-center"><Mail className="size-4" aria-hidden /> staff-mobility@petra.ac.id</a>
+            <a href="mailto:staff-mobility@petra.ac.id" className="btn justify-center border border-midnight/25 text-midnight hover:bg-midnight/5"><Mail className="size-4" aria-hidden /> staff-mobility@petra.ac.id</a>
           </div>
         </div>
       </Section>

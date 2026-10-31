@@ -45,7 +45,7 @@ export default async function TailorMadePage({ params }: PageProps) {
           </div>
         </div>
       </Section>
-      <Section tone="deep" labelledBy="past">
+      <Section tone="deep" cinematic bgImage={media.campus["building-yellow"]} labelledBy="past">
         <SectionHeading id="past" eyebrow={en ? "Past programmes" : "Program sebelumnya"} title={en ? "Programmes we have hosted" : "Program yang pernah kami selenggarakan"} />
         <Gallery className="mt-10" items={tailorMade.gallery.map((g) => ({ ...g, caption: g.alt }))} openLabel={en ? "Open photo" : "Buka foto"} />
       </Section>
