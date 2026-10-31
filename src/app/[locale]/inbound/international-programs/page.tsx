@@ -49,7 +49,7 @@ export default async function InternationalProgramPage({ params }: PageProps) {
         </div>
       </PageHero>
 
-      <Section tone="dark" orbs labelledBy="why">
+      <Section tone="dark" cinematic bgImage={media.campus["tree-planting"]} orbs labelledBy="why">
         <h2 id="why" className="sr-only">{en ? "Why the international programme" : "Mengapa program internasional"}</h2>
         <ul className="grid gap-4 md:grid-cols-3">
           {features.map((f, i) => (

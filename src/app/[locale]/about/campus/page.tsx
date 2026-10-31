@@ -39,7 +39,7 @@ export default async function CampusPage({ params }: PageProps) {
         crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(aboutNav.label, locale), href: href(locale, "/about") }, { label: en ? "Where We Are" : "Lokasi Kami" }]}
       />
 
-      <Section tone="dark" orbs labelledBy="zoom">
+      <Section tone="dark" cinematic bgImage={media.campus["building-yellow"]} orbs labelledBy="zoom">
         <SectionHeading id="zoom" eyebrow={en ? "Zoom in" : "Perbesar"} title={en ? "Indonesia → East Java → Surabaya" : "Indonesia → Jawa Timur → Surabaya"} lead={tr(campus.city, locale)} />
         <ol className="mt-12 grid gap-4 md:grid-cols-3">
           {campus.maps.map((m, i) => (

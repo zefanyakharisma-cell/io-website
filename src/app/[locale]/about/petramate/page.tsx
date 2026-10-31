@@ -65,8 +65,8 @@ export default async function PetramatePage({ params }: PageProps) {
           </div>
         </div>
       </Section>
-      <Section tone="deep" labelledBy="moments">
-        <SectionHeading id="moments" eyebrow={en ? "Petramate moments" : "Momen Petramate"} title={en ? "Welcoming the world to Petra" : "Menyambut dunia di Petra"} />
+      <Section tone="white" labelledBy="moments">
+        <SectionHeading id="moments" tone="light" eyebrow={en ? "Petramate moments" : "Momen Petramate"} title={en ? "Welcoming the world to Petra" : "Menyambut dunia di Petra"} />
         <Gallery className="mt-10" items={petramate.images.map((g) => ({ ...g, caption: g.alt }))} columns="columns-2 md:columns-3" openLabel={en ? "Open photo" : "Buka foto"} />
       </Section>
     </>

@@ -36,7 +36,7 @@ export default async function ResearchPage({ params }: PageProps) {
         crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(aboutNav.label, locale), href: href(locale, "/about") }, { label: en ? "Research & Labs" : "Riset & Laboratorium" }]}
       />
 
-      <Section tone="dark" orbs labelledBy="output">
+      <Section tone="dark" cinematic bgImage={media.campus["students-corridor"]} orbs labelledBy="output">
         <SectionHeading id="output" eyebrow={en ? "Research & publications" : "Riset & publikasi"} title={en ? "Petra research in the world's top-quartile journals" : "Riset Petra di jurnal kuartil teratas dunia"} lead={en ? "Fifty-two articles in Scopus-indexed Q1–Q3 journals, each with a verified DOI and a Petra affiliation." : "Lima puluh dua artikel di jurnal Scopus Q1–Q3, masing-masing dengan DOI terverifikasi dan afiliasi Petra."} />
         <StatGrid stats={researchTotals} locale={locale} className="mt-10" />
         <div className="mt-6 grid gap-4 lg:grid-cols-3">
@@ -86,7 +86,7 @@ export default async function ResearchPage({ params }: PageProps) {
         </ul>
       </Section>
 
-      <Section tone="deep" labelledBy="centres">
+      <Section tone="deep" cinematic bgImage={media.campus.landmark} labelledBy="centres">
         <SectionHeading id="centres" eyebrow={en ? "Study centres" : "Pusat studi"} title={en ? "Four study centres, one research agenda" : "Empat pusat studi, satu agenda riset"} />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {studyCentres.map((c, i) => (
@@ -148,7 +148,7 @@ export default async function ResearchPage({ params }: PageProps) {
         </Section>
       ))}
 
-      <Section tone="deep" labelledBy="labs">
+      <Section tone="deep" cinematic bgImage={media.campus["green-walkway"]} labelledBy="labs">
         <SectionHeading id="labs" eyebrow={en ? "Inside the labs" : "Di dalam laboratorium"} title={en ? "65+ labs across 7 faculties" : "65+ laboratorium di 7 fakultas"} lead={en ? "Industry-standard practice space for every discipline — where students practise before they reach a clinic, a client or a construction site." : "Ruang praktik berstandar industri untuk setiap disiplin — tempat mahasiswa berlatih sebelum ke klinik, klien atau lokasi proyek."} />
         <div className="mt-12 space-y-16">
           {labTour.map((lab) => (
@@ -166,7 +166,7 @@ export default async function ResearchPage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section tone="dark" orbs labelledBy="jumbo">
+      <Section tone="dark" cinematic bgImage={media.mobility["exchange-group"]} orbs labelledBy="jumbo">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
           <div>
             <SectionHeading id="jumbo" eyebrow="IPDM · Digital Media Lab" title={tr(jumbo.title, locale)} lead={tr(jumbo.body, locale)} />

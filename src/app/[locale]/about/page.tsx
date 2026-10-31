@@ -40,13 +40,13 @@ export default async function AboutPage({ params }: PageProps) {
         crumbs={[{ label: en ? "Home" : "Beranda", href: href(locale) }, { label: tr(about.label, locale) }]}
       />
 
-      <Section tone="dark" labelledBy="numbers">
+      <Section tone="dark" cinematic bgImage={media.campus["gazebo-study"]} labelledBy="numbers">
         <SectionHeading id="numbers" eyebrow={en ? "Petra in numbers · 2025–2026" : "Petra dalam angka · 2025–2026"} title={en ? "Six decades of measurable impact" : "Enam dekade dampak yang terukur"} />
         <StatGrid stats={keyStats} locale={locale} className="mt-10" />
         <p className="mt-6 text-xs text-smoke/85">{en ? "Sources" : "Sumber"}: {tr(statsSource, locale)}</p>
       </Section>
 
-      <Section tone="deep" orbs labelledBy="history" decor={<Ring shape="ring-n-line" className="-right-24 top-8 w-[30rem] text-teal" />}>
+      <Section tone="deep" cinematic bgImage={media.mobility["international-day"]} orbs labelledBy="history" decor={<Ring shape="ring-n-line" className="-right-24 top-8 w-[30rem] text-teal" />}>
         <SectionHeading id="history" face="serif" eyebrow={en ? "Our story" : "Sejarah kami"} title={en ? "Seventy-five years of Petra education" : "Tujuh puluh lima tahun pendidikan Petra"} lead={en ? "From a Christian education foundation in 1951 to a QS-ranked university." : "Dari yayasan pendidikan Kristen pada 1951 hingga universitas berperingkat QS."} />
         <Timeline className="mt-10" items={history.map((h) => ({ when: h.when, title: tr(h.title, locale), body: tr(h.body, locale) }))} />
         <SourceNote ids={["wikipediaPetra"]} locale={locale} tone="dark" className="mt-6" />
@@ -87,7 +87,7 @@ export default async function AboutPage({ params }: PageProps) {
         </ul>
       </Section>
 
-      <Section tone="dark" orbs labelledBy="accreditation">
+      <Section tone="dark" cinematic bgImage={media.campus["tree-planting"]} orbs labelledBy="accreditation">
         <Ring shape="ring-n" className="-right-32 -top-24 w-[26rem] text-teal/60" />
         <SectionHeading id="accreditation" eyebrow={en ? "Accreditation" : "Akreditasi"} title={en ? "Benchmarked against the world" : "Bertolok ukur dunia"} lead={en ? "European, Washington and Canberra Accord standards — and every programme nationally “Excellent”." : "Standar Eropa, Washington Accord dan Canberra Accord — dan setiap program berstatus “Unggul” secara nasional."} />
         <ul className="mt-12 grid gap-4 md:grid-cols-3">
@@ -129,7 +129,7 @@ export default async function AboutPage({ params }: PageProps) {
         <p className="mt-6 text-sm text-ink-secondary">{en ? "International students are welcomed by our " : "Mahasiswa internasional disambut oleh "}<Link className="prose-link" href={href(locale, "/about/petramate")}>Petramate</Link>{en ? " team." : "."}</p>
       </Section>
 
-      <Section tone="deep" labelledBy="explore">
+      <Section tone="deep" cinematic bgImage={media.mobility["asp-group"]} labelledBy="explore">
         <SectionHeading id="explore" eyebrow={tagline} title={en ? "Explore Petra" : "Jelajahi Petra"} />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[

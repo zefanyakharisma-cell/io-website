@@ -64,7 +64,7 @@ export default async function ContactPage({ params }: PageProps) {
         </p>
       </Section>
 
-      <Section tone="dark" orbs labelledBy="team">
+      <Section tone="dark" cinematic bgImage={media.campus["gazebo-study"]} orbs labelledBy="team">
         <SectionHeading id="team" eyebrow={en ? "Members of KUI" : "Anggota KUI"} title={en ? "Persons in charge" : "Penanggung jawab"} />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {team.map((m) => (
@@ -86,7 +86,7 @@ export default async function ContactPage({ params }: PageProps) {
         {team.some((m) => !m.name) && <ToConfirm locale={locale} className="mt-6 text-amber" />}
       </Section>
 
-      <Section tone="light" labelledBy="inquiry-title" id="inquiry" className="scroll-mt-20">
+      <Section tone="white" labelledBy="inquiry-title" id="inquiry" className="scroll-mt-20">
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
           <div className="glass-light rounded-lg p-6 md:p-8">
             <SectionHeading id="inquiry-title" tone="light" eyebrow={en ? "Inquiry" : "Pertanyaan"} title={en ? "Send us a message" : "Kirim pesan"} />

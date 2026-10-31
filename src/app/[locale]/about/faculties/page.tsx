@@ -123,7 +123,7 @@ export default async function FacultiesPage({ params }: PageProps) {
         ))}
       </div>
 
-      <Section tone="dark" orbs>
+      <Section tone="dark" cinematic bgImage={media.mobility["cultural-night"]} orbs>
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
           <SectionHeading eyebrow={en ? "Taught in English" : "Berbahasa Inggris"} title={en ? "Eight programmes, fully in English" : "Delapan program, sepenuhnya berbahasa Inggris"} />
           <Link href={href(locale, "/inbound/international-programs")} className="btn btn-amber">{en ? "See the International Programs" : "Lihat Program Internasional"}</Link>

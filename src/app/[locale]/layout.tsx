@@ -16,7 +16,7 @@ const SITE_URL = "https://io.petra.ac.id";
  * Without JavaScript, scroll reveals would stay at opacity 0 and number tickers at 0.
  * Show the content as-is, and the tickers' screen-reader value in place of the animated one.
  */
-const noScriptStyles = `[data-reveal]{opacity:1!important;transform:none!important}
+const noScriptStyles = `[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}
 [data-ticker]>.sr-only{position:static!important;width:auto!important;height:auto!important;margin:0!important;padding:0!important;overflow:visible!important;clip:auto!important;clip-path:none!important;white-space:normal!important}
 [data-ticker]>[aria-hidden]{display:none!important}`;
 

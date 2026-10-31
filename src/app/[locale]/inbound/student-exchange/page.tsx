@@ -75,7 +75,7 @@ export default async function StudentExchangePage({ params }: PageProps) {
         </div>
       </Section>
 
-      <Section tone="dark" orbs labelledBy="courses">
+      <Section tone="dark" cinematic bgImage={media.mobility["exchange-group"]} orbs labelledBy="courses">
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-center">
           <SectionHeading id="courses" eyebrow={en ? "Courses offered" : "Mata kuliah"} title={en ? "Choose from courses taught in English" : "Pilih mata kuliah berbahasa Inggris"} lead={en ? "Download the list of courses offered in English this semester, then agree your study plan with your home university." : "Unduh daftar mata kuliah berbahasa Inggris semester ini, lalu sepakati rencana studi dengan universitas asal."} />
           <div className="flex flex-col gap-3">
