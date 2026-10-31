@@ -11,14 +11,14 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   return (
     <footer className="bg-white">
       {/* ArchBand: the design system's double-arch top edge, one per page, at the bottom. */}
-      <div className="pcu-arch-band isolate overflow-hidden text-smoke">
+      <div className="petra-arch-band isolate overflow-hidden text-smoke">
         <div className="relative mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-[1.3fr_2fr]">
             <div>
-              <div className="pcu-lockup text-white">
+              <div className="petra-lockup text-white">
                 <Logo height={56} className="h-14 w-auto" />
-                <span className="pcu-lockup__rule" aria-hidden />
-                <span className="pcu-lockup__dept">{locale === "en" ? "International Office" : "Kantor Urusan Internasional"}</span>
+                <span className="petra-lockup__rule" aria-hidden />
+                <span className="petra-lockup__dept">{locale === "en" ? "International Office" : "Kantor Urusan Internasional"}</span>
               </div>
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-smoke">{tr(ui.footerAbout, locale)}</p>
               <p className="mt-4 max-w-sm text-sm italic text-smoke/90">{tr(vision, locale)}</p>

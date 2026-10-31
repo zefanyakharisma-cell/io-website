@@ -13,5 +13,5 @@ const corners = {
  * place it in the corner away from the heading.
  */
 export function PatternBlock({ corner = "tr", className }: { corner?: keyof typeof corners; className?: string }) {
-  return <div aria-hidden className={cn("pcu-pattern pointer-events-none absolute hidden size-72 [background-size:120px_120px] md:block lg:size-96", corners[corner], className)} />;
+  return <div aria-hidden className={cn("petra-pattern pointer-events-none absolute hidden size-72 [background-size:120px_120px] md:block lg:size-96", corners[corner], className)} />;
 }

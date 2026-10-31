@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
  */
 export function Sign({ icon: Icon, building, room, arrow = "→", className }: { icon: LucideIcon; building: string; room: string; arrow?: string; className?: string }) {
   return (
-    <div className={cn("pcu-sign mr-4 mt-4", className)}>
+    <div className={cn("petra-sign mr-4 mt-4", className)}>
       <Icon className="size-9 shrink-0" strokeWidth={2.5} aria-hidden />
       <span className="min-w-0">
         <span className="eyebrow block text-amber">{building}</span>

@@ -4,7 +4,7 @@ import { media } from "./media.generated";
 /** Slides 57–60. */
 export const aiTimeline = [
   { year: "2023", body: { en: "AI enters teaching and campus operations", id: "AI masuk ke pengajaran dan operasional kampus" } },
-  { year: "2025", body: { en: "AI@PCU launched on 1 August", id: "AI@PCU diluncurkan pada 1 Agustus" } },
+  { year: "2025", body: { en: "AI@PETRA launched on 1 August", id: "AI@PETRA diluncurkan pada 1 Agustus" } },
   { year: "2026", body: { en: "First Artificial Intelligence degree intake, AY 2026/27", id: "Angkatan pertama program Artificial Intelligence, TA 2026/27" } },
 ] satisfies { year: string; body: L }[];
 

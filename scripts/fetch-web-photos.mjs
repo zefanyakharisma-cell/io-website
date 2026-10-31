@@ -9,7 +9,7 @@ import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
 const manifest = JSON.parse(fs.readFileSync(path.join(root, "scripts/web-photos.json"), "utf8"));
-const UA = "PCU-IO-website-build/1.0 (https://github.com/zefanyakharisma-cell/io-website)";
+const UA = "PETRA-IO-website-build/1.0 (https://github.com/zefanyakharisma-cell/io-website)";
 // Free licences only: anything else (fair use, non-free logos) stops the build.
 const FREE = /^(CC0|Public domain|PD[- ]|CC BY [0-9.]+|CC BY-SA [0-9.]+)/i;
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "web-photos-"));

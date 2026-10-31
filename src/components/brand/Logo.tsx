@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Approved white-wordmark logomaster (PCU Design System, Assets → Logos).
+ * Approved white-wordmark logomaster (PETRA Design System, Assets → Logos).
  * Only on midnight or black grounds; never below 96px wide; never recoloured.
  */
 export function Logo({ className, height = 44 }: { className?: string; height?: number }) {

@@ -46,7 +46,7 @@ export const studyCentres = [
   { name: { en: "Value Chain Studies", id: "Studi Rantai Nilai" }, body: { en: "Supply chains, ERP and green operations: the route industry uses to reach Petra.", id: "Rantai pasok, ERP dan operasi hijau: jalur industri menuju Petra." }, image: media.labs.automation },
   { name: { en: "Sustainability & Social Innovation", id: "Keberlanjutan & Inovasi Sosial" }, body: { en: "Sets the SDG agenda and runs the 40-hectare green campus.", id: "Menetapkan agenda SDG dan mengelola kampus hijau seluas 40 hektare." }, image: media.campus["tree-planting"] },
   { name: { en: "Chinese Indonesian Studies", id: "Studi Tionghoa Indonesia" }, body: { en: "Est. 2011: a special library collection and a summer-school strand.", id: "Berdiri 2011: koleksi perpustakaan khusus dan jalur summer school." }, image: media.research["chinese-studies"] },
-  { name: { en: "AI & Computational Modeling", id: "AI & Pemodelan Komputasi" }, body: { en: "The research engine under AI@PCU and the VR and CADE labs.", id: "Motor riset di balik AI@PCU serta lab VR dan CADE." }, image: media.faculty["vr-studio"] },
+  { name: { en: "AI & Computational Modeling", id: "AI & Pemodelan Komputasi" }, body: { en: "The research engine under AI@PETRA and the VR and CADE labs.", id: "Motor riset di balik AI@PETRA serta lab VR dan CADE." }, image: media.faculty["vr-studio"] },
 ] satisfies { name: L; body: L; image: Img }[];
 
 export type Story = {

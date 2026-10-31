@@ -1,6 +1,6 @@
 # Petra Christian University — International Office website
 
-The public website of the International Office (Kantor Urusan Internasional, KUI) of Petra Christian University, Surabaya. It is built from the deck *PETRA International Profile (General)* and styled with the **PCU Design System** plus a "Midnight Glass" glassmorphism layer.
+The public website of the International Office (Kantor Urusan Internasional, KUI) of Petra Christian University, Surabaya. It is built from the deck *PETRA International Profile (General)* and styled with the **PETRA Design System** plus a "Midnight Glass" glassmorphism layer.
 
 - **Audience:** partner institutions first, international students second.
 - **Languages:** English (`/en/`) and Bahasa Indonesia (`/id/`). The Indonesian copy still needs a KUI review.
@@ -40,7 +40,7 @@ src/content/         All site copy and data, typed and bilingual ({ en, id })
   mobility.ts        Exchange steps, ICOP/PSP/SPECTRA/ASP, joint degrees, gallery
   partners.ts        Network numbers, partner list, consortia, EU projects, 8 ways to collaborate
   research.ts        Q1 output, study centres, researcher stories, lab tour
-  ai.ts              AI@PCU and Petra Drone Academy
+  ai.ts              AI@PETRA and Petra Drone Academy
   contact.ts         Office details, inquiry topics
   links.ts           Every external link, WhatsApp numbers, testimonial video ids (fill these in)
   inbound.ts         Inbound programmes, requirements, visa, costs, dos & don'ts, tailor-made, Darmasiswa
@@ -52,7 +52,7 @@ src/content/         All site copy and data, typed and bilingual ({ en, id })
   media.generated.ts Generated from scripts/media-manifest.json — do not edit
 content/news/*.md    News posts (both languages in one file)
 src/components/      brand/ (Logo, Ring, Glass canvas, VideoSlot…), ui/ (21st.dev adaptations), sections/, layout/
-public/brand/        Logo, fonts and shapes copied from the PCU Design System
+public/brand/        Logo, fonts and shapes copied from the PETRA Design System
 public/images/       WebP photos extracted from the deck
 scripts/             build-media.mjs (deck photos → WebP), build-map.mjs (dotted world map)
 ```
@@ -145,7 +145,7 @@ homeHero: { mp4: "/video/home-hero.mp4", webm: "/video/home-hero.webm" },
 
 Slots: `homeHero` (home), `inboundHero` (Mobility → Inbound), `ipdmReel` (Regular International Program, IPDM spotlight) and `labsHero` (Research & Labs). Videos never autoplay for visitors who prefer reduced motion, and every video has a pause button.
 
-## Design rules (from the PCU Design System)
+## Design rules (from the PETRA Design System)
 
 - **Colour:** `midnight` leads. Text on midnight may be white, smoke, amber, yellow, teal, green, orange or purple. On light grounds it may be midnight, black, emerald or red. Blue and cerise text is allowed only at 24px and above.
 - **Gradients:** only `gradient-midnight`, `-aqua`, `-sunrise` and `-dusk`.

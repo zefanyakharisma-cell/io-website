@@ -5,7 +5,7 @@
 export const sources = {
   ioAbout: { title: "Petra International Office — About us", url: "https://io.petra.ac.id/page/about-us" },
   petramate2425: { title: "Petramate open recruitment 24/25 (Petra digital repository)", url: "https://dewey.petra.ac.id/catalog/digital/view/60085" },
-  pcuFactSheet: { title: "PCU Fact Sheet, Non-Degree Program Fall 2026 (hosted by HKBU)", url: "https://intl.hkbu.edu.hk/f/partner/564/Fact_Sheet_Non_Degree_Program_PCU_Fall2026.pdf" },
+  petraFactSheet: { title: "PETRA Fact Sheet, Non-Degree Program Fall 2026 (hosted by HKBU)", url: "https://intl.hkbu.edu.hk/f/partner/564/Fact_Sheet_Non_Degree_Program_PCU_Fall2026.pdf" },
   darmasiswaGuidelines: { title: "Darmasiswa 2026/2027 Application Guidelines (via Università di Siena)", url: "https://www.unisi.it/sites/default/files/allegatiparagrafo/Application-Guidelines-Darmasiswa-20262027_rev.pdf" },
   darmasiswaAtmaJaya: { title: "Darmasiswa Scholarship Program 2026/2027 (Atma Jaya)", url: "https://www.atmajaya.ac.id/id/pages/darmasiswa_26-27/" },
   iismaUmy: { title: "IISMA information (Universitas Muhammadiyah Yogyakarta)", url: "https://ipirel.umy.ac.id/?p=3475" },

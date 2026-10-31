@@ -165,7 +165,7 @@ export default async function AboutPage({ params }: PageProps) {
               <li className="flex items-center gap-3"><IconBadge icon={Phone} tone="aqua" size={40} /><span>{en ? "Student mobility: " : "Mobilitas mahasiswa: "}<a className="font-semibold underline underline-offset-2" href={`tel:${office.mobilityPhone.tel}`}>{office.mobilityPhone.display}</a></span></li>
               <li className="flex items-center gap-3"><IconBadge icon={Mail} tone="dusk" size={40} /><a className="font-semibold underline underline-offset-2" href={`mailto:${office.mobilityEmail}`}>{office.mobilityEmail}</a></li>
             </ul>
-            <SourceNote ids={["pcuFactSheet"]} locale={locale} />
+            <SourceNote ids={["petraFactSheet"]} locale={locale} />
             <Sign icon={DoorOpen} building={en ? "D Building · Room 104" : "Gedung D · Ruang 104"} room={en ? "International Office" : "Kantor Urusan Internasional"} className="mt-8 max-w-md" />
           </div>
           <MapEmbed query="Petra Christian University, Siwalankerto, Surabaya" title={en ? "Map of Petra Christian University" : "Peta Universitas Kristen Petra"} labels={en ? { load: "Show map", note: "Loads Google Maps, which may set cookies.", open: "Open in Google Maps" } : { load: "Tampilkan peta", note: "Memuat Google Maps, yang dapat menyimpan cookie.", open: "Buka di Google Maps" }} />

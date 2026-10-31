@@ -32,7 +32,7 @@ export function PosterSlot({ src, alt, title, placeholder, className }: { src?: 
   }
   return (
     <div className={cn("relative grid aspect-[3/4] w-full place-items-center overflow-hidden rounded-lg bg-gradient-midnight p-6 text-center text-white", className)}>
-      <div aria-hidden className="pcu-pattern absolute -right-10 -top-10 size-32 rounded-bl-full [background-size:64px_64px]" />
+      <div aria-hidden className="petra-pattern absolute -right-10 -top-10 size-32 rounded-bl-full [background-size:64px_64px]" />
       <div>
         <ImageIcon className="mx-auto size-10 text-amber" aria-hidden />
         <p className="mt-4 font-display text-5xl leading-none">{title}</p>

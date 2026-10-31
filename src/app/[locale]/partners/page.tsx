@@ -86,7 +86,7 @@ export default async function PartnersPage({ params }: PageProps) {
         <Reveal><WorldMap origin={surabaya} points={partnerCountryPoints()} size={MAP_SIZE} /></Reveal>
       </Section>
 
-      <Section tone="light" labelledBy="partners-title" id="partners" className="scroll-mt-20" decor={<span aria-hidden className="pcu-glow pcu-glow--cerise -right-48 -top-48 hidden size-[30rem] md:block" />}>
+      <Section tone="light" labelledBy="partners-title" id="partners" className="scroll-mt-20" decor={<span aria-hidden className="petra-glow petra-glow--cerise -right-48 -top-48 hidden size-[30rem] md:block" />}>
         <span id="domestic" className="block scroll-mt-20" />
         <span id="international" className="block scroll-mt-20" />
         <SectionHeading id="partners-title" tone="light" eyebrow={en ? "Partners" : "Mitra"} title={en ? "Who we work with" : "Mitra kerja sama kami"} lead={en ? `${domestic.total}+ partners across industry, government and institutions in Indonesia, and 180+ universities abroad.` : `${domestic.total}+ mitra dari industri, pemerintah dan institusi di Indonesia, serta 180+ universitas di luar negeri.`} />

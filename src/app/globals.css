@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   PCU Design System tokens (tokens.json, PCU Design System artifact) mapped to
+   PETRA Design System tokens (tokens.json, PETRA Design System artifact) mapped to
    Tailwind v4 theme variables. Brand rules live in the design system README:
    midnight leads; text on midnight may be white, smoke, amber, yellow, teal,
    green, orange or purple; text on light grounds only midnight, black,
@@ -207,10 +207,10 @@
   .shape-bar { background: currentColor; }
 
   /* Gradient overlay register: multiply-blended glows at .55, for light grounds only. */
-  .pcu-glow { position: absolute; border-radius: 50%; mix-blend-mode: multiply; opacity: 0.55; pointer-events: none; }
-  .pcu-glow--cerise { background: radial-gradient(circle at 30% 30%, #ec008c 0%, rgba(236, 0, 140, 0.15) 70%, transparent 72%); }
-  .pcu-glow--aqua { background: radial-gradient(circle at 70% 40%, #54feeb 0%, rgba(84, 254, 235, 0.25) 70%, transparent 72%); }
-  .pcu-glow--amber { background: radial-gradient(circle at 50% 50%, #ffbc00 0%, rgba(255, 188, 0, 0.2) 70%, transparent 72%); }
+  .petra-glow { position: absolute; border-radius: 50%; mix-blend-mode: multiply; opacity: 0.55; pointer-events: none; }
+  .petra-glow--cerise { background: radial-gradient(circle at 30% 30%, #ec008c 0%, rgba(236, 0, 140, 0.15) 70%, transparent 72%); }
+  .petra-glow--aqua { background: radial-gradient(circle at 70% 40%, #54feeb 0%, rgba(84, 254, 235, 0.25) 70%, transparent 72%); }
+  .petra-glow--amber { background: radial-gradient(circle at 50% 50%, #ffbc00 0%, rgba(255, 188, 0, 0.2) 70%, transparent 72%); }
 
   /* IconBadge: white 2px outline icon in a gradient circle. */
   .icon-badge { --size: 3rem; width: var(--size); height: var(--size); flex-shrink: 0; display: grid; place-items: center; border-radius: 50%; color: var(--color-white); background: var(--gradient-midnight); }
@@ -222,14 +222,14 @@
   .icon-badge--cerise { background: linear-gradient(160deg, #3880d0 0%, #ec008c 55%); }
 
   /* Tag: one- or two-word category on the midnight gradient. */
-  .pcu-tag { display: inline-block; padding: 0.3em 0.7em; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 600; line-height: 1.3; background: var(--gradient-midnight); color: var(--color-white); }
-  .pcu-tag--outline { background: none; color: currentColor; box-shadow: inset 0 0 0 1px currentColor; }
+  .petra-tag { display: inline-block; padding: 0.3em 0.7em; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 600; line-height: 1.3; background: var(--gradient-midnight); color: var(--color-white); }
+  .petra-tag--outline { background: none; color: currentColor; box-shadow: inset 0 0 0 1px currentColor; }
 
   /* Sign: wayfinding panel with a pill right end and the flat amber offset. */
-  .pcu-sign { display: flex; align-items: center; gap: 1rem; padding: 1.25rem 2rem 1.25rem 1.5rem; background: var(--color-midnight); color: var(--color-white); border-radius: 0 9999px 9999px 0; box-shadow: var(--shadow-sign); font-weight: 700; }
+  .petra-sign { display: flex; align-items: center; gap: 1rem; padding: 1.25rem 2rem 1.25rem 1.5rem; background: var(--color-midnight); color: var(--color-white); border-radius: 0 9999px 9999px 0; box-shadow: var(--shadow-sign); font-weight: 700; }
 
   /* ArchBand: midnight band whose top edge is the double-arch silhouette. */
-  .pcu-arch-band {
+  .petra-arch-band {
     --arch: clamp(48px, 10vw, 140px);
     position: relative;
     background: var(--gradient-midnight);
@@ -239,16 +239,16 @@
   }
 
   /* DepartmentLockup: logo, 1px rule, unit name. */
-  .pcu-lockup { display: inline-flex; align-items: center; --x: 0.75rem; gap: calc(var(--x) * 1.5); }
-  .pcu-lockup__rule { align-self: stretch; width: 1px; background: currentColor; opacity: 0.9; }
-  .pcu-lockup__dept { font-weight: 500; font-size: 1.15rem; line-height: 1.2; }
+  .petra-lockup { display: inline-flex; align-items: center; --x: 0.75rem; gap: calc(var(--x) * 1.5); }
+  .petra-lockup__rule { align-self: stretch; width: 1px; background: currentColor; opacity: 0.9; }
+  .petra-lockup__dept { font-weight: 500; font-size: 1.15rem; line-height: 1.2; }
   .double-arch {
     aspect-ratio: 2 / 1;
     background: currentColor;
     -webkit-mask: url("/brand/double-arch.svg") center / 100% 100% no-repeat;
     mask: url("/brand/double-arch.svg") center / 100% 100% no-repeat;
   }
-  .pcu-pattern {
+  .petra-pattern {
     background-image: url("/brand/pattern-tile.svg");
     background-size: 80px 80px;
   }
