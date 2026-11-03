@@ -40,7 +40,7 @@ export type NewsPost = {
   location?: L;
   deadline?: string;
   audience?: Audience;
-  /** Internal path ("/outbound#iisma") or full URL. */
+  /** Internal path ("/mobility/outbound") or full URL. */
   applyUrl?: string;
   /** Placeholder post that KUI still has to replace with a real one. */
   sample: boolean;

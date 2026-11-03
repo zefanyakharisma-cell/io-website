@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, DoorOpen, Mail, MapPin, Phone } from "lucide-react";
 import { media } from "@/content/media.generated";
-import { aboutNav } from "@/content/navigation";
+import { aboutNav, internationalNav } from "@/content/navigation";
 import { campusResources, office } from "@/content/getToKnow";
 import { accreditations, badges, campus, history, keyStats, rankingNote, rankings, standing, statsSource, tagline, vision } from "@/content/profile";
 import { href, localeParams, pageMeta, resolveLocale, tr, type PageProps } from "@/lib/i18n";
@@ -126,19 +126,19 @@ export default async function AboutPage({ params }: PageProps) {
             </li>
           ))}
         </ul>
-        <p className="mt-6 text-sm text-ink-secondary">{en ? "International students are welcomed by our " : "Mahasiswa internasional disambut oleh "}<Link className="prose-link" href={href(locale, "/about/petramate")}>Petramate</Link>{en ? " team." : "."}</p>
+        <p className="mt-6 text-sm text-ink-secondary">{en ? "International students are welcomed by our " : "Mahasiswa internasional disambut oleh "}<Link className="prose-link" href={href(locale, "/international-students/petramate")}>Petramate</Link>{en ? " team." : "."}</p>
       </Section>
 
       <Section tone="deep" cinematic bgImage={media.mobility["asp-group"]} labelledBy="explore">
         <SectionHeading id="explore" eyebrow={tagline} title={en ? "Explore Petra" : "Jelajahi Petra"} />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { link: about.links[1], image: media.mobility["international-day"] },
-            { link: about.links[2], image: media.mobility.bromo },
-            { link: about.links[3], image: media.campus["building-yellow"] },
-            { link: about.links[4], image: media.faculty.medicine },
-            { link: about.links[5], image: media.labs["structural-beam"] },
-            { link: about.links[6], image: media.drone.launch },
+            { link: about.links[1], image: media.faculty.medicine },
+            { link: about.links[2], image: media.labs["structural-beam"] },
+            { link: about.links[3], image: media.drone.launch },
+            { link: about.links[4], image: media.campus["building-yellow"] },
+            { link: internationalNav.links[3], image: media.mobility.bromo },
+            { link: about.links[5], image: media.mobility["international-day"] },
           ].map(({ link, image }) => (
             <li key={link.path}>
               <Link href={href(locale, link.path)} className="group relative flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-lg">

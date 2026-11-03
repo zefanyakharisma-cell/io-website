@@ -46,13 +46,13 @@ export type SignatureProgramme = {
 
 export const signatureProgrammes: SignatureProgramme[] = [
   {
-    code: "ICOP",
+    code: "iCOP",
     website: "https://cop.petra.ac.id/",
-    name: "International Community Outreach Program",
+    name: "International Community Outreach Program (iCOP)",
     kicker: { en: "Signature programme · since 1996", id: "Program unggulan · sejak 1996" },
     summary: {
-      en: "Students live, build and teach alongside rural Indonesian communities. The work is set by the community, not the visiting cohort.",
-      id: "Mahasiswa tinggal, membangun dan mengajar bersama masyarakat desa di Indonesia. Pekerjaannya ditentukan oleh masyarakat, bukan oleh peserta.",
+      en: "The International Community Outreach Program (iCOP) is an international service-learning program that brings together students from PCU and partner universities worldwide to work alongside local communities in rural areas of Indonesia. Through collaborative community projects, participants contribute to community development and empowerment while gaining hands-on experience, developing social awareness, and engaging in meaningful multicultural exchanges.",
+      id: "International Community Outreach Program (iCOP) adalah program service-learning internasional yang mempertemukan mahasiswa Petra dan universitas mitra dari seluruh dunia untuk bekerja bersama masyarakat di pedesaan Indonesia. Melalui proyek bersama, peserta berkontribusi pada pengembangan dan pemberdayaan masyarakat sambil memperoleh pengalaman langsung, mengasah kepedulian sosial, dan menjalin pertukaran multikultural yang bermakna.",
     },
     facts: [
       { value: "30", label: { en: "years running", id: "tahun berjalan" } },
@@ -68,13 +68,33 @@ export const signatureProgrammes: SignatureProgramme[] = [
     images: [media.mobility["icop-river"], media.mobility["icop-teaching"], media.mobility["icop-buckets"], media.mobility["service-learning"]],
   },
   {
+    code: "ASP",
+    website: "https://asp.petra.ac.id/",
+    name: "Asia Summer Program",
+    kicker: { en: "Signature programme · regional consortium", id: "Program unggulan · konsorsium regional" },
+    summary: {
+      en: "The Asia Summer Program (ASP) is an international summer program that combines academic enrichment, cultural immersion, and cross-cultural collaboration. Hosted by PCU in Surabaya, the program offers English-taught courses on topics relevant to Asia, complemented by cultural activities and excursions that allow students to explore Indonesia's rich heritage and traditions while building international friendships and networks.",
+      id: "Asia Summer Program (ASP) adalah program musim panas internasional yang memadukan pengayaan akademik, imersi budaya, dan kolaborasi lintas budaya. Diselenggarakan Petra di Surabaya, program ini menawarkan mata kuliah berbahasa Inggris tentang topik-topik Asia, dilengkapi kegiatan budaya dan kunjungan untuk menjelajahi kekayaan warisan dan tradisi Indonesia sambil membangun persahabatan dan jejaring internasional.",
+    },
+    facts: [
+      { value: "5", label: { en: "founders", id: "pendiri" } },
+      { value: "4", label: { en: "countries", id: "negara" } },
+      { value: "3", label: { en: "weeks", id: "minggu" } },
+      { value: "✓", label: { en: "credit-bearing", id: "berkredit" } },
+    ],
+    highlights: [
+      { en: "Petra (Indonesia), Dongseo (Korea), UniMAP (Malaysia), Bangkok University (Thailand), Josai International (Japan)", id: "Petra (Indonesia), Dongseo (Korea), UniMAP (Malaysia), Bangkok University (Thailand), Josai International (Jepang)" },
+    ],
+    images: [media.mobility["asp-group"], media.mobility["asp-thailand"], media.mobility["asp-event"]],
+  },
+  {
     code: "PSP",
     website: "https://psp.petra.ac.id/",
     name: "Petra Summer Program",
     kicker: { en: "Signature programme · summer immersion", id: "Program unggulan · imersi musim panas" },
     summary: {
-      en: "Two to four credit-bearing weeks in Surabaya, taught in English, across four tracks.",
-      id: "Dua hingga empat minggu berkredit di Surabaya, berbahasa Inggris, dalam empat peminatan.",
+      en: "The Petra Summer Program (PSP) offers an engaging short-term learning experience that combines academic activities with cultural exploration. Through interactive courses, practical experiences, and cultural activities, participants discover Indonesia's diverse heritage, experience life in Surabaya, and connect with students from different cultural backgrounds.",
+      id: "Petra Summer Program (PSP) menawarkan pengalaman belajar jangka pendek yang memadukan kegiatan akademik dengan eksplorasi budaya. Melalui kelas interaktif, pengalaman praktik, dan kegiatan budaya, peserta mengenal keragaman warisan Indonesia, merasakan kehidupan di Surabaya, dan terhubung dengan mahasiswa dari berbagai latar belakang budaya.",
     },
     facts: [
       { value: "4", label: { en: "tracks", id: "peminatan" } },
@@ -96,8 +116,8 @@ export const signatureProgrammes: SignatureProgramme[] = [
     name: "Indonesian Spectrum",
     kicker: { en: "Signature programme · culture & language", id: "Program unggulan · budaya & bahasa" },
     summary: {
-      en: "Summer Program Exploration of Culture and the Indonesian Language: three modules taught in English.",
-      id: "Summer Program Exploration of Culture and the Indonesian Language: tiga modul berbahasa Inggris.",
+      en: "The Indonesian Spectrum Program is an immersive academic and cultural program for international students who wish to deepen their understanding of Indonesia's language, society, culture, and diversity. Combining classroom learning with hands-on experiences, cultural activities, and community interactions, it explores Indonesia from various perspectives. Students can choose short courses, one-semester or one-year study options.",
+      id: "Indonesian Spectrum Program adalah program akademik dan budaya imersif bagi mahasiswa internasional yang ingin memperdalam pemahaman tentang bahasa, masyarakat, budaya, dan keragaman Indonesia. Memadukan pembelajaran di kelas dengan pengalaman langsung, kegiatan budaya, dan interaksi dengan masyarakat, program ini menjelajahi Indonesia dari berbagai perspektif. Mahasiswa dapat memilih kursus singkat, satu semester, atau satu tahun.",
     },
     facts: [
       { value: "3", label: { en: "modules", id: "modul" } },
@@ -111,26 +131,6 @@ export const signatureProgrammes: SignatureProgramme[] = [
       { en: "Cultural immersion across Surabaya", id: "Imersi budaya di seluruh Surabaya" },
     ],
     images: [media.mobility["spectra-cooking"], media.mobility["spectra-museum"], media.mobility["museum-group"], media.mobility.bromo],
-  },
-  {
-    code: "ASP",
-    website: "https://asp.petra.ac.id/",
-    name: "Asia Summer Program",
-    kicker: { en: "Signature programme · regional consortium", id: "Program unggulan · konsorsium regional" },
-    summary: {
-      en: "Three credit-bearing weeks. Hosting rotates every year between the five founders, and credits transfer home.",
-      id: "Tiga minggu berkredit. Tuan rumah bergilir setiap tahun di antara lima pendiri, dan kredit diakui di kampus asal.",
-    },
-    facts: [
-      { value: "5", label: { en: "founders", id: "pendiri" } },
-      { value: "4", label: { en: "countries", id: "negara" } },
-      { value: "3", label: { en: "weeks", id: "minggu" } },
-      { value: "✓", label: { en: "credit-bearing", id: "berkredit" } },
-    ],
-    highlights: [
-      { en: "Petra (Indonesia), Dongseo (Korea), UniMAP (Malaysia), Bangkok University (Thailand), Josai International (Japan)", id: "Petra (Indonesia), Dongseo (Korea), UniMAP (Malaysia), Bangkok University (Thailand), Josai International (Jepang)" },
-    ],
-    images: [media.mobility["asp-group"], media.mobility["asp-thailand"], media.mobility["asp-event"]],
   },
 ];
 

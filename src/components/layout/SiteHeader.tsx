@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Globe, Menu, X, ArrowRight, Search } from "lucide-react";
-import { directNav, navigation, newsNav } from "@/content/navigation";
+import { directNav, infoHubNav, navigation, newsNav, type NavGroup, type NavLink } from "@/content/navigation";
 import { ui } from "@/lib/dictionary";
 import { href, tr, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -81,14 +81,18 @@ export function SiteHeader({ locale, index }: { locale: Locale; index: SearchIte
 
   // In the drawer, the section holding the current page starts open.
   useEffect(() => {
-    if (mobile) setExpanded(navigation.findIndex((g) => rest.startsWith(`/${g.path.split("/")[1]}`)));
+    if (mobile) setExpanded(navigation.findIndex(groupActive));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mobile, rest]);
 
   const isActive = (path: string) => {
-    const section = path.split("/")[1];
-    return rest.startsWith(`/${section}`);
+    const section = path.split(/[/#]/)[1];
+    return rest === `/${section}` || rest.startsWith(`/${section}/`);
   };
-  const activeIndex = [...navigation.map((g) => g.path), ...directNav.map((d) => d.path)].findIndex(isActive);
+  // A group is active when the page sits under its path or under any of its links (About & Contact holds /contact).
+  const groupActive = (g: NavGroup) => [g.path, ...g.links.map((l) => l.path)].some(isActive);
+  const groupIndex = navigation.findIndex(groupActive);
+  const activeIndex = groupIndex >= 0 ? groupIndex : (() => { const k = directNav.findIndex((d) => isActive(d.path)); return k >= 0 ? navigation.length + k : -1; })();
 
   const enter = (i: number) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -248,7 +252,7 @@ export function SiteHeader({ locale, index }: { locale: Locale; index: SearchIte
                         aria-expanded={isOpen}
                         aria-controls={`m-group-${gi}`}
                         onClick={() => setExpanded(isOpen ? null : gi)}
-                        className={cn("flex w-full items-center justify-between py-4 text-left text-xl font-bold", isActive(group.path) ? "text-amber" : "text-white")}
+                        className={cn("flex w-full items-center justify-between py-4 text-left text-xl font-bold", groupActive(group) ? "text-amber" : "text-white")}
                       >
                         {tr(group.label, locale)}
                         <ChevronDown className={cn("size-5 transition-transform", isOpen && "rotate-180")} aria-hidden />
@@ -269,8 +273,9 @@ export function SiteHeader({ locale, index }: { locale: Locale; index: SearchIte
                                 <ArrowRight className="size-4 shrink-0" aria-hidden />
                               </Link>
                             </li>
-                            {group.links.map((l) => (
+                            {group.links.map((l, li) => (
                               <li key={l.path}>
+                                {l.section && l.section.en !== group.links[li - 1]?.section?.en && <p className="eyebrow mt-3 px-3 text-xs text-amber/90">{tr(l.section, locale)}</p>}
                                 <Link href={href(locale, l.path)} aria-current={rest.replace(/\/$/, "") === l.path ? "page" : undefined} className="block rounded-md px-3 py-2 hover:bg-white/10">
                                   <span className="block font-semibold text-white">{tr(l.label, locale)}</span>
                                   <span className="block text-sm text-smoke/70">{tr(l.description, locale)}</span>
@@ -295,6 +300,12 @@ export function SiteHeader({ locale, index }: { locale: Locale; index: SearchIte
                       </li>
                     ))}
                   </ul>
+                </li>
+                <li className="py-4">
+                  <Link href={href(locale, infoHubNav.path)} className={cn("flex items-center justify-between text-xl font-bold", isActive(infoHubNav.path) ? "text-amber" : "text-white")}>
+                    {tr(infoHubNav.label, locale)}
+                    <ArrowRight className="size-5 text-smoke/60" aria-hidden />
+                  </Link>
                 </li>
               </ul>
               <div className="fixed inset-x-0 bottom-0 flex gap-3 border-t border-white/10 bg-midnight-deep px-5 py-4">
@@ -330,6 +341,13 @@ function Lamp({ reduce }: { reduce: boolean }) {
 
 function MegaPanel({ locale, index }: { locale: Locale; index: number }) {
   const group = navigation[index];
+  const sections: { label: string; links: NavLink[] }[] = [];
+  for (const l of group.links) {
+    const label = l.section ? tr(l.section, locale) : "";
+    const last = sections[sections.length - 1];
+    if (last && last.label === label) last.links.push(l);
+    else sections.push({ label, links: [l] });
+  }
   return (
     <div className="glass-strong grid grid-cols-[1.1fr_2fr] gap-2 overflow-hidden rounded-lg p-2 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.7)]">
       <Link href={href(locale, group.path)} className="group relative block min-h-56 overflow-hidden rounded-md">
@@ -341,19 +359,36 @@ function MegaPanel({ locale, index }: { locale: Locale; index: number }) {
           <span className="mt-1 block text-sm text-smoke/90">{tr(group.blurb, locale)}</span>
         </span>
       </Link>
-      <ul className="grid grid-cols-2 content-start gap-1 p-2">
-        {group.links.map((l) => (
-          <li key={l.path}>
-            <Link href={href(locale, l.path)} className="group block rounded-md px-4 py-3 transition-colors hover:bg-white/10">
-              <span className="flex items-center gap-2 font-semibold text-white">
-                {tr(l.label, locale)}
-                <ArrowRight className="size-3.5 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" aria-hidden />
-              </span>
-              <span className="mt-0.5 block text-sm text-smoke/80">{tr(l.description, locale)}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {sections.length > 1 ? (
+        <div className="grid grid-cols-2 gap-2 p-2">
+          {sections.map((sec) => (
+            <div key={sec.label}>
+              <p className="eyebrow px-4 pb-1 pt-2 text-xs text-amber">{sec.label}</p>
+              <ul className="grid content-start gap-0.5">
+                {sec.links.map((l) => <MegaLink key={l.path} link={l} locale={locale} compact />)}
+              </ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <ul className="grid grid-cols-2 content-start gap-1 p-2">
+          {group.links.map((l) => <MegaLink key={l.path} link={l} locale={locale} />)}
+        </ul>
+      )}
     </div>
+  );
+}
+
+function MegaLink({ link: l, locale, compact }: { link: NavLink; locale: Locale; compact?: boolean }) {
+  return (
+    <li>
+      <Link href={href(locale, l.path)} className={cn("group block rounded-md px-4 transition-colors hover:bg-white/10", compact ? "py-2" : "py-3")}>
+        <span className="flex items-center gap-2 font-semibold text-white">
+          {tr(l.label, locale)}
+          <ArrowRight className="size-3.5 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" aria-hidden />
+        </span>
+        <span className="mt-0.5 block text-sm text-smoke/80">{tr(l.description, locale)}</span>
+      </Link>
+    </li>
   );
 }

@@ -5,11 +5,10 @@ import { links } from "@/content/links";
 import { heroSlides } from "@/content/testimonials";
 import { badges, keyStats, rankingNote, rankings, tagline } from "@/content/profile";
 import { signatureProgrammes, gallery } from "@/content/mobility";
-import { byRegion, logoStrip, networkTotals } from "@/content/partners";
+import { byRegion, consortia, logoStrip, networkTotals } from "@/content/partners";
 import { faculties } from "@/content/faculties";
 import { getAllNews } from "@/lib/news";
 import { href, isLocale, localeParams, tr, type Locale } from "@/lib/i18n";
-import { MAP_SIZE, partnerCountryPoints, surabaya } from "@/lib/map-points";
 import { HeroSlides } from "@/components/sections/HeroSlides";
 import { Ring } from "@/components/brand/Ring";
 import { Shape } from "@/components/brand/Shape";
@@ -22,7 +21,6 @@ import { Section } from "@/components/sections/Section";
 import { StatGrid } from "@/components/sections/StatGrid";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { NewsCard } from "@/components/sections/NewsCard";
-import { WorldMap } from "@/components/ui/world-map";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { Gallery } from "@/components/ui/gallery";
 import { PhotoCredits } from "@/components/sections/PhotoCredit";
@@ -47,28 +45,28 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       tone: "sunrise",
       title: en ? "Partner with us" : "Bermitra dengan kami",
       body: en ? "Exchange, joint degrees, research and more." : "Pertukaran, gelar bersama, riset dan lainnya.",
-      path: "/partners",
+      path: "/collaboration",
     },
     {
       icon: GraduationCap,
       tone: "aqua",
       title: en ? "Study at Petra" : "Belajar di Petra",
       body: en ? "Semester exchange and summer programmes." : "Pertukaran semester dan program musim panas.",
-      path: "/inbound",
+      path: "/mobility/inbound",
     },
     {
       icon: Plane,
       tone: "dusk",
       title: en ? "Go abroad" : "Ke luar negeri",
       body: en ? "Petranesians in 10 countries." : "Petranesian di 10 negara.",
-      path: "/outbound",
+      path: "/mobility/outbound",
     },
   ];
 
   const mobilityTiles = [
-    { path: "/inbound", image: media.mobility["cultural-night"], eyebrow: "Inbound", title: en ? "Spend a semester in Surabaya" : "Satu semester di Surabaya", body: en ? "Credits that count at home, Indonesian from zero, and a Petramate buddy." : "Kredit yang diakui di kampus asal, bahasa Indonesia dari nol, dan buddy Petramate." },
-    { path: "/outbound", image: media.mobility.nsysu, eyebrow: "Outbound", title: en ? "Petranesians around the world" : "Petranesian di seluruh dunia", body: en ? "Exchange, double degrees and summer schools in 10 countries." : "Pertukaran, gelar ganda dan summer school di 10 negara." },
-    { path: "/inbound/international-programs", image: media.ai["study-table"], eyebrow: en ? "International Programs" : "Program Internasional", title: en ? "A full degree, in English" : "Gelar penuh, dalam bahasa Inggris", body: en ? "8 bachelor's programmes with a semester abroad built in." : "8 program sarjana dengan satu semester di luar negeri." },
+    { path: "/mobility/inbound", image: media.mobility["cultural-night"], eyebrow: "Inbound", title: en ? "Spend a semester in Surabaya" : "Satu semester di Surabaya", body: en ? "Credits that count at home, Indonesian from zero, and a Petramate buddy." : "Kredit yang diakui di kampus asal, bahasa Indonesia dari nol, dan buddy Petramate." },
+    { path: "/mobility/outbound", image: media.mobility.nsysu, eyebrow: "Outbound", title: en ? "Petranesians around the world" : "Petranesian di seluruh dunia", body: en ? "Exchange, double degrees and summer schools in 10 countries." : "Pertukaran, gelar ganda dan summer school di 10 negara." },
+    { path: "/international-students/international-programs", image: media.ai["study-table"], eyebrow: en ? "International Programs" : "Program Internasional", title: en ? "A full degree, in English" : "Gelar penuh, dalam bahasa Inggris", body: en ? "8 bachelor's programmes with a semester abroad built in." : "8 program sarjana dengan satu semester di luar negeri." },
   ];
 
   return (
@@ -221,7 +219,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   <div className="relative p-5">
                     <span className="block font-display text-5xl leading-none text-amber">{p.code}</span>
                     <h3 className="mt-1 text-base font-semibold tracking-normal">
-                      <Link href={href(locale, `/inbound/short-programs#${p.code.toLowerCase()}`)} className="after:absolute after:inset-0 after:content-['']">
+                      <Link href={href(locale, `/mobility/inbound/short-programs#${p.code.toLowerCase()}`)} className="after:absolute after:inset-0 after:content-['']">
                         {p.name}
                       </Link>
                     </h3>
@@ -267,12 +265,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </li>
               ))}
             </ul>
-            <Link href={href(locale, "/partners")} className="btn btn-amber mt-8">
-              {en ? "Explore the partner list" : "Lihat daftar mitra"} <ArrowRight className="size-4" aria-hidden />
+            <Link href={href(locale, "/collaboration")} className="btn btn-amber mt-8">
+              {en ? "Global collaboration" : "Kolaborasi global"} <ArrowRight className="size-4" aria-hidden />
             </Link>
           </div>
           <Reveal>
-            <WorldMap origin={surabaya} points={partnerCountryPoints()} size={MAP_SIZE} />
+            <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {consortia.map((c) => (
+                <li key={c.name} className="glass rounded-lg p-4">
+                  <span className="block font-display text-3xl leading-none text-amber">{c.name}</span>
+                  <span className="mt-1 block text-sm text-smoke/90">{c.full}</span>
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </div>
         <div className="mt-16">

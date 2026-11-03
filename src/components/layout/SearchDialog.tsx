@@ -13,7 +13,7 @@ import { useReducedMotionSafe } from "@/lib/use-reduced-motion";
 /** Lower-case, strip accents, so "Pendaftaran" matches "pendaftaran" and "café" matches "cafe". */
 const norm = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
-const SUGGESTED = ["/inbound/student-exchange", "/outbound#iisma", "/news/opportunities", "/news/calendar", "/contact"];
+const SUGGESTED = ["/mobility/inbound/student-exchange", "/mobility/outbound/student-exchange", "/mobility/outbound/scholarships", "/information-hub", "/news/calendar", "/contact"];
 
 type Prepared = SearchItem & { t: string; d: string; k: string };
 

@@ -19,17 +19,19 @@ npm run lint
 
 ## Sitemap
 
-The menu follows KUI's content spec: the Google Sheet "WEBSITE IO", Sheet1.
+The menu follows KUI's content spec: the sheet "WEBSITE IO", tab "NEW UPDATED". Inbound copy comes from KUI's linked Google Doc "Narasi page Inbound Student Exchange Program".
 
 | Menu | Pages (under `/en/` and `/id/`) |
 |---|---|
-| Home | `/` — photo slides with testimonial slots, faculties, numbers, programmes, partner map, news, gallery |
-| Inbound Programs | `inbound` (programs, registration info, visa, related costs, dos & don'ts, video testimonies, inquiries) · `inbound/student-exchange` · `inbound/short-programs` · `inbound/tailor-made` · `inbound/international-programs` · `inbound/darmasiswa` |
-| Outbound Programs | `outbound` (IISMA, global outbound, joint/dual degree partners, registration & rules, ICE Institute, local outbound, testimonies, inquiries) |
-| Partners | `partners` (domestic, international by continent, consortiums, EU projects, 8 ways to collaborate) |
-| Get to Know Us | `about` (incl. campus resources) · `about/petramate` · `about/surabaya` · `about/campus` · `about/faculties` · `about/research` · `about/ai` |
-| News | `news` (upcoming and past events) · `news/[slug]` |
-| Contact Us | `contact` (contact routes, KUI persons in charge, WhatsApp, inquiry form) |
+| Home | `/` |
+| About & Contact | `about` · `about/faculties` · `about/research` · `about/ai` · `about/campus` · `contact` |
+| Student Mobility | `mobility` · Inbound: `mobility/inbound`, `…/inbound/student-exchange` (fact sheet, courses, academic calendar, how to apply, fees, living costs), `…/inbound/short-programs` (iCOP, ASP, PSP, Indonesian Spectrum), `…/inbound/experiences` · Outbound: `mobility/outbound`, `…/outbound/short-program`, `…/outbound/student-exchange` (incl. host universities), `…/outbound/dual-degree`, `…/outbound/scholarships`, `…/outbound/experiences` |
+| International Students | `international-students` (visa, dos & don'ts, inquiries) · `…/international-programs` · `…/petramate` · `…/surabaya` |
+| Global Collaboration | `collaboration` (#networking, #consortium, #contact) |
+| News & Events | `news` · `news/events` · `news/calendar` · `news/opportunities` · `news/[slug]` |
+| Information Hub | `information-hub` (downloads & forms, key dates, FAQ, contacts) |
+
+**Moved pages.** Old URLs (`/inbound…`, `/outbound`, `/partners`, `/about/petramate`, `/about/surabaya`) are static redirect pages built with `src/lib/redirect-page.tsx`. Darmasiswa, IISMA, ICE Institute, local outbound, study abroad, joint degree, tailor-made and EU projects were removed with the new menu.
 
 ## Where things live
 
@@ -37,14 +39,15 @@ The menu follows KUI's content spec: the Google Sheet "WEBSITE IO", Sheet1.
 src/content/         All site copy and data, typed and bilingual ({ en, id })
   profile.ts         Rankings, numbers, accreditation, campus
   faculties.ts       7 faculties, programmes, English-taught degrees
-  mobility.ts        Exchange steps, ICOP/PSP/SPECTRA/ASP, joint degrees, gallery
-  partners.ts        Network numbers, partner list, consortia, EU projects, 8 ways to collaborate
+  mobility.ts        iCOP/ASP/PSP/Indonesian Spectrum, mobility numbers, gallery
+  partners.ts        Network numbers, partner data, consortia, Global Collaboration copy and logo wall
   research.ts        Q1 output, study centres, researcher stories, lab tour
   ai.ts              AI@PETRA and Petra Drone Academy
   contact.ts         Office details, inquiry topics
   links.ts           Every external link, WhatsApp numbers, testimonial video ids (fill these in)
-  inbound.ts         Inbound programmes, requirements, visa, costs, dos & don'ts, tailor-made, Darmasiswa
-  outbound.ts        IISMA, global/online/local outbound, requirements, dos & don'ts
+  inbound.ts         Inbound fact sheet, calendar, how to apply, fees, living costs, experiences, visa, dos & don'ts
+  outbound.ts        Short program, exchange, dual degree, host universities, 10 steps, fees, scholarships, experiences
+  infoHub.ts         Information Hub downloads, FAQ and contacts
   getToKnow.ts       Campus resources, Petramate, Beautiful Surabaya
   team.ts            Contact routes and KUI persons in charge
   testimonials.ts    Home hero slides
@@ -173,47 +176,16 @@ Slots: `homeHero` (home), `inboundHero` (Mobility → Inbound), `ipdmReel` (Regu
 
 On the site, content that isn't from KUI or the deck carries a dashed "Details to be confirmed" badge, and links that aren't available yet show "Link coming soon".
 
-**Links and files to provide (`src/content/links.ts`):**
-- The inbound courses-offered Excel file.
-- The outbound registration form.
-- The Petramate registration form.
-- The four outbound Excel lists: exchange, study abroad, joint degree, dual degree.
-- The Petra Business School website.
-- The faculty websites (FTSP, FTI, SBM, FHIK, FKIP, FK, FKG).
-- The IISMA (iisma.id), Darmasiswa (darmasiswa / apply.darmasiswa.kemendikdasmen.go.id) and ICE Institute (icei.ac.id) URLs. These were taken from public sources and need checking.
+**Files and links to provide (`src/content/links.ts`):**
+- The International Outbound Program Flyer (`outboundFlyer`).
+- SK Tarif Studi No. 381 and No. 532 PDFs (`skTarif381`, `skTarif532`).
+- The Petramate registration form and the Petra Business School website.
+- Websites for SBM, FHIK and FKIP, and the AUPF website and logo (`src/content/partners.ts`).
 
 **Media to provide:**
-- PSP and ASP posters.
-- 3 inbound testimonial videos.
-- NUNI, BKPTKI and IISMA testimonial videos.
-- Testimonial quotes for the home hero.
-- KUI team names and photos.
-- Surabaya City Government (Pemkot) tourism photos, each with its credit. Credited Wikimedia Commons photos fill these slots for now.
-- OMNI's list of campus facilities to highlight.
-- IISMA and ICE Institute activity photos. Deck photos are used for now.
+- Inbound Experiences: Welcome Dinner, City Tour, Outing and Farewell Dinner photos, and testimony videos (`testimonialVideos.inbound`). Programme photos stand in for now.
+- Outbound Experiences: photos of the six students and the two YouTube videos (`outboundStories`, `outboundVideos` in `outbound.ts`).
+- Logos of QS Top 100 partners (Fudan, Monash, Yonsei, CityU HK); initials show for now. Check the multinational and foundation selection in `partners.ts` → `mncNames`, `foundationNames`.
+- PSP and ASP posters, home hero testimonial quotes, KUI team names and photos.
 
-**Drafted text to review**, written from general or public knowledge:
-- Inbound: general requirements, visa types and steps, cost items (no amounts), dos & don'ts, the tailor-made programme description, and the Darmasiswa description.
-- Outbound: the IISMA description and internal selection, definitions of exchange, study abroad, joint degree and dual degree, general requirements, ICE Institute, local outbound (NUNI, BKPTKI), and dos & don'ts.
-- Get to Know Us: Petramate benefits, and the Surabaya travel times to Bali and Malang.
-- Partners: the descriptions for GHAS, P2A and NUNI, and the full list of domestic partners.
-
-**Facts taken from the web** (listed with their sources in [docs/sources.md](docs/sources.md); each is cited on its page):
-- The visa steps and documents checklist, including passport validity, which sources disagree on.
-- Darmasiswa 2026/27 dates. These change every year.
-- IISMA applicant figures and ICE Institute statistics.
-- Petramate SKKK points and scholarship eligibility, from the 2024/25 call.
-- KUI office room (D 104) and the mobility phone line. These come from a partner-hosted fact sheet.
-- The Petra history timeline, Surabaya landmark facts, and day-trip travel times.
-
-**Data flags from the deck:**
-- Iowa State is listed at QS #540 under a "Top 500" heading.
-- Sherly De Yong is listed under two different faculties.
-- Two news posts have unconfirmed dates.
-
-**Copy review:** all Indonesian copy needs a review by KUI.
-
-## Pending inputs
-
-- **Chulalongkorn reference site:** `inter.chula.ac.th` is used as the structural inspiration, but this build environment could not reach it. The homepage section order should be reviewed against it.
-- **Videos:** see [Adding videos](#adding-videos).
+**Drafted text to review:** all Indonesian translations of the new content; the visa overview and dos & don'ts (International Students); Petramate benefits and Surabaya travel times.

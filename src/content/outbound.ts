@@ -4,99 +4,126 @@ import { media } from "./media.generated";
 
 type Img = { src: string; small?: string; alt: string; width?: number; height?: number };
 
-/** KUI spec, Sheet1 → Outbound Programs. Definitions drafted — TO CONFIRM by KUI. */
-export const iisma = {
-  intro: {
-    en: "IISMA (Indonesian International Student Mobility Awards) is the Indonesian government's scholarship for undergraduates to spend a semester at a leading university abroad, with tuition, travel and living costs covered.",
-    id: "IISMA (Indonesian International Student Mobility Awards) adalah beasiswa pemerintah Indonesia bagi mahasiswa S1 untuk kuliah satu semester di universitas terkemuka di luar negeri, dengan biaya kuliah, perjalanan dan hidup ditanggung.",
-  } satisfies L,
-  selection: [
-    { en: "Active Petra undergraduate in the semester set by the call", id: "Mahasiswa S1 aktif Petra pada semester yang ditetapkan" },
-    { en: "Minimum GPA and English score as set by IISMA and Petra", id: "IPK dan skor bahasa Inggris minimum sesuai ketentuan IISMA dan Petra" },
-    { en: "Recommendation from your study programme", id: "Rekomendasi dari program studi" },
-    { en: "Petra's internal selection: documents and interview", id: "Seleksi internal Petra: berkas dan wawancara" },
-  ] satisfies L[],
-  images: [media.mobility.nsysu, media.mobility["korea-university"], media.mobility["exchange-group"]] satisfies Img[],
-  facts: [
-    { en: "Managed by the Directorate General of Higher Education, Research and Technology", id: "Dikelola Direktorat Jenderal Pendidikan Tinggi, Riset, dan Teknologi" },
-    { en: "Open to undergraduates; a vocational track has run since 2022", id: "Terbuka untuk mahasiswa S1; jalur vokasi berjalan sejak 2022" },
-  ] satisfies L[],
-  /** Applicants per year (iismaKatadata source); selected only reported for 2024. */
-  applicants: [
-    { year: "2021", value: 2551 },
-    { year: "2024", value: 15211 },
-  ],
-  selected2024: 3330,
+/** Student Mobility → Outbound, from KUI's spec (WEBSITE IO, "NEW UPDATED"). */
+
+const eligibilityBase: L[] = [
+  { en: "You must be a Petra Christian University full-time undergraduate or graduate student.", id: "Anda adalah mahasiswa sarjana atau pascasarjana penuh waktu Universitas Kristen Petra." },
+  { en: "Undergraduates must have successfully completed at least 2 semesters at Petra Christian University.", id: "Mahasiswa sarjana telah menyelesaikan minimal 2 semester di Universitas Kristen Petra." },
+  { en: "Good conduct, behaviour and responsibility, with the qualities and suitability to represent Petra Christian University overseas.", id: "Berkelakuan baik dan bertanggung jawab, dengan kualitas dan kelayakan untuk mewakili Universitas Kristen Petra di luar negeri." },
+  { en: "See the International Outbound Program Flyer for the minimum GPA and language proficiency requirements. Requirements may vary by host university.", id: "Lihat Flyer International Outbound Program untuk syarat IPK dan kemampuan bahasa minimum. Persyaratan dapat berbeda di setiap universitas tujuan." },
+];
+
+export type OutboundProgram = {
+  slug: "short-program" | "student-exchange" | "dual-degree";
+  title: L;
+  kind: L;
+  definition: L;
+  eligibility: L[];
+  image: Img;
 };
 
-export const globalOutbound: { title: L; definition: L; download: string; image: Img }[] = [
+export const outboundPrograms: OutboundProgram[] = [
   {
+    slug: "short-program",
+    title: { en: "Short Program", id: "Program Singkat" },
+    kind: { en: "2–3 weeks abroad", id: "2–3 minggu di luar negeri" },
+    definition: {
+      en: "Ready for an international adventure? Join a Short Program to experience learning abroad, explore new cultures, make friends from around the world, and create unforgettable memories, all in just 2–3 weeks!",
+      id: "Siap untuk petualangan internasional? Ikuti Program Singkat untuk merasakan belajar di luar negeri, menjelajahi budaya baru, berteman dengan mahasiswa dari seluruh dunia, dan menciptakan kenangan tak terlupakan, hanya dalam 2–3 minggu!",
+    },
+    eligibility: eligibilityBase,
+    image: media.mobility["asp-thailand"],
+  },
+  {
+    slug: "student-exchange",
     title: { en: "Student Exchange", id: "Pertukaran Mahasiswa" },
-    definition: { en: "One or two semesters at a partner university under an exchange agreement. You pay Petra's tuition, and credits transfer back to your degree.", id: "Satu atau dua semester di universitas mitra dalam perjanjian pertukaran. Anda membayar biaya kuliah Petra, dan kreditnya diakui untuk studi Anda." },
-    download: links.outboundExchangeList,
+    kind: { en: "A semester or an academic year", id: "Satu semester atau satu tahun akademik" },
+    definition: {
+      en: "Experience student life in another country through our Student Exchange Program! Spend a semester or an academic year at one of our partner universities, discover new cultures, make international friends, and gain valuable academic and life experiences beyond the classroom.",
+      id: "Rasakan kehidupan mahasiswa di negara lain melalui Program Pertukaran Mahasiswa! Habiskan satu semester atau satu tahun akademik di salah satu universitas mitra, temukan budaya baru, jalin pertemanan internasional, dan raih pengalaman akademik serta kehidupan yang berharga di luar kelas.",
+    },
+    eligibility: eligibilityBase,
     image: media.mobility["korea-university"],
   },
   {
-    title: { en: "Study Abroad", id: "Study Abroad" },
-    definition: { en: "A semester abroad at a university of your choice, usually paying that university's fees, with credits recognised by Petra.", id: "Satu semester di universitas pilihan Anda di luar negeri, umumnya dengan membayar biaya universitas tersebut, dan kreditnya diakui Petra." },
-    download: links.outboundStudyAbroadList,
-    image: media.mobility.nsysu,
-  },
-  {
-    title: { en: "Joint Degree", id: "Joint Degree" },
-    definition: { en: "A programme designed and delivered together by Petra and a partner, leading to one degree awarded jointly.", id: "Program yang dirancang dan dijalankan bersama oleh Petra dan mitra, menghasilkan satu gelar yang diberikan bersama." },
-    download: links.outboundJointDegreeList,
+    slug: "dual-degree",
+    title: { en: "Dual Degree", id: "Dual Degree" },
+    kind: { en: "Two degrees, two universities", id: "Dua gelar, dua universitas" },
+    definition: {
+      en: "Take your education to the next level with our Dual Degree Program! Study at Petra Christian University and an overseas partner university to earn two degrees, experience different academic environments, and expand your global opportunities for future success.",
+      id: "Bawa pendidikan Anda ke tingkat berikutnya dengan Program Dual Degree! Kuliah di Universitas Kristen Petra dan universitas mitra di luar negeri untuk meraih dua gelar, merasakan lingkungan akademik yang berbeda, dan memperluas peluang global untuk masa depan.",
+    },
+    eligibility: [eligibilityBase[0], eligibilityBase[2], eligibilityBase[3]],
     image: media.mobility.saxion,
   },
-  {
-    title: { en: "Dual Degree", id: "Dual Degree" },
-    definition: { en: "Study part of your programme at Petra and part at a partner (2+2, 3+1 or 1+1) and graduate with a degree from each.", id: "Kuliah sebagian di Petra dan sebagian di mitra (2+2, 3+1 atau 1+1) dan lulus dengan gelar dari keduanya." },
-    download: links.outboundDualDegreeList,
-    image: media.mobility["exchange-group"],
-  },
 ];
 
-export const outboundRequirements: L[] = [
-  { en: "Active Petra student in good academic standing", id: "Mahasiswa aktif Petra dengan status akademik baik" },
-  { en: "Minimum GPA and English score set by the programme", id: "IPK dan skor bahasa Inggris minimum sesuai program" },
-  { en: "Approval of your study plan by your study programme", id: "Persetujuan rencana studi dari program studi" },
-  { en: "A passport valid for the whole stay abroad", id: "Paspor yang berlaku selama masa tinggal di luar negeri" },
-  { en: "Parental consent and health insurance", id: "Izin orang tua dan asuransi kesehatan" },
+/** How to Apply — the same ten steps for all three programmes. */
+export const outboundHowToApply: { title: L; body: L }[] = [
+  { title: { en: "Explore the program", id: "Pelajari program" }, body: { en: "Check the details and requirements in the International Outbound Program Flyer.", id: "Periksa informasi dan persyaratan di Flyer International Outbound Program." } },
+  { title: { en: "Consult your Head of Department", id: "Konsultasi dengan Kaprodi" }, body: { en: "Discuss your study plan and course selection with your Head of Department.", id: "Diskusikan rencana studi dan pilihan mata kuliah dengan Ketua Program Studi." } },
+  { title: { en: "Complete Form 01", id: "Isi Form 01" }, body: { en: "Register through io.petra.ac.id/outbound before the application deadline.", id: "Daftar melalui io.petra.ac.id/outbound sebelum batas waktu pendaftaran." } },
+  { title: { en: "Wait for the selection results", id: "Tunggu hasil seleksi" }, body: { en: "Results are announced within 3–4 days after the application deadline.", id: "Hasil diumumkan dalam 3–4 hari setelah batas waktu pendaftaran." } },
+  { title: { en: "Nomination to the host university", id: "Nominasi ke universitas tujuan" }, body: { en: "Petra Christian University nominates selected students to the host university.", id: "Universitas Kristen Petra menominasikan mahasiswa terpilih ke universitas tujuan." } },
+  { title: { en: "Complete the host university's application", id: "Lengkapi aplikasi universitas tujuan" }, body: { en: "Follow the host university's instructions and submit all required documents before its deadline.", id: "Ikuti petunjuk universitas tujuan dan kirim semua dokumen sebelum batas waktunya." } },
+  { title: { en: "Receive your Letter of Acceptance", id: "Terima Letter of Acceptance" }, body: { en: "Wait for the official acceptance letter (LoA) from the host university.", id: "Tunggu surat penerimaan resmi (LoA) dari universitas tujuan." } },
+  { title: { en: "Apply for a visa", id: "Ajukan visa" }, body: { en: "Prepare the required documents and complete the visa application.", id: "Siapkan dokumen dan selesaikan pengajuan visa." } },
+  { title: { en: "Complete Form 02", id: "Isi Form 02" }, body: { en: "Complete the next registration step through io.petra.ac.id/outbound.", id: "Selesaikan tahap pendaftaran berikutnya melalui io.petra.ac.id/outbound." } },
+  { title: { en: "Get ready for departure!", id: "Bersiap berangkat!" }, body: { en: "Finalise your preparations for your international learning experience.", id: "Selesaikan persiapan untuk pengalaman belajar internasional Anda." } },
 ];
 
-export const ice = {
-  intro: {
-    en: "ICE Institute (Indonesia Cyber Education Institute) is a consortium platform for online courses that count toward university credit. It is run by Universitas Terbuka, with members such as UGM, Universitas Indonesia, ITS, BINUS and UPH.",
-    id: "ICE Institute (Indonesia Cyber Education Institute) adalah platform konsorsium mata kuliah daring yang dapat diakui sebagai kredit. Platform ini dikelola Universitas Terbuka, dengan anggota seperti UGM, Universitas Indonesia, ITS, BINUS dan UPH.",
-  } satisfies L,
-  /** As of ICE Institute's fifth anniversary (iceFiveYears source). */
-  stats: [
-    { value: 49, label: { en: "Partner institutions", id: "Institusi mitra" } },
-    { value: 885, label: { en: "National online courses", id: "Mata kuliah daring nasional" } },
-    { value: 50000, suffix: "+", label: { en: "Learners", id: "Pembelajar" } },
-  ] satisfies { value: number; suffix?: string; label: L }[],
-  selection: [
-    { en: "Course approved by your study programme for credit transfer; your programme sets how many credits can come from online courses", id: "Mata kuliah disetujui program studi untuk transfer kredit; program studi menentukan berapa banyak kredit dari mata kuliah daring" },
-    { en: "Registration through KUI within the enrolment window", id: "Pendaftaran melalui KUI dalam periode pendaftaran" },
-  ] satisfies L[],
+/** Fees: the study-fee decrees (SK Tarif Studi) KUI will upload. */
+export const outboundFees = {
+  body: { en: "Fees follow Petra's study-fee decrees (SK Tarif Studi) No. 381 and No. 532.", id: "Biaya mengikuti SK Tarif Studi Universitas Kristen Petra No. 381 dan No. 532." } satisfies L,
+  files: [
+    { label: "SK Tarif Studi No. 381", href: links.skTarif381 },
+    { label: "SK Tarif Studi No. 532", href: links.skTarif532 },
+  ],
 };
 
-export const localOutbound: { name: string; body: L }[] = [
-  { name: "Local Student Exchange Program", body: { en: "A semester at another Indonesian university, with credits recognised by Petra.", id: "Satu semester di universitas lain di Indonesia, dengan kredit yang diakui Petra." } },
-  { name: "NUNI", body: { en: "Exchange within the NUNI university network.", id: "Pertukaran dalam jejaring universitas NUNI." } },
-  { name: "BKPTKI", body: { en: "Exchange among member universities of BKPTKI, the association of Indonesian Christian higher-education institutions.", id: "Pertukaran antaranggota BKPTKI, Badan Kerja Sama Perguruan Tinggi Kristen Indonesia." } },
+/** Student Exchange → Host University. */
+export const hostUniversities: { country: string; universities: string[] }[] = [
+  { country: "Bangladesh", universities: ["Daffodil International University"] },
+  { country: "Cambodia", universities: ["National University of Management"] },
+  { country: "China", universities: ["Zhejiang Yuexiu University of Foreign Languages", "Nanjing University of Aeronautics and Astronautics", "Guangxi Normal University", "Xi'an Jiaotong-Liverpool University"] },
+  { country: "Hong Kong", universities: ["Hong Kong Baptist University", "Lingnan University"] },
+  { country: "India", universities: ["Assam Down Town University", "Lady Doak College"] },
+  { country: "Japan", universities: ["International Christian University", "Josai International University", "Kaichi International University", "Kwansei Gakuin University", "Meiji University", "Momoyama Gakuin University", "Sophia University"] },
+  { country: "Germany", universities: ["Hochschule Darmstadt", "Hochschule Mainz", "Hochschule Fresenius"] },
+  { country: "Malaysia", universities: ["UCSI University", "Universiti Tunku Abdul Rahman (UTAR)"] },
+  { country: "Philippines", universities: ["University of Mindanao"] },
+  { country: "Russia", universities: ["Southern Federal University (SFedU)"] },
+  { country: "Singapore", universities: ["Singapore University of Technology and Design (SUTD)"] },
+  { country: "South Korea", universities: ["Dankook University", "Dongseo University", "Hankuk University of Foreign Studies", "Hannam University", "Keimyung University", "SolBridge International School of Business", "Woosong University", "Soongsil University"] },
+  { country: "Netherlands", universities: ["Saxion University of Applied Sciences", "Fontys University of Applied Sciences"] },
+  { country: "Taiwan, ROC", universities: ["Chang Jung Christian University", "Chung Yuan Christian University", "Fu Jen Catholic University", "I-Shou University", "National Kaohsiung University of Science and Technology", "National Sun Yat-sen University", "National Taiwan University of Science and Technology", "Tunghai University", "Wenzao Ursuline University of Languages"] },
+  { country: "Thailand", universities: ["Bangkok University"] },
 ];
 
-export const outboundDosAndDonts = {
-  dos: [
-    { en: "Register your trip with KUI and share your contact details abroad", id: "Daftarkan perjalanan Anda ke KUI dan bagikan kontak selama di luar negeri" },
-    { en: "Keep copies of your passport, visa and insurance", id: "Simpan salinan paspor, visa dan asuransi" },
-    { en: "Follow the host university's rules and local laws", id: "Patuhi aturan universitas tujuan dan hukum setempat" },
-    { en: "Report your grades to your study programme after you return", id: "Laporkan nilai ke program studi setelah kembali" },
-  ] satisfies L[],
-  donts: [
-    { en: "Don't change courses without approval from your study programme", id: "Jangan mengganti mata kuliah tanpa persetujuan program studi" },
-    { en: "Don't work unless your visa allows it", id: "Jangan bekerja kecuali visa mengizinkan" },
-    { en: "Don't leave your host country without telling KUI and the host university", id: "Jangan keluar dari negara tujuan tanpa memberi tahu KUI dan universitas tujuan" },
-  ] satisfies L[],
+export const scholarships = {
+  note: { en: "Subject to change.", id: "Dapat berubah sewaktu-waktu." } satisfies L,
+  internal: [
+    { program: { en: "Short Program", id: "Program Singkat" }, amount: "Rp2,500,000" },
+    { program: { en: "Student Exchange", id: "Pertukaran Mahasiswa" }, amount: "Rp5,000,000" },
+    { program: { en: "Dual Degree", id: "Dual Degree" }, amount: "Rp10,000,000" },
+  ] satisfies { program: L; amount: string }[],
+  external: [
+    { for: { en: "For exchange programs", id: "Untuk program pertukaran" }, items: ["Global Korea Scholarship (GKS)", "JASSO Scholarship", "Bangkok University Scholarship", "ACUCA Student Mobility Scheme"] },
+    { for: { en: "For dual degree programs", id: "Untuk program dual degree" }, items: ["NUAA Freshmen Scholarship", "Saxion Talent Scholarship", "Orange Tulip Scholarship"] },
+  ] satisfies { for: L; items: string[] }[],
 };
+
+/** Experiences: photo highlights and video testimonies. Photos are stand-ins until KUI sends the students' own. */
+export const outboundStories: { program: L; host: string; name: string; study: string; award?: string; image: Img }[] = [
+  { program: { en: "Student Exchange", id: "Pertukaran Mahasiswa" }, host: "Hochschule Fresenius, Germany", name: "Michael Tjipto", study: "IBAcc '20", image: media.mobility["exchange-group"] },
+  { program: { en: "Student Exchange", id: "Pertukaran Mahasiswa" }, host: "Dongseo University, South Korea", name: "Veronica Singajaya", study: "Visual Communication Design '22", award: "GKS Awardee", image: media.mobility["korea-university"] },
+  { program: { en: "Student Exchange", id: "Pertukaran Mahasiswa" }, host: "Sophia University, Japan", name: "Nicholas Dean", study: "Tax Accounting '23", award: "JASSO Awardee", image: media.mobility.nsysu },
+  { program: { en: "Dual Degree", id: "Dual Degree" }, host: "IMI, Switzerland", name: "Neven Nanthaniel", study: "Hotel Management '22", image: media.campus["students-gazebo"] },
+  { program: { en: "Dual Degree", id: "Dual Degree" }, host: "Nanjing University of Aeronautics and Astronautics, China", name: "Fellix Allenfant", study: "Business Information System '22", image: media.campus["students-corridor"] },
+  { program: { en: "Dual Degree", id: "Dual Degree" }, host: "Saxion University of Applied Sciences, the Netherlands", name: "Evany Melika Martamulia", study: "IBM '21", image: media.mobility.saxion },
+];
+
+export const outboundVideos: { title: string; youtubeId: string }[] = [
+  { title: "Student Exchange to Nanjing University of Aeronautics and Astronautics — Sherilyn Phan, IBM '23", youtubeId: "" },
+  { title: "Dual Degree to Dongseo University — Theresia Rebecca, IPDM '22", youtubeId: "" },
+];

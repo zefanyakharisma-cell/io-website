@@ -128,18 +128,15 @@ export const partners: Partner[] = [
   { name: "University of Mauritius", country: "Mauritius", region: "Other", lat: -20.24, lng: 57.5, tags: ["EU project"], logo: media.logos.mauritius },
 ];
 
-export const qsNote: L = {
-  en: "Iowa State University is listed at #540 in the source deck, outside the QS top-500 band. The International Office is confirming the figure.",
-  id: "Iowa State University tercantum di peringkat #540 pada sumber, di luar kelompok QS top 500. KUI sedang mengonfirmasi angka ini.",
-};
 
-/** Consortiums named in KUI's spec (WEBSITE IO, Sheet1 → Partners). Websites from web search (docs/sources.md). */
+/** Consortiums, with descriptions and websites from KUI's spec (WEBSITE IO, NEW UPDATED → Global Collaboration). */
 export const consortia = [
   { name: "ACUCA", full: "Association of Christian Universities and Colleges in Asia", website: "https://acuca.asia/", logo: null, body: { en: "A network of Christian universities across Asia, linking Petra to sister institutions for exchange and leadership programmes.", id: "Jejaring universitas Kristen se-Asia yang menghubungkan Petra dengan institusi saudara untuk pertukaran dan program kepemimpinan." } },
   { name: "GHAS", full: "Consortium of Global Hakka Studies", website: "https://ghas.hakka.nycu.edu.tw/", logo: { src: "/images/logos/consortia/ghas.webp", alt: "GHAS logo" }, body: { en: "An international platform for Hakka and ethnic studies, founded in 2019 at National Chiao Tung University with Petra among its overseas founding members.", id: "Platform internasional untuk studi Hakka dan etnis, didirikan 2019 di National Chiao Tung University dengan Petra sebagai salah satu anggota pendiri luar negeri." } },
-  { name: "P2A", full: "Passage to ASEAN", website: "https://passagetoasean.org/", logo: { src: "/images/logos/consortia/p2a.webp", alt: "Passage to ASEAN logo" }, body: { en: "A network of universities across ASEAN, founded in 2012, for student and staff exchange and cooperation among members.", id: "Jejaring universitas se-ASEAN, berdiri 2012, untuk pertukaran mahasiswa dan staf serta kerja sama antaranggota." }, confirm: true },
-  { name: "BKPTKI", full: "Badan Kerja Sama Perguruan Tinggi Kristen di Indonesia", website: "", logo: null, body: { en: "The association of Indonesian Christian higher-education institutions, including a local student exchange among members.", id: "Badan kerja sama perguruan tinggi Kristen di Indonesia, termasuk pertukaran mahasiswa antaranggota." } },
-  { name: "NUNI", full: "Nationwide University Network in Indonesia", website: "https://global.binus.ac.id/nationwide-university-network-in-indonesia-nuni/", logo: null, body: { en: "A network of Indonesian universities founded in 2011 for student and faculty mobility and joint research, including a credit-earning exchange semester.", id: "Jejaring universitas Indonesia yang berdiri 2011 untuk mobilitas mahasiswa dan dosen serta riset bersama, termasuk semester pertukaran berkredit." } },
+  { name: "P2A", full: "Passage to ASEAN", website: "https://passagetoasean.org/", logo: { src: "/images/logos/consortia/p2a.webp", alt: "Passage to ASEAN logo" }, body: { en: "A network of universities across ASEAN, founded in 2012, for student and staff exchange and cooperation among members.", id: "Jejaring universitas se-ASEAN, berdiri 2012, untuk pertukaran mahasiswa dan staf serta kerja sama antaranggota." } },
+  { name: "BKPTKI", full: "Badan Kerja Sama Perguruan Tinggi Kristen di Indonesia", website: "https://bkptki.org/", logo: null, body: { en: "The association of Indonesian Christian higher-education institutions, including a local student exchange among members.", id: "Badan kerja sama perguruan tinggi Kristen di Indonesia, termasuk pertukaran mahasiswa antaranggota." } },
+  { name: "NUNI", full: "Nationwide University Network in Indonesia", website: "https://nuni.or.id/", logo: null, body: { en: "A network of Indonesian universities founded in 2011 for student and faculty mobility and joint research, including a credit-earning exchange semester.", id: "Jejaring universitas Indonesia yang berdiri 2011 untuk mobilitas mahasiswa dan dosen serta riset bersama, termasuk semester pertukaran berkredit." } },
+  { name: "AUPF", full: "Asian University Presidents Forum", website: "", logo: null, body: { en: "A forum where university leaders across Asia exchange ideas and build cooperation. It was founded in 2002 and Petra hosted it in Surabaya in 2018.", id: "Forum tempat para pemimpin universitas se-Asia bertukar gagasan dan membangun kerja sama. Forum ini berdiri pada 2002 dan Petra menjadi tuan rumah di Surabaya pada 2018." } },
 ] satisfies { name: string; full: string; website: string; logo: Img | null; body: L; confirm?: boolean }[];
 
 /**
@@ -218,71 +215,42 @@ export const industry = {
   names: ["BCA", "Wings", "Polygon", "Schneider Electric", "Nutrifood", "SPIL", "Kempinski", "Astra"],
 };
 
-/** Slides 36–38: EU-funded projects. */
-export const euProjects = [
-  {
-    programme: "Erasmus+",
-    action: "Capacity Building in Higher Education",
-    title: "Modern Academic Platform for Smart and Sustainable Cities Development in Asia and Southeast Asia Cities",
-    institutions: 8,
-    countries: 5,
-    image: media.labs["city-model"],
-    members: [
-      { country: "Finland", name: "University of Jyväskylä", logo: media.logos.jyvaskyla },
-      { country: "Austria", name: "FH Joanneum", logo: media.logos["fh-joanneum"] },
-      { country: "India", name: "NIRMA University", logo: media.logos.nirma },
-      { country: "India", name: "Somaiya University" },
-      { country: "Thailand", name: "Prince of Songkla University", logo: media.logos.psu },
-      { country: "Thailand", name: "Payap University", logo: media.logos.payap },
-      { country: "Indonesia", name: "Petra Christian University", logo: media.brand["petra-seal"] },
-      { country: "Indonesia", name: "Universitas Sumatera Utara", logo: media.logos.usu },
-    ],
-  },
-  {
-    programme: "Horizon Europe",
-    action: "Marie Skłodowska-Curie Actions",
-    title: "Engineered Erythrocytes and Erythrocyte Extracellular Vesicles for Advanced Photodynamic and Sonodynamic Therapy",
-    institutions: 14,
-    countries: 10,
-    image: media.faculty.medicine,
-    members: [
-      { country: "Germany", name: "FAU Erlangen-Nürnberg", logo: media.logos.fau },
-      { country: "Austria", name: "Danube Private University", logo: media.logos.danube },
-      { country: "Spain", name: "CIC biomaGUNE", logo: media.logos["cic-biomagune"] },
-      { country: "Bulgaria", name: "Trakia University", logo: media.logos.trakia },
-      { country: "Italy", name: "Rome Tor Vergata", logo: media.logos["tor-vergata"] },
-      { country: "Italy", name: "mAIbe S.R.L.", logo: media.logos.maibe },
-      { country: "Israel", name: "Technion", logo: media.logos.technion },
-      { country: "Argentina", name: "Univ. Nacional del Sur", logo: media.logos.uns },
-      { country: "Argentina", name: "Univ. Buenos Aires", logo: media.logos.uba },
-      { country: "Thailand", name: "Chulalongkorn University", logo: media.logos.chulalongkorn },
-      { country: "Thailand", name: "Prove Innomed", logo: media.logos.innomed },
-      { country: "Thailand", name: "Mahidol University", logo: media.logos.mahidol },
-      { country: "Mauritius", name: "University of Mauritius", logo: media.logos.mauritius },
-      { country: "Indonesia", name: "Petra Christian University", logo: media.brand["petra-seal"] },
-    ],
-  },
-] satisfies {
-  programme: string;
-  action: string;
-  title: string;
-  institutions: number;
-  countries: number;
-  image: Img;
-  members: { country: string; name: string; logo?: Img }[];
-}[];
+/** Global Collaboration (KUI spec, NEW UPDATED). */
+export const collaboration = {
+  headline: { en: "Connecting Petra to the World", id: "Menghubungkan Petra dengan Dunia" } satisfies L,
+  intro: { en: "Petra Christian University works alongside leading universities, global companies, and reputable foundations to create opportunities that reach beyond borders, for our students, our faculty, and the communities we serve.", id: "Universitas Kristen Petra bekerja bersama universitas terkemuka, perusahaan global, dan yayasan bereputasi untuk menciptakan peluang yang melampaui batas, bagi mahasiswa, dosen, dan masyarakat yang kami layani." } satisfies L,
+  partnersLine: { en: "We partner with QS Top 100 universities, multinational corporations, and established foundations across Indonesia and around the globe.", id: "Kami bermitra dengan universitas QS Top 100, perusahaan multinasional, dan yayasan ternama di Indonesia dan seluruh dunia." } satisfies L,
+  waysIntro: { en: "From student exchanges to co-developed programs, we design collaborations that fit each partner's priorities.", id: "Dari pertukaran mahasiswa hingga program yang dikembangkan bersama, kami merancang kolaborasi sesuai prioritas setiap mitra." } satisfies L,
+  consortiumIntro: { en: "Petra is an active member of regional and international consortia that advance higher education, research, and mobility.", id: "Petra adalah anggota aktif konsorsium regional dan internasional yang memajukan pendidikan tinggi, riset, dan mobilitas." } satisfies L,
+  contactIntro: { en: "Interested in partnering with Petra? Our partnership team is ready to explore opportunities with you.", id: "Tertarik bermitra dengan Petra? Tim kemitraan kami siap menjajaki peluang bersama Anda." } satisfies L,
+  emails: ["head-partnership@petra.ac.id", "staff-partnership@petra.ac.id"],
+  phone: { display: "+62 31 298 3186", href: "tel:+62312983186" },
+};
 
-/** Slide 39: eight ways to work with Petra. */
+/** Ways We Collaborate (KUI spec). */
 export const collaborationWays = [
-  { title: { en: "Student exchange", id: "Pertukaran mahasiswa" }, body: { en: "A semester with full credit transfer", id: "Satu semester dengan transfer kredit penuh" }, icon: "repeat" },
-  { title: { en: "Joint & dual degree", id: "Gelar bersama & ganda" }, body: { en: "2+2 and 3+1, two awards", id: "2+2 dan 3+1, dua gelar" }, icon: "graduation" },
-  { title: { en: "International internship", id: "Magang internasional" }, body: { en: "Placements with our partners, or yours", id: "Penempatan di mitra kami, atau mitra Anda" }, icon: "briefcase" },
-  { title: { en: "Tailor-made programmes", id: "Program khusus" }, body: { en: "Short courses built for your cohort", id: "Kursus singkat untuk kelompok Anda" }, icon: "ruler" },
-  { title: { en: "Research collaboration", id: "Kolaborasi riset" }, body: { en: "Joint projects and co-authored papers", id: "Proyek bersama dan publikasi bersama" }, icon: "flask" },
-  { title: { en: "Joint lecture", id: "Kuliah bersama" }, body: { en: "Co-taught, online or on campus", id: "Diajar bersama, daring atau di kampus" }, icon: "presentation" },
-  { title: { en: "Joint conference", id: "Konferensi bersama" }, body: { en: "Co-hosted academic events", id: "Acara akademik bersama" }, icon: "mic" },
-  { title: { en: "Joint programmes", id: "Program bersama" }, body: { en: "Summer schools and consortia", id: "Summer school dan konsorsium" }, icon: "sun" },
-] satisfies { title: L; body: L; icon: string }[];
+  { title: { en: "Joint Degree", id: "Joint Degree" }, icon: "graduation" },
+  { title: { en: "Student Exchange", id: "Pertukaran Mahasiswa" }, icon: "repeat" },
+  { title: { en: "Internship", id: "Magang" }, icon: "briefcase" },
+  { title: { en: "Research", id: "Riset" }, icon: "flask" },
+  { title: { en: "Joint Lecture", id: "Kuliah Bersama" }, icon: "presentation" },
+  { title: { en: "Joint Conference", id: "Konferensi Bersama" }, icon: "mic" },
+  { title: { en: "Tailor-Made Program", id: "Program Tailor-Made" }, icon: "ruler" },
+  { title: { en: "And other possibilities", id: "Dan peluang lainnya" }, icon: "sun" },
+] satisfies { title: L; icon: string }[];
+
+/** Logo wall for Global Networking: QS Top 100 universities, multinational companies and foundations. */
+const mncNames = [
+  "PT. Bosch Rexroth", "PT. Transforma Oto Prima (Mercedes-Benz)", "PT Grant Thornton Indonesia", "RSM Indonesia", "JW Marriott Hotel Surabaya",
+  "Hotel Double Tree by Hilton Surabaya", "Sheraton Surabaya Hotel", "Four Points By Sheraton Surabaya", "PT Rekso Nasional Food (McDonald's)",
+  "PT Odoo Software Indonesia", "PT. Charoen Popkphand Indonesia Tbk - Jawa Timur", "Kempinski", "Schneider Electric", "PT GoTo Gojek Tokopedia Tbk",
+];
+const foundationNames = ["Yayasan Monash University Indonesia", "Monash University, Indonesia"];
+export const networkingLogos = {
+  qsTop100: partners.filter((p) => p.qs && p.qs <= 100),
+  multinationals: nationalList.filter((n) => mncNames.includes(n.name)),
+  foundations: nationalList.filter((n) => foundationNames.includes(n.name)),
+};
 
 export const logoStrip = [
   media.logos.nuaa, media.logos.dongseo, media.logos.saxion, media.logos.ntust, media.logos["iowa-state"], media.logos.wenzao,

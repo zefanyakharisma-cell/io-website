@@ -20,8 +20,8 @@ excerpt:
 ::en
 *Sample post — dates and fees to be confirmed by the International Office.*
 
-PSP combines morning classes in Bahasa Indonesia and Indonesian culture with trips to Malang and Mount Bromo. See [Short Programs](/en/inbound/short-programs/) for the full programme.
+PSP combines morning classes in Bahasa Indonesia and Indonesian culture with trips to Malang and Mount Bromo. See [Short Programs](/en/mobility/inbound/short-programs/) for the full programme.
 ::id
 *Contoh unggahan — tanggal dan biaya menunggu konfirmasi Kantor Urusan Internasional.*
 
-PSP memadukan kelas pagi bahasa Indonesia dan budaya Indonesia dengan perjalanan ke Malang dan Gunung Bromo. Lihat [Program Singkat](/id/inbound/short-programs/) untuk detail lengkap.
+PSP memadukan kelas pagi bahasa Indonesia dan budaya Indonesia dengan perjalanan ke Malang dan Gunung Bromo. Lihat [Program Singkat](/id/mobility/inbound/short-programs/) untuk detail lengkap.

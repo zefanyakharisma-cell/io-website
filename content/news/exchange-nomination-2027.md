@@ -4,7 +4,7 @@ kind: opportunity
 sample: true
 deadline: 2026-11-30
 audience: partners
-applyUrl: /inbound/student-exchange
+applyUrl: /mobility/inbound/student-exchange
 category: Opportunities
 cover: mobility.exchange-group
 title:
@@ -17,8 +17,8 @@ excerpt:
 ::en
 *Sample post — the International Office will confirm the deadline.*
 
-Send your nominations to the International Office. Nominated students then complete the online application. See [Student Exchange](/en/inbound/student-exchange/) for the steps.
+Send your nominations to the International Office. Nominated students then complete the online application. See [Student Exchange](/en/mobility/inbound/student-exchange/) for the steps.
 ::id
 *Contoh unggahan — Kantor Urusan Internasional akan mengonfirmasi batas waktu.*
 
-Kirim nominasi ke Kantor Urusan Internasional. Mahasiswa yang dinominasikan lalu mengisi formulir daring. Lihat [Pertukaran Mahasiswa](/id/inbound/student-exchange/) untuk langkah-langkahnya.
+Kirim nominasi ke Kantor Urusan Internasional. Mahasiswa yang dinominasikan lalu mengisi formulir daring. Lihat [Pertukaran Mahasiswa](/id/mobility/inbound/student-exchange/) untuk langkah-langkahnya.

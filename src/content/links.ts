@@ -7,15 +7,13 @@
 export const links = {
   // Registration
   inboundRegistration: "https://international-registration.petra.ac.id",
-  outboundRegistration: "", // KUI: outbound student registration form
+  outboundRegistration: "https://io.petra.ac.id/outbound", // Form 01 and Form 02 (KUI spec)
   petramateRegistration: "", // KUI: Petramate online registration form
 
-  // Downloads (Google Drive, shared with @petra.ac.id and @john.petra.ac.id accounts only)
-  inboundCourses: "", // Excel: courses offered in English for inbound exchange
-  outboundExchangeList: "", // Excel: student exchange destinations
-  outboundStudyAbroadList: "", // Excel: study abroad destinations
-  outboundJointDegreeList: "", // Excel: joint degree programmes
-  outboundDualDegreeList: "", // Excel: dual degree programmes
+  // Downloads
+  outboundFlyer: "", // KUI: International Outbound Program Flyer (min. GPA and language requirements)
+  skTarif381: "", // KUI: SK Tarif Studi No. 381 (PDF)
+  skTarif532: "", // KUI: SK Tarif Studi No. 532 (PDF)
 
   // Programmes
   icop: "https://cop.petra.ac.id/",
@@ -23,10 +21,6 @@ export const links = {
   asp: "https://asp.petra.ac.id/",
   spectra: "https://indonesianspectrum.petra.ac.id/",
   petraBusinessSchool: "", // KUI: Petra Business School website
-  darmasiswa: "https://darmasiswa.kemendikdasmen.go.id/", // per 2026/27 guidelines
-  darmasiswaApply: "https://apply.darmasiswa.kemendikdasmen.go.id/", // per 2026/27 guidelines
-  iisma: "https://iisma.id/", // per partner-university guides; older domain iisma.kemdikbud.go.id
-  iceInstitute: "https://icei.ac.id/",
 
   // Faculty websites, keyed by faculty code (found by web search; KUI to confirm)
   faculty: {
@@ -107,6 +101,5 @@ export const whatsapp = {
 
 /** YouTube video ids for testimonials. Leave empty to show a placeholder. */
 export const testimonialVideos = {
-  inbound: ["", "", ""], // KUI: 3 videos from past student exchange participants
-  outbound: ["", "", ""], // KUI: NUNI, BKPTKI and IISMA participants
+  inbound: ["", "", ""], // KUI: inbound testimony videos (Experiences page)
 };
